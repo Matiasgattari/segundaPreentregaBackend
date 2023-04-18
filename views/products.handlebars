@@ -1,33 +1,23 @@
-<h1>{{encabezado}}</h1>
-{{#if hayProductos}}
-
-
-<p class="text-danger">Lista de productos parseados al array [];</p>
-<ul class="">
+{{#if hayDocs}}
+<ul>
   {{#each arrayProductos}}
   <li>{{this}}</li>
   {{/each}}
 </ul>
-
-
 {{else}}
-<p class="text-danger">sin productos cargados</p>
+array vacio...
 {{/if}}
+<a {{#if hasPrevPage}} href="?limit={{limit}}&page={{prevPage}}" {{/if}}>Prev</a>
+[{{ page }}]
+<a {{#if hasNextPage}} href="?limit={{limit}}&page={{nextPage}}" {{/if}}>Next</a><br>
 
+<button>Sort ascendente</button>
+<button>Sort descendente</button><br>
+Página: <input type="text"> <button onclick="irAPag({{limit}})">ir</button>
+<script>
+  function irAPag(limit) {
+    const pagDeseada = document.querySelector('input').value || 1
+    window.location = `?limit=${limit}&page=${pagDeseada}`
+  }
 
-
-{{!-- {{#if hayCarritos}}
-<h4>Carritos</h4>
-<ul>
-    {{#each carritos}}
-    <li>{{this}}</li>
-    {{/each}}
-</ul>
-{{else}}
-<p class="text-danger">sin carritos creados</p>
-{{/if}}
- --}}
-
-
-
-{{!-- <script src="/js/indexHome.js"></script> --}}
+</script>

@@ -1,7 +1,8 @@
 import express, {Router} from 'express';
 import { Product, ProductManager } from '../../public/dao/ProductManager.js';
 import { randomUUID } from 'crypto'
-
+import { productsDB } from '../../public/dao/models/schemaProducts.js';
+import util from 'node:util'
 export const productManager = new ProductManager('./productos.txt');
 
 
@@ -12,25 +13,84 @@ productsRouter.use(express.urlencoded({extended:true}))
 
 
 productsRouter.get('/', async (req,res)=>{
-    try {
-        const poductosLeidos = await productManager.getProducts()
 
-        //obtengo parametro limit de las querys
-        const limite = req.query.limit;
-        let productosXPagina;
+// const poductosLeidos = await productManager.getProducts()
 
-        //si se brinda limite corto en el limite deseado.
-        if (limite) {
-            productosXPagina = poductosLeidos.slice(0, limite)
-            res.send(productosXPagina)
-        }
+//     //obtengo parametro limit de las querys
+//     const limite = req.query.limit;
+//     let productosXPagina;
 
-        res.json(poductosLeidos)
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        })
+//     //si se brinda limite corto en el limite deseado.
+//     if (limite) {
+//         productosXPagina = poductosLeidos.slice(0, limite)
+//         res.send(productosXPagina)
+//     }
+
+//     res.json(poductosLeidos)
+
+
+
+    const criterioDeBusqueda = { }
+
+    const opcionesDePaginacion = {
+        limit: req.query.limit || 5, // tamaño de pagina: 5 por defecto
+        page: req.query.page || 1, // devuelve la primera pagina por defecto
+        lean: true // para que devuelva objetos literales, no de mongoose
     }
+
+    // @ts-ignore
+    let result = await productsDB.paginate(criterioDeBusqueda, opcionesDePaginacion)
+// const result2 = util.inspect(result, false, 10)
+
+const arrayProductos = []
+result.docs.forEach((res)=>{arrayProductos.push(JSON.stringify(res))})
+    // console.log(result)
+   
+    const context = {
+        pageTitle: 'paginado',
+        hayDocs: result.docs.length > 0,
+        docs: result.docs,
+        limit: result.limit,
+        page: result.page,
+        totalPages: result.totalPages,
+        hasNextPage: result.hasNextPage,
+        nextPage: result.nextPage,
+        hasPrevPage: result.hasPrevPage,
+        prevPage: result.prevPage,
+        pagingCounter: result.pagingCounter,
+        arrayProductos
+    }
+
+    res.render('products.handlebars', context)
+
+
+
+
+
+
+
+
+
+
+    // try {
+    //     const poductosLeidos = await productManager.getProducts()
+
+    //     //obtengo parametro limit de las querys
+    //     const limite = req.query.limit;
+    //     let productosXPagina;
+
+    //     //si se brinda limite corto en el limite deseado.
+    //     if (limite) {
+    //         productosXPagina = poductosLeidos.slice(0, limite)
+    //         res.send(productosXPagina)
+    //     }
+
+    //     res.json(poductosLeidos)
+    // } catch (error) {
+    //     res.status(500).json({
+    //         message: error.message
+    //     })
+    // }
 
 } )
 
