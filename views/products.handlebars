@@ -1,0 +1,33 @@
+<h1>{{encabezado}}</h1>
+{{#if hayProductos}}
+
+
+<p class="text-danger">Lista de productos parseados al array [];</p>
+<ul class="">
+  {{#each arrayProductos}}
+  <li>{{this}}</li>
+  {{/each}}
+</ul>
+
+
+{{else}}
+<p class="text-danger">sin productos cargados</p>
+{{/if}}
+
+
+
+{{!-- {{#if hayCarritos}}
+<h4>Carritos</h4>
+<ul>
+    {{#each carritos}}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
+{{else}}
+<p class="text-danger">sin carritos creados</p>
+{{/if}}
+ --}}
+
+
+
+{{!-- <script src="/js/indexHome.js"></script> --}}
