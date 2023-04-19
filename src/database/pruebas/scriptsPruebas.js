@@ -1,5 +1,4 @@
 import mongoose, { Schema } from 'mongoose';
-// import mongoosePaginate from 'mongoose-paginate-v2'
 // import util from 'node:util'
 // import { ProductManager } from '../../public/productManager.js';
 
@@ -8,8 +7,6 @@ import mongoose, { Schema } from 'mongoose';
 
 await mongoose.connect('mongodb://127.0.0.1:27017/ecommerce')
 console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce'}`);
-
-
 //-------------------------------------------CARRITOS-------------------------------------------
 
 // const vis = [
@@ -98,40 +95,21 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 
 
  
-//   const prod =   {
-//     title: 'bulbasaur',
-//     description: 'descripcion prod 3',
-//     price: 3500,
-//     thumbnail: 'url imagen',
-//     stock: 45,
-//     code: 'televisor',
-//     category: 'hogar',
-//     status: true
-//     }
-//   const prod1 =   {
-//     title: 'bulbasaur2',
-//     description: 'descripcion prod 3',
-//     price: 3500,
-//     thumbnail: 'url imagen',
-//     stock: 45,
-//     code: 'televisor',
-//     category: 'hogar',
-//     status: true
-//     }
-  
 
 
-// const vis2 = [
+// const vis3= [
 //     {
-//             title: 'bulbasaur',
-//             description: 'descripcion prod 3',
-//             price: 3500,
-//             thumbnail: 'url imagen',
-//             stock: 45,
-//             code: 'bulvo',
-//             category: 'planta',
-//             status: true
-//             },
+      
+//       title: 'bulbasaur',
+//       description: 'descripcion prod 3',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true,
+//       id: '44820200-b24d-478f-8765-e69c4f8cf650'
+//     },
 //     {
       
 //       title: 'ivysaur',
@@ -141,7 +119,8 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       stock: 45,
 //       code: 'televisor',
 //       category: 'hogar',
-//       status: true
+//       status: true,
+//       id: '44820200-b24d-478f-1111-e69c4f8cf650'
 //     },
 //     {
       
@@ -152,7 +131,8 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       stock: 45,
 //       code: 'televisor',
 //       category: 'hogar',
-//       status: true
+//       status: true,
+//       id: 'dac58fd1-4123-4b06-ad4f-aade9f184b2e'
 //     },
 //     {
       
@@ -163,7 +143,8 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       stock: 45,
 //       code: 'televisor',
 //       category: 'hogar',
-//       status: true
+//       status: true,
+//       id: '065592be-4846-4b2b-891e-ceddb54a01a9'
 //     },
 //     {
       
@@ -174,7 +155,8 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       stock: 45,
 //       code: 'televisor',
 //       category: 'hogar',
-//       status: true
+//       status: true,
+//       id: '065597be-4846-4b2b-891e-ceddb54a01a9'
 //     },
 //     {
       
@@ -185,7 +167,8 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       stock: 45,
 //       code: 'televisor',
 //       category: 'hogar',
-//       status: true
+//       status: true,
+//       id: '065297be-4899-4b2b-891e-ceddb54a01a9'
 //     },
 //     {
       
@@ -196,7 +179,8 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       stock: 45,
 //       code: 'televisor',
 //       category: 'hogar',
-//       status: true
+//       status: true,
+//       id: '015597be-4846-4b2b-7777-ceddb54a01a9'
 //     },
 //     {
       
@@ -207,7 +191,8 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       stock: 45,
 //       code: 'televisor',
 //       category: 'hogar',
-//       status: true
+//       status: true,
+//       id: '063597be-4846-4b2b-891e-cedd124a01a9'
 //     },
 //     {
       
@@ -218,7 +203,8 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       stock: 45,
 //       code: 'televisor',
 //       category: 'hogar',
-//       status: true
+//       status: true,
+//       id: '068597be-4846-4b2b-891e-12ddb54a01a9'
 //     },
 //     {
       
@@ -229,7 +215,8 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       stock: 45,
 //       code: 'televisor',
 //       category: 'hogar',
-//       status: true
+//       status: true,
+//       id: 'b7e04998-900a-4078-bdff-c0068dba2121'
 //     },
 //     {
       
@@ -240,7 +227,8 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       stock: 45,
 //       code: 'televisor',
 //       category: 'hogar',
-//       status: true
+//       status: true,
+//       id: '3307ab83-226d-49e2-905a-ef118d60172a'
 //     },
 //     {
       
@@ -251,7 +239,8 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       stock: 45,
 //       code: 'cocina',
 //       category: 'hogar',
-//       status: true
+//       status: true,
+//       id: '3307ab83-226d-49e2-905a-efd18d10572a'
 //     },
 //     {
       
@@ -260,82 +249,55 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       price: 4000,
 //       thumbnail: 'url imagen',
 //       stock: 45,
+//       code: 'televisor',
 //       category: 'hogar',
-//       code: 'cocina',      
-//       status: true
+//       status: true,
+//       id: 'eb75a066-f01e-410e-b4d0-e622893532fd'
+//     },
+//     {
+      
+//       title: 'kakuna',
+//       description: 'descripcion prod 3',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true,
+//       id: 'ade0f4d9-716b-4453-b88d-6d5df1564232'
+//     },
+//     {
+      
+//       title: 'beedrill',
+//       description: 'descripcion prod 6',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true,
+//       id: 'ade0f4d9-716b-4453-tryu-6d5df1564232'
 //     }
 //   ]
 
-const vis3 = [{
-    title: 'bulbasaur',
-    description: 'descripcion prod 3',
-    price: 3500,
-    thumbnail: 'url imagen',
-    stock: 45,
-    code: 'bulvo',
-    category: 'planta',
-    status: true
-    },
-    {
-        title: 'bulbasaur1',
-        description: 'descripcion prod 3',
-        price: 3500,
-        thumbnail: 'url imagen',
-        stock: 45,
-        code: 'bulvo',
-        category: 'planta',
-        status: true
-        },
-    {
-         title: 'bulbasaur2',
-            description: 'descripcion prod 3',
-            price: 3500,
-            thumbnail: 'url imagen',
-            stock: 45,
-            code: 'bulvo',
-            category: 'planta',
-            status: true
-            }]
+
+//   export const schemaProducts = new Schema({
+//     title: { type: String, required: true, index: true },
+//     description: { type: String, required: true },
+//     price: { type: Number, required: true, min: 0 },
+//     thumbnail: { type: String, required: true },
+//     stock: { type: Number, required: true, min: 1 },
+//     code: { type: String, required: true },
+//     category: { type: String, required: true , index: true },
+//     status: { type: Boolean, required: true },
+//     id: { required: true, unique:true,type: String}
+// }, { versionKey: false })
 
 
-  export const schemaProducts = new Schema({
-    title: { type: String, required: true, index: true },
-    description: { type: String, required: true },
-    price: { type: Number, required: true, min: 0 },
-    thumbnail: { type: String, required: true },
-    stock: { type: Number, required: true, min: 1 },
-    code: { type: String, required: true },
-    category: { type: String, required: true , index: true },
-    status: { type: Boolean, required: true },
-    id:{type: Schema.Types.ObjectId}
-}, { versionKey: false })
+// export const productsDB = mongoose.model('products', schemaProducts)
 
-// schemaProducts.plugin(mongoosePaginate)
-export const productsDB = mongoose.model('products', schemaProducts)
+// await productsDB.deleteMany({})
+// await productsDB.insertMany(vis3)
+// console.log(await productsDB.find());
+// await mongoose.connection.close()
 
-
-
-await productsDB.deleteMany({})
-// await productsDB.create(prod)
-// await productsDB.create(prod1)
-// await productsDB.create(prod2)
-// await productsDB.create(prod3)
-// await productsDB.create(prod4)
-// await productsDB.create(prod5)
-// await productsDB.create(prod6)
-// await productsDB.create(prod7)
-// await productsDB.create(prod8)
-// await productsDB.create(prod9)
-// await productsDB.create(prod10)
-// await productsDB.create(prod11)
-// await productsDB.create(prod12)
-// await productsDB.create(prod13)
-// await productsDB.create(prod14)
-
-
-
-await productsDB.insertMany(vis3)
-// await productsDB.insertMany(prod1)
-console.log(await productsDB.find());
-// console.log(vis2);
-await mongoose.connection.close()
