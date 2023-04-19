@@ -1,23 +1,38 @@
 {{#if hayDocs}}
+<h1>Lista de productos</h1>
 <ul>
   {{#each arrayProductos}}
   <li>{{this}}</li>
   {{/each}}
 </ul>
 {{else}}
-array vacio...
+<p>El array se encuentra vacio</p>
 {{/if}}
-<a {{#if hasPrevPage}} href="?limit={{limit}}&page={{prevPage}}" {{/if}}>Prev</a>
-[{{ page }}]
-<a {{#if hasNextPage}} href="?limit={{limit}}&page={{nextPage}}" {{/if}}>Next</a><br>
+<button><a {{#if hasPrevPage}} href="?limit={{limit}}&page={{prevPage}}" {{/if}}>Prev</a></button>
 
-<button>Sort ascendente</button>
-<button>Sort descendente</button><br>
-Página: <input type="text"> <button onclick="irAPag({{limit}})">ir</button>
+[{{ page }}]
+<button><a {{#if hasNextPage}} href="?limit={{limit}}&page={{nextPage}}" {{/if}}>Next</a></button>
+<br><br>
+
+<button id="boton_ascendente" onclick="ascendente({{limit}},{{page}})">Sort ascendente</button>
+<button id="boton_descendente" onclick="descendente({{limit}},{{page}})">Sort descendente</button><br><br>
+
+<p>Página: </p><input id="pagina" type="text"> <button onclick="irAPag({{limit}})">ir</button>
+<p>Query: </p><input id="query" type="text"> <button onclick="query({{query}})">ir</button>
+
 <script>
   function irAPag(limit) {
-    const pagDeseada = document.querySelector('input').value || 1
+    const pagDeseada = document.getElementById('pagina').value || 1
     window.location = `?limit=${limit}&page=${pagDeseada}`
   }
-
+  function ascendente(limit,page){
+        window.location = `?limit=${limit}&page=${page}&sort=1`
+  }
+ function descendente(limit,page){
+        window.location = `?limit=${limit}&page=${page}&sort=-1`
+  }
+   function query(filtro,limit,page,sort) {
+    window.location = `?limit=${limit}&page=${page}&sort=${sort}&query=${filtro}`
+  }
 </script>
+<script src="/js/indexProducts.js"></script>

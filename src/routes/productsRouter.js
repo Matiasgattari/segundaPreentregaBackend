@@ -13,41 +13,37 @@ productsRouter.use(express.urlencoded({extended:true}))
 
 
 productsRouter.get('/', async (req,res)=>{
-
-// const poductosLeidos = await productManager.getProducts()
-
-//     //obtengo parametro limit de las querys
-//     const limite = req.query.limit;
-//     let productosXPagina;
-
-//     //si se brinda limite corto en el limite deseado.
-//     if (limite) {
-//         productosXPagina = poductosLeidos.slice(0, limite)
-//         res.send(productosXPagina)
-//     }
-
-//     res.json(poductosLeidos)
-
-
-
+try {
     const criterioDeBusqueda = { }
 
     const opcionesDePaginacion = {
-        limit: req.query.limit || 5, // tamaño de pagina: 5 por defecto
-        page: req.query.page || 1, // devuelve la primera pagina por defecto
-        lean: true // para que devuelva objetos literales, no de mongoose
+        limit: req.query.limit || 10, // tamaño de pagina
+        page: req.query.page || 1, // pagina inicial
+        lean: true, // para que devuelva objetos literales, no de mongoose
+        sort :  {price : req.query.sort || -1},
+        pagination: true,
+        options: {category:req.query.query}
     }
+
 
     // @ts-ignore
     let result = await productsDB.paginate(criterioDeBusqueda, opcionesDePaginacion)
-// const result2 = util.inspect(result, false, 10)
 
-const arrayProductos = []
-result.docs.forEach((res)=>{arrayProductos.push(JSON.stringify(res))})
+    const arrayProductos = []
+    result.docs.forEach((res)=>{arrayProductos.push(util.inspect(res, false, 10))})
     // console.log(result)
    
+//     const filtro = req.query.query
+// if (filtro) {
+//     const arrayProductosFiltrados= arrayProductos.filter(category===filtro)
+// }else {
+//     const arrayProductosFiltrados = arrayProductos
+// }
+
+
+
     const context = {
-        pageTitle: 'paginado',
+        pageTitle: 'Products',
         hayDocs: result.docs.length > 0,
         docs: result.docs,
         limit: result.limit,
@@ -58,39 +54,19 @@ result.docs.forEach((res)=>{arrayProductos.push(JSON.stringify(res))})
         hasPrevPage: result.hasPrevPage,
         prevPage: result.prevPage,
         pagingCounter: result.pagingCounter,
-        arrayProductos
-    }
+        arrayProductos,
+        // query:result.filtro
+        
+        }
 
     res.render('products.handlebars', context)
 
 
-
-
-
-
-
-
-
-
-    // try {
-    //     const poductosLeidos = await productManager.getProducts()
-
-    //     //obtengo parametro limit de las querys
-    //     const limite = req.query.limit;
-    //     let productosXPagina;
-
-    //     //si se brinda limite corto en el limite deseado.
-    //     if (limite) {
-    //         productosXPagina = poductosLeidos.slice(0, limite)
-    //         res.send(productosXPagina)
-    //     }
-
-    //     res.json(poductosLeidos)
-    // } catch (error) {
-    //     res.status(500).json({
-    //         message: error.message
-    //     })
-    // }
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        })
+    }
 
 } )
 

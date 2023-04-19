@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
-import util from 'node:util'
+// import mongoosePaginate from 'mongoose-paginate-v2'
+// import util from 'node:util'
 // import { ProductManager } from '../../public/productManager.js';
 
 // import { MONGODB_PATH } from './src/config/config.mongo';
@@ -96,206 +97,245 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //-------------------------------------------PRODUCTOS-------------------------------------------
 
 
+ 
+//   const prod =   {
+//     title: 'bulbasaur',
+//     description: 'descripcion prod 3',
+//     price: 3500,
+//     thumbnail: 'url imagen',
+//     stock: 45,
+//     code: 'televisor',
+//     category: 'hogar',
+//     status: true
+//     }
+//   const prod1 =   {
+//     title: 'bulbasaur2',
+//     description: 'descripcion prod 3',
+//     price: 3500,
+//     thumbnail: 'url imagen',
+//     stock: 45,
+//     code: 'televisor',
+//     category: 'hogar',
+//     status: true
+//     }
+  
 
 
 // const vis2 = [
 //     {
+//             title: 'bulbasaur',
+//             description: 'descripcion prod 3',
+//             price: 3500,
+//             thumbnail: 'url imagen',
+//             stock: 45,
+//             code: 'bulvo',
+//             category: 'planta',
+//             status: true
+//             },
+//     {
       
-//       "title": "bulbasaur",
-//       "description": "descripcion prod 3",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
-      
+//       title: 'ivysaur',
+//       description: 'descripcion prod 2',
+//       price: 2500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true
 //     },
 //     {
       
-//       "title": "ivysaur",
-//       "description": "descripcion prod 2",
-//       "price": 2500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
-      
+//       title: 'venasaur',
+//       description: 'descripcion prod 3',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true
 //     },
 //     {
       
-//       "title": "venasaur",
-//       "description": "descripcion prod 3",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
-      
+//       title: 'charmander',
+//       description: 'descripcion prod 3',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true
 //     },
 //     {
       
-//       "title": "charmander",
-//       "description": "descripcion prod 3",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
-      
+//       title: 'charmileon',
+//       description: 'descripcion prod 3',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true
 //     },
 //     {
       
-//       "title": "charmileon",
-//       "description": "descripcion prod 3",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
-      
+//       title: 'charizard',
+//       description: 'descripcion prod 3',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true
 //     },
 //     {
       
-//       "title": "charizard",
-//       "description": "descripcion prod 3",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
-      
+//       title: 'squirtle',
+//       description: 'descripcion prod 3',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true
 //     },
 //     {
       
-//       "title": "squirtle",
-//       "description": "descripcion prod 3",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
-      
+//       title: 'warturtle',
+//       description: 'descripcion prod 3',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true
 //     },
 //     {
       
-//       "title": "warturtle",
-//       "description": "descripcion prod 3",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
-      
+//       title: 'blastoise',
+//       description: 'descripcion prod 3',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true
 //     },
 //     {
       
-//       "title": "blastoise",
-//       "description": "descripcion prod 3",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
-      
-//     },
-//     {
-     
-//       "title": "caterpie",
-//       "description": "descripcion prod 3",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
-      
-//     },
-//     {
-     
-//       "title": "metapod",
-//       "description": "descripcion prod 3",
-//       "price": 4000,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
-      
-//     },
-//     {
-     
-//       "title": "buterfree",
-//       "description": "descripcion prod 3",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "cocina",
-//       "category": "hogar",
-//       "status": true,
-     
-//     },
-//     {
-     
-//       "title": "weedle",
-//       "description": "descripcion prod 3",
-//       "price": 4000,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
+//       title: 'caterpie',
+//       description: 'descripcion prod 3',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true
 //     },
 //     {
       
-//       "title": "kakuna",
-//       "description": "descripcion prod 3",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
+//       title: 'metapod',
+//       description: 'descripcion prod 3',
+//       price: 4000,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'televisor',
+//       category: 'hogar',
+//       status: true
 //     },
 //     {
       
-//       "title": "beedrill",
-//       "description": "descripcion prod 6",
-//       "price": 3500,
-//       "thumbnail": "url imagen",
-//       "stock": 45,
-//       "code": "televisor",
-//       "category": "hogar",
-//       "status": true,
+//       title: 'buterfree',
+//       description: 'descripcion prod 3',
+//       price: 3500,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       code: 'cocina',
+//       category: 'hogar',
+//       status: true
+//     },
+//     {
+      
+//       title: 'weedle',
+//       description: 'descripcion prod 3',
+//       price: 4000,
+//       thumbnail: 'url imagen',
+//       stock: 45,
+//       category: 'hogar',
+//       code: 'cocina',      
+//       status: true
 //     }
 //   ]
 
+const vis3 = [{
+    title: 'bulbasaur',
+    description: 'descripcion prod 3',
+    price: 3500,
+    thumbnail: 'url imagen',
+    stock: 45,
+    code: 'bulvo',
+    category: 'planta',
+    status: true
+    },
+    {
+        title: 'bulbasaur1',
+        description: 'descripcion prod 3',
+        price: 3500,
+        thumbnail: 'url imagen',
+        stock: 45,
+        code: 'bulvo',
+        category: 'planta',
+        status: true
+        },
+    {
+         title: 'bulbasaur2',
+            description: 'descripcion prod 3',
+            price: 3500,
+            thumbnail: 'url imagen',
+            stock: 45,
+            code: 'bulvo',
+            category: 'planta',
+            status: true
+            }]
 
 
-//   export const schemaProducts = new Schema({
-//     title: { type: String, required: true, index: true },
-//     description: { type: String, required: true },
-//     price: { type: Number, required: true, min: 0 },
-//     thumbnail: { type: String, required: true },
-//     stock: { type: Number, required: true, min: 1 },
-//     code: { type: String, required: true },
-//     category: { type: String, required: true , index: true },
-//     status: { type: Boolean, required: true },
-//     id: { required: true, unique:true,type: String}
-// }, { versionKey: false })
+  export const schemaProducts = new Schema({
+    title: { type: String, required: true, index: true },
+    description: { type: String, required: true },
+    price: { type: Number, required: true, min: 0 },
+    thumbnail: { type: String, required: true },
+    stock: { type: Number, required: true, min: 1 },
+    code: { type: String, required: true },
+    category: { type: String, required: true , index: true },
+    status: { type: Boolean, required: true },
+    id:{type: Schema.Types.ObjectId}
+}, { versionKey: false })
+
+// schemaProducts.plugin(mongoosePaginate)
+export const productsDB = mongoose.model('products', schemaProducts)
 
 
-// export const productsDB = mongoose.model('products', schemaProducts)
 
-// await productsDB.deleteMany({})
-// await productsDB.insertMany(vis2)
-// console.log(await productsDB.find());
-// await mongoose.connection.close()
+await productsDB.deleteMany({})
+// await productsDB.create(prod)
+// await productsDB.create(prod1)
+// await productsDB.create(prod2)
+// await productsDB.create(prod3)
+// await productsDB.create(prod4)
+// await productsDB.create(prod5)
+// await productsDB.create(prod6)
+// await productsDB.create(prod7)
+// await productsDB.create(prod8)
+// await productsDB.create(prod9)
+// await productsDB.create(prod10)
+// await productsDB.create(prod11)
+// await productsDB.create(prod12)
+// await productsDB.create(prod13)
+// await productsDB.create(prod14)
+
+
+
+await productsDB.insertMany(vis3)
+// await productsDB.insertMany(prod1)
+console.log(await productsDB.find());
+// console.log(vis2);
+await mongoose.connection.close()
