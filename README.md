@@ -1,0 +1,92 @@
+# segundaPreentregaBackend
+
+Curso de programacion backend
+Alumno: Matías Gattari
+Rubro del ecommerce: aun variando, si tiene que ser algo real posiblemente venda figuras coleccionables, si puede ser realmente ficticio voy a vender pokemons.
+
+Actualmente esta en desarrollo, con partes funcionales y partes que estan parchadas hasta encontrar la falla.
+
+base de datos mongo:
+database: ecommerce
+collections: products, carts, messages
+
+para iniciar el repositorio utilizo:
+-mongod --dbpath G:\MongoDB
+npm i (de requerir)
+npm test
+
+dependencias que uso:
+"dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.2",
+    "mongoose": "^7.0.3",
+    "mongoose-paginate-v2": "^1.7.1",
+    "nodemon": "^2.0.22",
+    "socket.io": "^4.6.1"
+  }
+
+ENDPOINTS:
+
+"/": Pagina de inicio de la api, solo muestra un mensaje para ver que funciona (json). en la ruta /src/servidor.js se encuentran tanto los datos de este endpoint, como el SOCKET.io 
+
+"/home": muestra una lista fija de los productos cargados en la base de datos, sin modificaciones. Esta trabajado con express-handlebars, siendo su vista /views/home.handlebars. Metodo GET
+
+"/realtimeproducts": muestra la misma lista que "/home" pero en esta misma, se pueden cargar datos para eliminar productos y agregar un nuevo producto a la base de datos, cuenta con actualizacion automatia por medio de socket.io
+Actualmente presenta problemas, "cargar" el producto pedido pero entra en un loop lo cual puede o cargarlo reiteradas veces o tildar el programa.
+"eliminar" elimina el producto por medio del ID pasado, tambien entra en loop, pero al eliminar 1 solo producto se aprecia que funciona bien y no se rompe. 
+Esta trabajado con express-handlebars, siendo su vista /views/realTimeProducts.handlebars  y estando su JS de frontend en /public/js/indexHome.js
+Su código base y endpoints se encuentran dentro de la ruta src/routes/productRouter.js
+
+"/chat": este endpoint esa en proceso, ya que se habia creado y luego se rompio y saco. actualmente solo muestra una vista con lo estructural basico, sin funcionalidad. Esta trabajado con express-handlebars, siendo su vista /views/chat.handlebars
+
+"/api/products": Este endpoint muestra una lista completa de todos los productos de la base de datos. Esta trabajado con express-handlebars, siendo su vista /views/products.handlebars, estando su codigo base en src/routes/productRouter.js
+por medio de la renderizacion de express y el paginate, se le agregaron tanto las opciones de paginacion como de busqueda (por pagina y criterio). La busqueda por query aun no esta probada del todo, pero deberia recibir un objeto con un criterio de busqueda como los del find en mongoDB ej: {_id:asdasasdasd}. Metodo GET
+Los botones para Sort ascendente y descendente se basan en el campo "precio" y esta funcional
+
+"/api/products/pid": este endpoint renderiza por medios de busqueda a la base de datos, el producto especificado por su pid ("_id" autogenerado por mongo), estando su codigo base en src/routes/productRouter.js. Metodo GET
+
+"/api/carts": Este endpoint muestra una lista completa de todos los carritos de la base de datos. Esta trabajado con express-handlebars, siendo su vista /views/carts.handlebars, estando su codigo base en src/routes/cartsRouter.js
+por medio de la renderizacion de express y el paginate, se le agregaron las opciones de paginacion (aunque aun no se trabajo sobre las mismas). Metodo GET. esta POPULADO.
+solamente falta realizar el metodo delete del carrito entero y de cada producto particular.
+
+"/api/carts/cid": este endpoint renderiza por medios de busqueda a la base de datos, el carrito especificado por su pid ("_id" autogenerado por mongo), estando su codigo base en src/routes/cartsRouter.js. Metodo GET
+
+"/api/carts/cid/product/pid": Este endpoint utiliza un metodo POST para cargar en el carrito especificado ("_id" del mismo, en este caso CID) el producto que deseo ("_id" del producto), al poseer el id del producto pasado por parametro dentro, este se ajusta solamente en +1 la cantidad del mismo. si el producto no existe en el carrito (no se encontro el _id pasado), este se carga en el carrito como un objeto { productID: ObjectId(""), quantity: 1, _id:ObjectId("643ffc0aec109cce37251944")} dentro del array "products" del carrito. tanto el carrito como cada producto distinto cargado al carrito genera su propio ID por mongoose tipo OBJeCTid.
+Al realizar un cambio ayer en el mismo, puede que no me este reconociendo el IF para saber si el ID del producto existe en el carrito o no, por lo que me cargaba el producto duplicado en lugar de sumar el quantity +1, esta en revisión ya que en la entrega pasada funcionaba.
+Su código base y endpoints se encuentran dentro de la ruta src/routes/cartsRouter.js
+
+
+Todos los productos cargados tienen un ID propio que les doy autogenerado por el randomUUII, pero para realizar las operaciones internas actualmente cambie al uso del _id (object ID que brinda mongoose)
+Todos estos endpoints a grandes rasgos funcionan, salvo las cosas que marque puntualmente.
+
+Dentro de la carpeta public/dao se encuentran tanto los managers de productos y carritos, como los schemas de mongoose (dentro de la carpeta models)
+Dentro de la carpeta public/js se encuentran los archivos JS del frontend, los cuales dan funcionalidades a botones y otras cuestiones (como socket.io del cliente)
+Dentro de la carpeta src/databases se encuentra el inicio de base de datos de mongoose (el cual se importa en "src/servidor.js"  para su inicio mismo), en la misma carpeta se encuentra "/pruebas/scriptsPruebas.js" en el cual tengo codigo para limpiar y reiniciar los datos de las bases de datos de productos y de carts
+Dentro de la carpeta src/config hay configuraciones del servidor
+
+
+DATOS A TENER EN CUENTA 
+Para esta entrega vengo muy atrasado ya que en el medio sucedio que me fui de vacaciones y no pude prestar atencion mas que a lo visto en clases y no tuve tiempo de practicar, a parte la pc que me pude traer no colabora (ni el internet). hay algunos errores en la funcionalidad del codifo que pude detectar pero no encontrar una solucion. a saber:
+- endpoint /realtimeproducts, al cargarse un producto el mismo entra en loop y se carga reiteradas veces rompiendo el codigo (o si no lo rompe se carga entre 1 y 4 veces el mismo producto).
+- falta terminar bien la query de busqueda (filtro) de productos del endpoing /api/products
+- Falta realizar el chat funcional (hay 2 handlebars que tengo como base para hacerlo "chat" y "mensajes" siendo chat la unica que esta unida a un endpoint actualmente)
+- No entendi del todo esta consigna : ya que todos estos datos yo se los doy al paginar, pero no muestro todos en la vista del handlebars, ya que estan unidos o a botones o a links, necesito hacer que especificamente se muestren, porque todos estos datos los termino usando sin mostrarselos al usuario??
+
+	Se debe entregar: El método GET deberá devolver un objeto con el siguiente formato:
+	{
+	status:success/error
+	payload: Resultado de los productos solicitados
+	totalPages: Total de páginas
+	prevPage: Página anterior
+	nextPage: Página siguiente
+	page: Página actual
+	hasPrevPage: Indicador para saber si la página previa existe
+	hasNextPage: Indicador para saber si la página siguiente existe.
+	prevLink: Link directo a la página previa (null si hasPrevPage=false)
+	nextLink: Link directo a la página siguiente (null si hasNextPage=false)
+	}
+
+- Incompleto en metodos delete para carrito completo o productos internos actualmente.
+- falta boton para agregar directamente productos al carrito desde la vista /products (aunque entiendo en este caso tendria que agregar tambien un imput para recibir un cid para linkear ese producto al carrito.
+
+EL proyecto se que va con faltas, pero como decia, justo estyo complicado en general, recien puedo tratar de sentarme a solucionar estas cosas entre el viernes y el sabado, por favor si hay informacion que me puedas brindar para solucionar alguno de los problemas que menciono serian de mucha ayuda. 
