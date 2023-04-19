@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2'
 // import util from 'node:util'
 // import { ProductManager } from '../../public/productManager.js';
 
@@ -11,47 +12,49 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 
 // const vis = [
 //     {
-//       "id": "642f2faab4be60728cdd1ae3",
+      
+//       "id": '642f2faab4be60728cdd1ae3',
 //       "quantity": 43,
 //       "products": [
 //         {
-//           "productID": "643ee24355da2d5dba436ce1",
+//           "productID": "643f5af63b563953e61948f1",
 //           "quantity": 3
 //         },
 //         {
-//           "productID": "643ee24355da2d5dba436ce3",
+//           "productID": "643f5af63b563953e61948f2",
 //           "quantity": 18
 //         },
 //         {
-//           "productID": "643ee24355da2d5dba436ce4",
+//           "productID": "643f5af63b563953e61948f3",
 //           "quantity": 2
 //         },
 //         {
-//           "productID": "643ee24355da2d5dba436ce5",
+//           "productID": "643f5af63b563953e61948f4",
 //           "quantity": 2
 //         },
 //         {
-//           "productID": "643ee24355da2d5dba436ce6",
+//           "productID": "643f5af63b563953e61948f5",
 //           "quantity": 7
 //         },
 //         {
-//           "productID": "643ee24355da2d5dba436ce7",
+//           "productID": "643f5af63b563953e61948f8",
 //           "quantity": 3
 //         },
 //         {
-//           "productID": "643ee24355da2d5dba436ce8",
+//           "productID": "643f5af63b563953e61948fd",
 //           "quantity": 5
 //         },
 //         {
-//           "productID": "643ee24355da2d5dba436ce9",
+//           "productID": "643f5af63b563953e61948fe",
 //           "quantity": 3
 //         }
 //       ]
 //     }
 //   ]
 
+
   
-//   const schemaCarts = new mongoose.Schema({
+// const schemaCarts = new mongoose.Schema({
 //     id: { type: String, required: true, unique:true },
 //     quantity: { type: Number },
 //     products: {
@@ -74,9 +77,10 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 // //     next()
 // // })
 
-
+// schemaCarts.plugin(mongoosePaginate)
 
 // export const cartsDB = mongoose.model('carts', schemaCarts)
+
 
 
 
@@ -85,7 +89,7 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 // await cartsDB.insertMany(vis)
 // const carritos = await cartsDB.find()
 
-// console.log(util.inspect(carritos, false, 10));
+// // console.log(util.inspect(carritos, false, 10));
 // await mongoose.connection.close()
 
 
