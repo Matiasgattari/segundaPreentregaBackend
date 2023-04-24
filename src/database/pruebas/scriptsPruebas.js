@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2'
-// import util from 'node:util'
+import util from 'node:util'
 // import { ProductManager } from '../../public/productManager.js';
 
 // import { MONGODB_PATH } from './src/config/config.mongo';
@@ -17,41 +17,95 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 //       "quantity": 43,
 //       "products": [
 //         {
-//           "productID": "643f5af63b563953e61948f1",
+//           "productID": "644587ac744b799f44db305d",
 //           "quantity": 3
 //         },
 //         {
-//           "productID": "643f5af63b563953e61948f2",
+//           "productID": "644587ac744b799f44db305e",
 //           "quantity": 18
 //         },
 //         {
-//           "productID": "643f5af63b563953e61948f3",
+//           "productID": "644587ac744b799f44db306a",
 //           "quantity": 2
 //         },
 //         {
-//           "productID": "643f5af63b563953e61948f4",
+//           "productID": "644587ac744b799f44db305f",
 //           "quantity": 2
 //         },
 //         {
-//           "productID": "643f5af63b563953e61948f5",
+//           "productID": "644587ac744b799f44db3060",
 //           "quantity": 7
 //         },
 //         {
-//           "productID": "643f5af63b563953e61948f8",
+//           "productID": "644587ac744b799f44db3062",
 //           "quantity": 3
 //         },
 //         {
-//           "productID": "643f5af63b563953e61948fd",
+//           "productID": "644587ac744b799f44db3063",
 //           "quantity": 5
 //         },
 //         {
-//           "productID": "643f5af63b563953e61948fe",
+//           "productID": "644587ac744b799f44db306b",
 //           "quantity": 3
 //         }
 //       ]
 //     }
 //   ]
 
+// //   const visNuevo = [
+// //     {
+      
+// //       "id": '642f2faab4be60728cdd1ae3',
+// //       "quantity": 46,
+// //       "products": [
+// //         {
+// //           "productID": "644587ac744b799f44db305d",
+// //           "quantity": 3,
+// //           "_id": "6445a1c506e307de067a8bf5"
+// //         },
+// //         {
+// //           "productID": "644587ac744b799f44db305e",
+// //           "quantity": 18,
+// //           "_id": "6445a1c506e307de067a8bf6"
+// //         },
+// //         {
+// //           "productID": "644587ac744b799f44db306a",
+// //           "quantity": 2,
+// //           "_id": "6445a1c506e307de067a8bf7"
+// //         },
+// //         {
+// //           "productID": "644587ac744b799f44db305f",
+// //           "quantity": 4,
+// //           "_id": "6445a1c506e307de067a8bf8"
+// //         },
+// //         {
+// //           "productID": "644587ac744b799f44db3060",
+// //           "quantity": 7,
+// //           "_id": "6445a1c506e307de067a8bf9"
+// //         },
+// //         {
+// //           "productID": "644587ac744b799f44db3062",
+// //           "quantity": 3,
+// //           "_id": "6445a1c506e307de067a8bfa"
+// //         },
+// //         {
+// //           "productID": "644587ac744b799f44db3063",
+// //           "quantity": 5,
+// //           "_id": "6445a1c506e307de067a8bfb"
+// //         },
+// //         {
+// //           "productID": "644587ac744b799f44db306b",
+// //           "quantity": 3,
+// //           "_id": "6445a1c506e307de067a8bfc"
+// //         },
+// //         {
+// //           "productID": "644587ac744b799f44db3069",
+// //           "quantity": 1,
+// //           "_id": "6445a37791308a3e6ac8d1bd"
+// //         }
+// //       ]
+// //     }
+// //   ]
 
   
 // const schemaCarts = new mongoose.Schema({
@@ -89,7 +143,7 @@ console.log(`conectado a base de datos en ${'mongodb://127.0.0.1:27017/ecommerce
 // await cartsDB.insertMany(vis)
 // const carritos = await cartsDB.find()
 
-// // console.log(util.inspect(carritos, false, 10));
+// console.log(util.inspect(carritos, false, 10));
 // await mongoose.connection.close()
 
 

@@ -72,16 +72,6 @@ export class ProductManager {
 
             if (title !== undefined && description !== undefined && price !== undefined && stock !== undefined && code !== undefined && category !== undefined) {
                
-                const product = new Product({
-                    title: title,
-                    description: description,
-                    price: price,
-                    thumbnail: thumbnail,
-                    stock: stock,
-                    code: code,
-                    category: category
-                })
-                
                 const product2 = await productsDB.create({ // insertOne en version mongoose
                     title: title,
                     description: description,
@@ -94,10 +84,10 @@ export class ProductManager {
                     id: randomUUID()
             })
                 this.products = await this.getProducts()
-                // this.products.push(product)
+                
                 const jsonProducts = JSON.stringify(this.products, null, 2)
                 await fs.writeFile(this.path, jsonProducts)
-                // console.log("this products post push",jsonProducts);
+              
 
             }
 
@@ -114,7 +104,7 @@ const IDrecibido = id;
         
         this.products = jsonProducts
 
-        const productFind = this.products.find((product) => product._id == IDrecibido)
+        const productFind = this.products.find((product) => product['_id'] == IDrecibido)
 
         if (productFind === undefined) {
             throw new Error("producto no encontrado o ID invalido")
@@ -132,7 +122,7 @@ const IDrecibido = id;
         const productos = await this.getProducts() //este paso asumo esta de mas
         this.products = productos //este paso asumo esta de mas
         
-        await productsDB.deleteOne({ id: id })
+        await productsDB.deleteOne({ _id: id })
 
         const productos2 = await this.getProducts() //persistencia luego de hacer el getproducts con mongoose
         this.products = productos2
@@ -145,37 +135,16 @@ const IDrecibido = id;
     }
 
     async updateProduct(id, prodModificado) {
+    await productsDB.findOneAndUpdate({_id:id},prodModificado)
+        const productosActualizados = await productsDB.find().lean()
+        this.products = productosActualizados
 
-        const jsonProducts = await fs.readFile(this.path, 'utf-8')
-        // this.products = JSON.parse(jsonProducts)
-
-        //busco producto a modificar
-        const productos = await this.getProducts()
-        this.products = productos
-        const product = this.products.find((prod) => prod.id === id);
-        const indice = this.products.findIndex(p => p.id === id)
-
-        // creo producto nuevo para reemmplazar al anterior
-        if (!product) {
-            throw new Error("El id no existe");
-        }
-
-        const nuevoProducto = new Product({
-            ...product,
-            ...prodModificado
-        })
-        nuevoProducto.id = id
-
-        //reemplazo producto
-        this.products[indice] = nuevoProducto
-
-        //actualizo el filesystem
+    //actualizo el filesystem
         const jsonProductsModif = JSON.stringify(this.products, null, 2)
         await fs.writeFile(this.path, jsonProductsModif)
-        // actualizo mongoDB
-        await productsDB.findOneAndUpdate({id:id},nuevoProducto)
-        
-        console.log("El producto se actualizo con exito", nuevoProducto);
+
+    console.log("El producto se actualizo con exito", prodModificado);
+
     }
 
 }
@@ -185,32 +154,38 @@ const IDrecibido = id;
 // const productManager = new ProductManager('../productos.txt');
 // console.log('console log de get products',await productManager.getProducts());
 
-// await productManager.addProduct(
-//             "computadora5",
-//              "descripcion prod 3",
-//             3500,
-//             "url imagen",
-//             45,
-//             "televisor",
-//            "hogar"
-//     )
+// const productoPrueba = {
+//     "_id": "644587ac744b799f44db306b",
+//     "title": "beedrill",
+//     "description": "descripcion prod 6",
+//     "price": 3500,
+//     "thumbnail": "url imagen",
+//     "stock": 45,
+//     "code": "televisor",
+//     "category": "bicho veneno",
+//     "status": true,
+//     "id": "ade0f4d9-716b-4453-tryu-6d5df1564232"
+//   }
 
-// console.log("producto filtrado por ID",await productManager.getProductById('ade0f4d9-716b-4453-b88d-6d5df1564232'));
+// await productManager.addProduct(productoPrueba)
 
-// await productManager.deleteProduct('2310d7bd-fe28-4d91-8fba-d83cbc9673f5')
+// console.log("producto filtrado por ID",await productManager.getProductById('644587ac744b799f44db306b'));
 
-// const prodModif = {title: "microondas",
-// description: "descripcion prod 3",
-// price: 3500,
-// thumbnail: "url imagen",
-// stock: 45,
-// code: "cocina",
-// category: "hogar"}
+// await productManager.deleteProduct('644587ac744b799f44db306b')
 
-// await productManager.updateProduct("3307ab83-226d-49e2-905a-efd18d10572a",prodModif)
+// const prodModif = {
+//     "_id": "644587ac744b799f44db306b",
+//     "title": "beedrill",
+//     "description": "descripcion prod 6",
+//     "price": 4500,
+//     "thumbnail": "url imagen",
+//     "stock": 20,
+//     "code": "televisor",
+//     "category": "bicho veneno",
+//     "status": true,
+//     "id": "ade0f4d9-716b-4453-tryu-6d5df1564232"
+//   }
 
+// await productManager.updateProduct("644587ac744b799f44db306b",prodModif)
 
-
-//no se donde ponerlo
-// await mongoose.connection.close()
 

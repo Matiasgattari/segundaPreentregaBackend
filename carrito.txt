@@ -1,48 +1,152 @@
 [
   {
-    _id: ObjectId("643f01f7945d577d51b2836e"),
-    id: '642f2faab4be60728cdd1ae3',
-    quantity: 43,
-    products: [
+    "_id": "6445a1c506e307de067a8bf4",
+    "id": "642f2faab4be60728cdd1ae3",
+    "quantity": 46,
+    "products": [
       {
-        productID: ObjectId("643ee24355da2d5dba436ce1"),
-        quantity: 3,
-        _id: ObjectId("643f01f7945d577d51b2836f")
+        "productID": {
+          "_id": "644587ac744b799f44db305d",
+          "title": "bulbasaur",
+          "description": "descripcion prod 3",
+          "price": 3500,
+          "thumbnail": "url imagen",
+          "stock": 45,
+          "code": "televisor",
+          "category": "hogar",
+          "status": true,
+          "id": "44820200-b24d-478f-8765-e69c4f8cf650"
+        },
+        "quantity": 3,
+        "_id": "6445a1c506e307de067a8bf5"
       },
       {
-        productID: ObjectId("643ee24355da2d5dba436ce3"),
-        quantity: 18,
-        _id: ObjectId("643f01f7945d577d51b28370")
+        "productID": {
+          "_id": "644587ac744b799f44db305e",
+          "title": "ivysaur",
+          "description": "descripcion prod 2",
+          "price": 2500,
+          "thumbnail": "url imagen",
+          "stock": 45,
+          "code": "televisor",
+          "category": "hogar",
+          "status": true,
+          "id": "44820200-b24d-478f-1111-e69c4f8cf650"
+        },
+        "quantity": 18,
+        "_id": "6445a1c506e307de067a8bf6"
       },
       {
-        productID: ObjectId("643ee24355da2d5dba436ce4"),
-        quantity: 2,
-        _id: ObjectId("643f01f7945d577d51b28371")
+        "productID": {
+          "_id": "644587ac744b799f44db306a",
+          "title": "kakuna",
+          "description": "descripcion prod 3",
+          "price": 3500,
+          "thumbnail": "url imagen",
+          "stock": 45,
+          "code": "televisor",
+          "category": "hogar",
+          "status": true,
+          "id": "ade0f4d9-716b-4453-b88d-6d5df1564232"
+        },
+        "quantity": 2,
+        "_id": "6445a1c506e307de067a8bf7"
       },
       {
-        productID: ObjectId("643ee24355da2d5dba436ce5"),
-        quantity: 2,
-        _id: ObjectId("643f01f7945d577d51b28372")
+        "productID": {
+          "_id": "644587ac744b799f44db305f",
+          "title": "venasaur",
+          "description": "descripcion prod 3",
+          "price": 3500,
+          "thumbnail": "url imagen",
+          "stock": 45,
+          "code": "televisor",
+          "category": "hogar",
+          "status": true,
+          "id": "dac58fd1-4123-4b06-ad4f-aade9f184b2e"
+        },
+        "quantity": 4,
+        "_id": "6445a1c506e307de067a8bf8"
       },
       {
-        productID: ObjectId("643ee24355da2d5dba436ce6"),
-        quantity: 7,
-        _id: ObjectId("643f01f7945d577d51b28373")
+        "productID": {
+          "_id": "644587ac744b799f44db3060",
+          "title": "charmander",
+          "description": "descripcion prod 3",
+          "price": 3500,
+          "thumbnail": "url imagen",
+          "stock": 45,
+          "code": "televisor",
+          "category": "hogar",
+          "status": true,
+          "id": "065592be-4846-4b2b-891e-ceddb54a01a9"
+        },
+        "quantity": 7,
+        "_id": "6445a1c506e307de067a8bf9"
       },
       {
-        productID: ObjectId("643ee24355da2d5dba436ce7"),
-        quantity: 3,
-        _id: ObjectId("643f01f7945d577d51b28374")
+        "productID": {
+          "_id": "644587ac744b799f44db3062",
+          "title": "charizard",
+          "description": "descripcion prod 3",
+          "price": 3500,
+          "thumbnail": "url imagen",
+          "stock": 45,
+          "code": "televisor",
+          "category": "hogar",
+          "status": true,
+          "id": "065297be-4899-4b2b-891e-ceddb54a01a9"
+        },
+        "quantity": 3,
+        "_id": "6445a1c506e307de067a8bfa"
       },
       {
-        productID: ObjectId("643ee24355da2d5dba436ce8"),
-        quantity: 5,
-        _id: ObjectId("643f01f7945d577d51b28375")
+        "productID": {
+          "_id": "644587ac744b799f44db3063",
+          "title": "squirtle",
+          "description": "descripcion prod 3",
+          "price": 3500,
+          "thumbnail": "url imagen",
+          "stock": 45,
+          "code": "televisor",
+          "category": "hogar",
+          "status": true,
+          "id": "015597be-4846-4b2b-7777-ceddb54a01a9"
+        },
+        "quantity": 5,
+        "_id": "6445a1c506e307de067a8bfb"
       },
       {
-        productID: ObjectId("643ee24355da2d5dba436ce9"),
-        quantity: 3,
-        _id: ObjectId("643f01f7945d577d51b28376")
+        "productID": {
+          "_id": "644587ac744b799f44db306b",
+          "title": "beedrill",
+          "description": "descripcion prod 6",
+          "price": 3500,
+          "thumbnail": "url imagen",
+          "stock": 45,
+          "code": "televisor",
+          "category": "hogar",
+          "status": true,
+          "id": "ade0f4d9-716b-4453-tryu-6d5df1564232"
+        },
+        "quantity": 3,
+        "_id": "6445a1c506e307de067a8bfc"
+      },
+      {
+        "productID": {
+          "_id": "644587ac744b799f44db3069",
+          "title": "weedle",
+          "description": "descripcion prod 3",
+          "price": 4000,
+          "thumbnail": "url imagen",
+          "stock": 45,
+          "code": "televisor",
+          "category": "hogar",
+          "status": true,
+          "id": "eb75a066-f01e-410e-b4d0-e622893532fd"
+        },
+        "quantity": 1,
+        "_id": "6445a37791308a3e6ac8d1bd"
       }
     ]
   }

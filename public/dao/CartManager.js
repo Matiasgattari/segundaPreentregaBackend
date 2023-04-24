@@ -6,7 +6,8 @@ import fs from 'fs/promises'
 
 import mongoose from 'mongoose';
 import { cartsDB } from "./models/schemaCarts.js";
-
+import util from 'node:util'
+import { log } from "console";
 
 
 
@@ -46,7 +47,7 @@ export class CartManager {
         await cartsDB.create(cart)
         console.log("carrito creado correctamente");
     }
-    // 
+   
     async agregarProductoAlCarrito(cid, pid) {
         try {
             //instancio productManager
@@ -54,12 +55,12 @@ export class CartManager {
 
             //ubico producto por pid
             const productos = await productManager.getProducts()
-            const productoIndex = productos.findIndex(prod => prod._id == pid)
+            const productoIndex = productos.findIndex(prod => prod['_id'] == pid)
             const productoFiltrado = productos[productoIndex]
 
             //ubico carrito por cid
             const carritos = await this.getCarts()
-            const carritoIndex = carritos.findIndex(carrito => carrito._id == cid)
+            const carritoIndex = carritos.findIndex(carrito => carrito['_id'] == cid)
             const carritoFiltrado = carritos[carritoIndex]
 
             //formato de producto a pushear al array de productos del carrito
@@ -70,16 +71,19 @@ export class CartManager {
             };
 
             //array con todos los IDs de los productos del carrito.Es un parche para dejarlo funcional. TRATAR DE ARRAGLAR CUANDO HAYA TIEMPO. 
-            const idsDentroDelCarrito = [];
-            const carritoProductos = carritoFiltrado.products
+            const productosDentroDelCarrito = [];
+            const carritoProductos = carritoFiltrado['products']
             carritoProductos.forEach(element => {
-                idsDentroDelCarrito.push(element.productID)
+                productosDentroDelCarrito.push(element.productID)
             });
-
+       
             //utilizo array de ids para saber si incluye PID. modifico cantidades o creo nuevo objeto
-            if (idsDentroDelCarrito.includes(pid)) {
-                const productoDentroDelCarrito = carritoProductos.find(element => element.productID == pid)
-                productoDentroDelCarrito.quantity++;
+            const booleano = productosDentroDelCarrito.some(element => element['_id'] == pid )
+            
+            if (booleano) {
+         
+            const ubicoProducto = carritoProductos.find(el =>el.productID["_id"] == pid)
+            ubicoProducto.quantity++;
                 carritoFiltrado.quantity++;
                 // await this.saveCart()
                 await cartsDB.findOneAndUpdate({_id:cid},carritoFiltrado)
@@ -87,8 +91,6 @@ export class CartManager {
                 this.carts= await this.getCarts()
                 const jsonCarts = JSON.stringify(this.carts, null, 2)
                 await fs.writeFile(this.path, jsonCarts)
-
-
                
             } else {
                 const push = carritoProductos.push(produID)
@@ -103,10 +105,35 @@ export class CartManager {
             }
 
              return { "message": "producto cargado correctamente"  }
+
         } catch (error) {
             return error.message
         }
     }
+
+async eliminarProducto(cid,pid){
+
+const carritoPorId =await  this.getCartById(cid)
+const productosCarrito =  carritoPorId?.products
+// const productoCarrito5 = productosCarrito[5]['productID']['_id']
+
+// const productoABorrar  = productosCarrito?.findIndex((el)=>el.productID?._id==pid)
+const arrayProductos = []
+productosCarrito?.forEach(el=>arrayProductos.push(el.productID?._id.toString()))
+const indiceProductoEliminar = arrayProductos.indexOf(pid)
+console.log("index of array pid" , indiceProductoEliminar);
+
+const nuevoCarrito = carritoPorId?.products.splice(indiceProductoEliminar,1)
+
+//esta parte aun sin probar
+await cartsDB.findOneAndUpdate({_id:cid},nuevoCarrito)
+    this.carts= await this.getCarts()
+    const jsonCarts = JSON.stringify(this.carts, null, 2)
+    await fs.writeFile(this.path, jsonCarts)
+return "producto eliminado correctamente"
+
+}
+
 
 
     async saveCart() {
@@ -129,15 +156,6 @@ export class CartManager {
             return cartID
 
         }
-
-
-
-
-
-
-
-
-
 
 
     }

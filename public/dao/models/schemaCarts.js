@@ -8,13 +8,13 @@ const schemaCarts = new mongoose.Schema({
         type: [
             {
                 productID: {
-                        type: Schema.Types.ObjectId, // este Schema estaba en minusculas en la diapo, ojo, va en mayúsculas!
+                        type: Schema.Types.ObjectId, 
                         ref: 'products'
                     },
                 quantity:{ type: Number }
             }
         ],
-        default: [], // este default faltaba en la diapositiva, ojo!
+        default: [], 
     }
 }, { versionKey: false })
 

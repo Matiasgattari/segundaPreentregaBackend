@@ -70,6 +70,12 @@ try {
 
 } )
 
+productsRouter.get('/json/productsJSON', async (req, res) => {
+    const productos = await productsDB.find().lean()
+    res.send(productos)
+    
+    })
+    
 
 productsRouter.get('/:pid', async (req,res)=>{
 
@@ -121,8 +127,8 @@ try {
     const prodActualizado = req.body
 
     await productManager.updateProduct(id,prodActualizado)
-
-    res.send('Producto actualizado correctamente')
+    // res.send('Producto actualizado correctamente')
+    res.send(prodActualizado)
    
 } catch (error) {
     throw new Error ('Error: no se encontro el producto filtrado. ')

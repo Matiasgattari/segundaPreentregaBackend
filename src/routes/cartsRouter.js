@@ -11,6 +11,7 @@ import {
 import util from 'node:util'
 
 import { engine } from 'express-handlebars'
+import { cartsDB } from '../../public/dao/models/schemaCarts.js';
 // const app = express()
 
 // app.engine('handlebars', engine())
@@ -27,6 +28,15 @@ cartsRouter.use(express.urlencoded({
 
 const productManager = new ProductManager('./productos.txt');
 const cartManager = new CartManager('./carrito.txt')
+
+
+cartsRouter.get('/json/cartsJSON', async (req, res) => {
+    const carritos = await cartManager.getCarts();
+ 
+    res.send(carritos)
+    
+    })
+
 
 cartsRouter.get('/:cid', async (req, res) => {
        try {
@@ -70,23 +80,50 @@ const hayCarritos = (arrayCarritos!=null)
 
 
 
+
+
 cartsRouter.post('/:cid/product/:pid', async (req, res) => {
     try {
         const cid = req.params.cid
         const pid = req.params.pid
 
-        // const productos = await productManager.getProducts()
-        // const carritos = await cartManager.getCarts()
-// const producto = await productManager.getProductById(pid)
-        // const actualizado = await cartManager.agregarProductoAlCarrito(cid,pid)
-        // const carritoActualizado = await cartManager.getCartById(cid)
-        // const prodAct = await cartManager.getCartById(cid)
-    // res.json({"message": "producto cargado correctamente"})
-const bla = await cartManager.agregarProductoAlCarrito(cid,pid)
-
-
-    res.json(bla)
+      
+const agregarCarrito = await cartManager.agregarProductoAlCarrito(cid,pid)
+    res.json(agregarCarrito)
     } catch (error) {
         throw new Error('id no encontrado')
     }
 })
+
+
+
+cartsRouter.delete('/:cid',async( req,res)=>{
+   
+    try {
+        const IDCarrito = req.params.cid
+        const carritosLeidos = await cartManager.getCarts()
+        const carritoFiltradoID= await cartManager.getCartById(IDCarrito)
+        await cartsDB.deleteOne({_id:IDCarrito})
+        res.send("carrito eliminado correctamente")
+            
+        }
+         catch(error) {
+             res.status(500).json({
+            message: error.message
+        })
+    }})
+cartsRouter.delete('/:cid/products/:pid',async( req,res)=>{
+     
+    try {
+    
+       
+        const productoID= req.params['pid']
+        const carritoID= req.params['cid']
+    
+const productosFiltrados = await cartManager.eliminarProducto(carritoID,productoID)
+// const getCarts = await cartsDB.find().lean()
+res.send(productosFiltrados)
+    } catch (error) {
+        throw new Error ('Error: no se encontro el producto filtrado. ')
+    }
+    } )
