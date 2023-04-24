@@ -50,6 +50,7 @@ eliminarBTN?.addEventListener("click", ()=>{
 //doy funcionalidad al boton de agregar productos "CARGAR"
 // @ts-ignore
 cargarBTN?.addEventListener("click", (e)=>{
+    e.preventDefault()
     // @ts-ignore
     const valorTitulo= titulo?.value
     // @ts-ignore
