@@ -1,38 +1,69 @@
-{{#if hayDocs}}
-<h1>Lista de productos</h1>
-<ul>
-  {{#each arrayProductos}}
-  <li>{{this}}</li>
-  {{/each}}
-</ul>
-{{else}}
-<p>El array se encuentra vacio</p>
+{{#if filtro}}
+      
+      <h1>---------------------FILTRO ENCONTRADO ---------------------</h1>
+      <h2>Producto filtrado por "title": {{filtro}}</h3>
+
+      <h3>Lista de productos</h1>
+      <ul>
+        {{#each arrayFiltrado}}
+        <li>{{this}}</li>
+        {{/each}}
+      </ul>
+      <br>
+      <button onclick="reestablecer({{limit}},{{page}},{{sort}})">reestablecer filtro</button>
+
+{{else}} 
+
+    {{#if hayDocs}}
+          <h1>Lista de productos</h1>
+          <ul>
+            {{#each arrayProductos}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+     {{else}}
+     <p>El array se encuentra vacio</p>
+     {{/if}}
+     
+    <button><a {{#if hasPrevPage}} href="?limit={{limit}}&page={{prevPage}}" {{/if}}>Prev</a></button>
+
+    [{{ page }}]
+    <button><a {{#if hasNextPage}} href="?limit={{limit}}&page={{nextPage}}" {{/if}}>Next</a></button>
+    <br><br>
+
+    <button id="boton_ascendente" onclick="ascendente({{limit}},{{page}})">Sort ascendente</button>
+    <button id="boton_descendente" onclick="descendente({{limit}},{{page}})">Sort descendente</button><br><br>
+
+    <p>Página: </p><input id="pagina" type="text"> <button onclick="irAPag({{limit}})">ir</button>
+    <p>Filtro por titulo: </p><input id="query" type="text"> <button onclick="query({{limit}},{{page}},{{sort}},{{filtro}})">ir</button>
+    <button onclick="reestablecer({{limit}},{{page}},{{sort}})">reestablecer filtro</button>
+
 {{/if}}
-<button><a {{#if hasPrevPage}} href="?limit={{limit}}&page={{prevPage}}" {{/if}}>Prev</a></button>
-
-[{{ page }}]
-<button><a {{#if hasNextPage}} href="?limit={{limit}}&page={{nextPage}}" {{/if}}>Next</a></button>
-<br><br>
-
-<button id="boton_ascendente" onclick="ascendente({{limit}},{{page}})">Sort ascendente</button>
-<button id="boton_descendente" onclick="descendente({{limit}},{{page}})">Sort descendente</button><br><br>
-
-<p>Página: </p><input id="pagina" type="text"> <button onclick="irAPag({{limit}})">ir</button>
-<p>Query: </p><input id="query" type="text"> <button onclick="query({{query}})">ir</button>
 
 <script>
   function irAPag(limit) {
     const pagDeseada = document.getElementById('pagina').value || 1
     window.location = `?limit=${limit}&page=${pagDeseada}`
   }
+
   function ascendente(limit,page){
         window.location = `?limit=${limit}&page=${page}&sort=1`
   }
+
  function descendente(limit,page){
         window.location = `?limit=${limit}&page=${page}&sort=-1`
   }
-   function query(filtro,limit,page,sort) {
-    window.location = `?limit=${limit}&page=${page}&sort=${sort}&query=${filtro}`
+
+ function query(limit,page,sort,filtro) {
+        const queryInput = document.getElementById('query').value
+        window.location = `?limit=${limit}&page=${page}&sort=${sort}&query=${queryInput}`
+    
+  }
+
+ function reestablecer (limit,page,sort) {
+        window.location = `?limit=${limit}&page=${page}&sort=${sort}`
   }
 </script>
 <script src="/js/indexProducts.js"></script>
+
+{{!-- window.location = `?limit=${limit}&page=${page}&sort=${sort}&query=${filtro}` --}}

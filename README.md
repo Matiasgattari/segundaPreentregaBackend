@@ -11,7 +11,7 @@ database: ecommerce
 collections: products, carts, messages
 
 para iniciar el repositorio utilizo:
--mongod --dbpath G:\MongoDB
+-mongod --dbpath E:\BD-mongo
 npm i (de requerir)
 npm test
 
@@ -68,7 +68,7 @@ solamente falta realizar el metodo delete del carrito entero y de cada producto 
 
 "/api/carts/cid": MEOTODO DELETE. este endpoint elimina por medios de busqueda a la base de datos, el carrito especificado por su cid ("_id" autogenerado por mongo), estando su codigo base en src/routes/cartsRouter.js. 
 
-"/api/carts/cid/product/pid": Este endpoint utiliza un metodo POST para cargar en el carrito especificado ("_id" del mismo, en este caso CID) el producto que deseo ("_id" del producto), al poseer el id del producto pasado por parametro dentro, este se ajusta solamente en +1 la cantidad del mismo. si el producto no existe en el carrito (no se encontro el _id pasado), este se carga en el carrito como un objeto { productID: ObjectId(""), quantity: 1, _id:ObjectId("643ffc0aec109cce37251944")} dentro del array "products" del carrito. tanto el carrito como cada producto distinto cargado al carrito genera su propio ID por mongoose tipo ObjectID.
+"/api/carts/cid/product/pid":METODO POST. Este endpoint utiliza un metodo POST para cargar en el carrito especificado ("_id" -autogenerado por mongoose- del mismo, en este caso CID) el producto que deseo ("_id" del producto), al poseer el id del producto pasado por parametro dentro, este se ajusta solamente en +1 la cantidad del mismo. si el producto no existe en el carrito (no se encontro el _id pasado), este se carga en el carrito como un objeto { productID: ObjectId(""), quantity: 1, _id:ObjectId("643ffc0aec109cce37251944")} dentro del array "products" del carrito. tanto el carrito como cada producto distinto cargado al carrito genera su propio ID por mongoose tipo ObjectID.
 Su código base y endpoints se encuentran dentro de la ruta src/routes/cartsRouter.js
 
 "api/carts/json/cartsJSON": este endpoint muestra un JSON de los carritos sin renderizar por express
@@ -85,28 +85,7 @@ Dentro de la carpeta src/config hay configuraciones del servidor
 
 
 DATOS A TENER EN CUENTA 
-Para esta entrega vengo muy atrasado ya que en el medio sucedio que me fui de vacaciones y no pude prestar atencion mas que a lo visto en clases y no tuve tiempo de practicar, a parte la pc que me pude traer no colabora (ni el internet). hay algunos errores en la funcionalidad del codifo que pude detectar pero no encontrar una solucion. a saber:
-- endpoint /realtimeproducts, al cargarse un producto el mismo entra en loop y se carga reiteradas veces rompiendo el codigo (o si no lo rompe se carga entre 1 y 4 veces el mismo producto).
-- falta terminar bien la query de busqueda (filtro) de productos del endpoing /api/products
+puntos faltantes a saber:
 - Falta realizar el chat funcional (hay 2 handlebars que tengo como base para hacerlo "chat" y "mensajes" siendo chat la unica que esta unida a un endpoint actualmente)
-
-- Incompleto en metodos delete para carrito completo o productos internos actualmente.
 - falta boton para agregar directamente productos al carrito desde la vista /products (aunque entiendo en este caso tendria que agregar tambien un imput para recibir un cid para linkear ese producto al carrito.
 
-EL proyecto se que va con faltas, pero como decia, justo estyo complicado en general, recien puedo tratar de sentarme a solucionar estas cosas entre el viernes y el sabado, por favor si hay informacion que me puedas brindar para solucionar alguno de los problemas que menciono serian de mucha ayuda. 
-
-
-
-
-{
-  "_id": "644587ac744b799f44db306b",
-  "title": "beedrill",
-  "description": "descripcion prod 6",
-  "price": 3500,
-  "thumbnail": "url imagen",
-  "stock": 45,
-  "code": "televisor",
-  "category": "bicho",
-  "status": true,
-  "id": "ade0f4d9-716b-4453-tryu-6d5df1564232"
-}

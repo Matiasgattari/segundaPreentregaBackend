@@ -33,6 +33,13 @@ try {
     result.docs.forEach((res)=>{arrayProductos.push(util.inspect(res, false, 10))})
     // console.log(result)
    
+
+const productosFiltrados = []
+const filtrado =  result.docs.forEach((res)=>{if(res.title==req.query.query)
+    productosFiltrados.push(util.inspect(res, false, 10))})
+
+const filtro = req.query.query
+
 //     const filtro = req.query.query
 // if (filtro) {
 //     const arrayProductosFiltrados= arrayProductos.filter(category===filtro)
@@ -55,8 +62,10 @@ try {
         prevPage: result.prevPage,
         pagingCounter: result.pagingCounter,
         arrayProductos,
-        // query:result.filtro
-        
+        filtro: filtro,
+        noHayFiltro:true,
+        sort:req.query.sort || -1,
+        arrayFiltrado: productosFiltrados || arrayProductos
         }
 
     res.render('products.handlebars', context)
