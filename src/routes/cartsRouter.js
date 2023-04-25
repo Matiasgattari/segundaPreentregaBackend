@@ -95,6 +95,19 @@ const agregarCarrito = await cartManager.agregarProductoAlCarrito(cid,pid)
     }
 })
 
+cartsRouter.put('/:cid/product/:pid', async (req, res) => {
+    try {
+        const cid = req.params.cid
+        const pid = req.params.pid
+
+      
+const agregarCarrito = await cartManager.agregarProductoAlCarrito(cid,pid)
+    res.json(agregarCarrito)
+    } catch (error) {
+        throw new Error('id no encontrado')
+    }
+})
+
 
 
 cartsRouter.delete('/:cid',async( req,res)=>{

@@ -9,7 +9,7 @@ export const schemaProducts = new Schema({
     stock: { type: Number, required: true, min: 1 },
     code: { type: String, required: true },
     category: { type: String, required: true , index: true },
-    status: { type: Boolean, required: true },
+    status: { type: String, required: true },
     // id: { required: true, unique:true,type: Schema.Types.ObjectId}
 }, { versionKey: false })
 

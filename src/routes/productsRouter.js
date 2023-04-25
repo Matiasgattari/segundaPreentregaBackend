@@ -34,20 +34,19 @@ try {
     // console.log(result)
    
 
-const productosFiltrados = []
-const filtrado =  result.docs.forEach((res)=>{if(res.title==req.query.query)
-    productosFiltrados.push(util.inspect(res, false, 10))})
+    //filtrado por titulo
+const productosFiltradosXTitulo = []
+const filtrandoXTitulo =  result.docs.forEach((res)=>{if(res.title==req.query.query)
+    productosFiltradosXTitulo.push(util.inspect(res, false, 10))})
+const filtroTitle = req.query.query
 
-const filtro = req.query.query
+//filtrado por disponibilidad
+const productosFiltradosXDisp = []
+const filtrandoXDisp =  result.docs.forEach((res)=>{if(res.status==true)
+    productosFiltradosXDisp.push(util.inspect(res, false, 10))})
+const filtroTDisp = req.query.status
 
-//     const filtro = req.query.query
-// if (filtro) {
-//     const arrayProductosFiltrados= arrayProductos.filter(category===filtro)
-// }else {
-//     const arrayProductosFiltrados = arrayProductos
-// }
-
-
+const filtro = filtroTitle || filtroTDisp
 
     const context = {
         pageTitle: 'Products',
@@ -61,11 +60,14 @@ const filtro = req.query.query
         hasPrevPage: result.hasPrevPage,
         prevPage: result.prevPage,
         pagingCounter: result.pagingCounter,
-        arrayProductos,
-        filtro: filtro,
-        noHayFiltro:true,
         sort:req.query.sort || -1,
-        arrayFiltrado: productosFiltrados || arrayProductos
+        arrayProductos,
+        filtroXTitulo: filtroTitle,
+        // noHayFiltro:true,
+        arrayFiltradoXTitulo: productosFiltradosXTitulo || arrayProductos,
+        disponibilidad: filtroTDisp,
+        arrayFiltradoXDisp: productosFiltradosXDisp,
+        filtro:filtro
         }
 
     res.render('products.handlebars', context)

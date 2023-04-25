@@ -88,4 +88,5 @@ DATOS A TENER EN CUENTA
 puntos faltantes a saber:
 - Falta realizar el chat funcional (hay 2 handlebars que tengo como base para hacerlo "chat" y "mensajes" siendo chat la unica que esta unida a un endpoint actualmente)
 - falta boton para agregar directamente productos al carrito desde la vista /products (aunque entiendo en este caso tendria que agregar tambien un imput para recibir un cid para linkear ese producto al carrito.
+-filtro de productos por categoría lo reemplace actualmente por "title" ya que no decidi bien los productos, solo difieren en titulo.
 

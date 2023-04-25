@@ -23,28 +23,19 @@ const stock = document.getElementById('stock')
 const codigo = document.getElementById('codigo')
 // console.log("codigo", codigo);
 const categoria = document.getElementById('categoria')
+const statusTrue = document.getElementById('status')
 // console.log("categoria", categoria);
 
 
-
-// const formulario = document.getElementById("formulario")
-// formulario?.addEventListener("click", (e)=>{
-// e.preventDefault()
-// } )
-
-
-
 //doy funcionalidad al boton de eliminar producto "ELIMINAR"
-eliminarBTN?.addEventListener("click", ()=>{
+eliminarBTN?.addEventListener("click", (e)=>{
+    e.preventDefault()
    // @ts-ignore
     const idEliminar = eliminarID?.value
 
     serverSocket.emit('eliminarProducto', idEliminar)
-
+    location.reload()
 } )
-
-
-
 
 
 //doy funcionalidad al boton de agregar productos "CARGAR"
@@ -66,11 +57,11 @@ cargarBTN?.addEventListener("click", (e)=>{
     // @ts-ignore
     const valorCategoria= categoria?.value
 
-    const productoAgregar = {"title":valorTitulo,"description":valorDescripcion,"price":valorPrecio,"thumbnail":valorUrlIMG,"stock":valorStock,"code":valorCodigo,"category":valorCategoria}
+    const productoAgregar = {"title":valorTitulo,"description":valorDescripcion,"price":valorPrecio,"thumbnail":valorUrlIMG,"stock":valorStock,"code":valorCodigo,"category":valorCategoria,"status":statusTrue}
 
 
 serverSocket.emit('nuevoProducto', productoAgregar)
-
+location.reload()
 
 
 } )

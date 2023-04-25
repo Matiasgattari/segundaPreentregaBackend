@@ -1,16 +1,31 @@
 {{#if filtro}}
       
       <h1>---------------------FILTRO ENCONTRADO ---------------------</h1>
-      <h2>Producto filtrado por "title": {{filtro}}</h3>
+      
 
       <h3>Lista de productos</h1>
-      <ul>
-        {{#each arrayFiltrado}}
-        <li>{{this}}</li>
-        {{/each}}
-      </ul>
-      <br>
-      <button onclick="reestablecer({{limit}},{{page}},{{sort}})">reestablecer filtro</button>
+
+      {{#if filtroXTitulo}}
+      <h2>Producto filtrado por "title": {{filtro}}</h3>
+          <ul>
+            {{#each arrayFiltradoXTitulo}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+          <br>
+          <button onclick="reestablecer({{limit}},{{page}},{{sort}})">Reestablecer filtro</button>
+
+            {{else}}
+            <h2>Producto filtrado por "disponibilidad": {{disponibilidad}}</h3>
+                    <ul>
+                      {{#each arrayFiltradoXDisp}}
+                      <li>{{this}}</li>
+                      {{/each}}
+                    </ul>
+                    <br>
+           <br><br>
+            <button onclick="reestablecer(10,{{page}},{{sort}})">Reestablecer filtro</button>
+      {{/if}}
 
 {{else}} 
 
@@ -25,10 +40,10 @@
      <p>El array se encuentra vacio</p>
      {{/if}}
      
-    <button><a {{#if hasPrevPage}} href="?limit={{limit}}&page={{prevPage}}" {{/if}}>Prev</a></button>
+    <button><a {{#if hasPrevPage}} href="?limit={{limit}}&page={{prevPage}}&status={{disponibilidad}}" {{/if}}>Prev</a></button>
 
     [{{ page }}]
-    <button><a {{#if hasNextPage}} href="?limit={{limit}}&page={{nextPage}}" {{/if}}>Next</a></button>
+    <button><a {{#if hasNextPage}} href="?limit={{limit}}&page={{nextPage}}&status={{disponibilidad}}" {{/if}}>Next</a></button>
     <br><br>
 
     <button id="boton_ascendente" onclick="ascendente({{limit}},{{page}})">Sort ascendente</button>
@@ -36,7 +51,11 @@
 
     <p>Página: </p><input id="pagina" type="text"> <button onclick="irAPag({{limit}})">ir</button>
     <p>Filtro por titulo: </p><input id="query" type="text"> <button onclick="query({{limit}},{{page}},{{sort}},{{filtro}})">ir</button>
-    <button onclick="reestablecer({{limit}},{{page}},{{sort}})">reestablecer filtro</button>
+    
+    <button onclick="disponibiles({{limit}},{{page}},{{sort}})">Disponibles</button>
+   
+
+
 
 {{/if}}
 
@@ -47,12 +66,15 @@
   }
 
   function ascendente(limit,page){
+       
         window.location = `?limit=${limit}&page=${page}&sort=1`
   }
 
  function descendente(limit,page){
+   
         window.location = `?limit=${limit}&page=${page}&sort=-1`
   }
+
 
  function query(limit,page,sort,filtro) {
         const queryInput = document.getElementById('query').value
@@ -61,9 +83,19 @@
   }
 
  function reestablecer (limit,page,sort) {
-        window.location = `?limit=${limit}&page=${page}&sort=${sort}`
+        window.location = `?limit=${limit}&page=${page}&sort=${sort}`}
+
+ function disponibiles(limit,page) {
+        window.location = `?limit=100&page=${page}&status="true"`
   }
+
+
+
 </script>
 <script src="/js/indexProducts.js"></script>
 
 {{!-- window.location = `?limit=${limit}&page=${page}&sort=${sort}&query=${filtro}` --}}
+
+{{!-- window.location = `?limit=${limit}&page=${page}&sort=1&status="${disponibilidad}"`
+
+window.location = `?limit=${limit}&page=${page}&sort=-1&status="${disponibilidad}"` --}}
