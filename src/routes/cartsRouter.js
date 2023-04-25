@@ -99,10 +99,11 @@ cartsRouter.put('/:cid/product/:pid', async (req, res) => {
     try {
         const cid = req.params.cid
         const pid = req.params.pid
+        const quantity = req.body.quantity
 
-      
-const agregarCarrito = await cartManager.agregarProductoAlCarrito(cid,pid)
-    res.json(agregarCarrito)
+      const modificarQantity = await cartManager.modificarUnidadesProcducto(cid,pid,quantity)
+
+    res.json(modificarQantity)
     } catch (error) {
         throw new Error('id no encontrado')
     }
