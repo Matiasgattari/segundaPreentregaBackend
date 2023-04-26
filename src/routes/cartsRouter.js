@@ -27,7 +27,7 @@ cartsRouter.use(express.urlencoded({
 
 
 const productManager = new ProductManager('./productos.txt');
-const cartManager = new CartManager('./carrito.txt')
+export const cartManager = new CartManager('./carrito.txt')
 
 
 cartsRouter.get('/json/cartsJSON', async (req, res) => {

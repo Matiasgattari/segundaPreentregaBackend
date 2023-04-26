@@ -5,6 +5,10 @@ import { productsRouter } from './routes/productsRouter.js';
 import { cartsRouter } from './routes/cartsRouter.js';
 import { PORT } from './config/config.sv.js';
 import { ProductManager } from '../public/dao/ProductManager.js';
+import util from 'node:util'
+import { sessionsRouter } from './routes/sessionsRouter.js';
+import { cartManager } from './routes/cartsRouter.js';
+import { productsDB } from '../public/dao/models/schemaProducts.js';
 
 //inicializando mongoose en el sv
 import {inicioMongoose} from './database/mongoose.js'
@@ -23,6 +27,7 @@ app.use(express.static('./static'))
 
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
+app.use('/api/sessions', sessionsRouter)
 
 
 
@@ -31,7 +36,7 @@ const httpServer = app.listen(PORT)
 console.log(`Servidor escuchando en puerto ${PORT}`);
 // lo mismo que me devuelve el http.createServer() !!
 
-const io = new SocketIOServer(httpServer)
+export const io = new SocketIOServer(httpServer)
 
 
 app.get('/', async (req, res) => {
@@ -114,3 +119,32 @@ res.render('chat.handlebars', {
 })
 })
 
+
+
+// app.get('/api/products/productSelected/:pid', async (req, res) => {
+   
+
+    
+    
+//     const pid = req.params.pid
+//     //probando recibir producto nuevo para agregar por socket.io
+//     io.on('connection', async clientSocket => {
+
+
+//             clientSocket.on('agregarProducto', async valorInputAgregarCarrito => {
+//                 await cartManager.agregarProductoAlCarrito(valorInputAgregarCarrito,pid)
+//             })
+
+
+//     })
+//     const productoFiltrado = await productsDB.find({_id:pid}).lean()
+
+//     res.render('productSelect.handlebars', {
+//             pid:JSON.stringify(pid),
+           
+//             producto:util.inspect(productoFiltrado, false, 10)
+           
+//         })
+       
+        
+//         })

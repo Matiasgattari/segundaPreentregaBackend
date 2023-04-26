@@ -1,0 +1,37 @@
+
+<h1>Tu perfil (sin datos sensibles)</h1>
+<p>Nombre completo: {{user.name}}</p>
+<p>Correo electronico: {{user.email}}</p>
+<p>Edad: {{user.age}}</p>
+<form id="formLogout">
+  <button type="submit">Logout</button>
+</form>
+{{!-- <script src="/js/indexProfile.js"></script> --}}
+
+
+    <p>REGISTRARSE </p> 
+    
+    <button onclick="register()">ir</button>
+
+    <p>INICIAR SESION</p>
+    
+    <button onclick="login()">ir</button><br>
+    
+
+
+<script>
+ 
+  
+ function register() {
+        window.location = `http://localhost:8080/api/sessions/register`
+    
+  }
+
+ function login() {
+       window.location = `http://localhost:8080/api/sessions/login`
+  }
+
+</script>
+
+
+<script src="/js/indexProducts.js"></script>

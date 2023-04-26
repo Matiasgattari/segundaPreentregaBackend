@@ -1,0 +1,31 @@
+<h1>Login</h1>
+<form action="" id="formLogin">
+  <label for="input_email">email</label> <input id="input_email" type="email" placeholder="email"><br>
+  <label for="input_password">password</label> <input id="input_password" type="password" placeholder="password"><br>
+  <button type="submit">Enviar</button>
+</form>
+
+
+ <p>Ver perfil de usuario </p> 
+    
+    <button onclick="perfil()">ir</button> <br><br>
+ <p>Volver a página anterior </p> 
+    
+    <button onclick="volver()">Volver</button>
+
+
+
+
+<script>
+function volver() {
+        window.location = `http://localhost:8080/api/sessions`
+    
+  }
+function perfil() {
+        window.location = `http://localhost:8080/api/sessions/profile`
+    
+  }
+</script>
+
+
+{{!-- <script src="/js/indexLogin.js"></script> --}}

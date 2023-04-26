@@ -1,4 +1,4 @@
-console.log("hola, desde la carpeta public");
+// console.log("hola, desde la carpeta public");
 
 // @ts-ignore
 const serverSocket = io()

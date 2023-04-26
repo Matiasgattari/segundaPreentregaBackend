@@ -2,7 +2,7 @@
   {
     "_id": "6445a1c506e307de067a8bf4",
     "id": "642f2faab4be60728cdd1ae3",
-    "quantity": 46,
+    "quantity": 49,
     "products": [
       {
         "productID": {
@@ -17,7 +17,7 @@
           "status": true,
           "id": "44820200-b24d-478f-8765-e69c4f8cf650"
         },
-        "quantity": 3,
+        "quantity": 5,
         "_id": "6445a1c506e307de067a8bf5"
       },
       {
@@ -125,7 +125,7 @@
           "thumbnail": "url imagen",
           "stock": 45,
           "code": "televisor",
-          "category": "hogar",
+          "category": "bicho veneno",
           "status": true,
           "id": "ade0f4d9-716b-4453-tryu-6d5df1564232"
         },
@@ -147,6 +147,22 @@
         },
         "quantity": 1,
         "_id": "6445a37791308a3e6ac8d1bd"
+      },
+      {
+        "productID": {
+          "_id": "644587ac744b799f44db3067",
+          "title": "metapod",
+          "description": "descripcion prod 3",
+          "price": 4000,
+          "thumbnail": "url imagen",
+          "stock": 45,
+          "code": "televisor",
+          "category": "hogar",
+          "status": true,
+          "id": "3307ab83-226d-49e2-905a-ef118d60172a"
+        },
+        "quantity": 1,
+        "_id": "6448728667bde62604949c51"
       }
     ]
   }

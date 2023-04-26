@@ -75,6 +75,11 @@ Su código base y endpoints se encuentran dentro de la ruta src/routes/cartsRout
 
 "api/products/json/productsJSON": este endpoint muestra un JSON de los productos sin renderizar por express
 
+"api/products/productSelected/:pid" Metodo PUT. esta ruta presenta un input en el cual cargo el CID (_id autogenerado por mongoose) del carrito al que quiero cargarle el prooducto al cual ingrese. al hacer click se agrega automaticamente al carrito.
+
+
+
+
 Todos los productos cargados tienen un ID propio que les doy autogenerado por el randomUUII, pero para realizar las operaciones internas actualmente cambie al uso del _id (object ID que brinda mongoose)
 Todos estos endpoints a grandes rasgos funcionan, salvo las cosas que marque puntualmente.
 
@@ -87,7 +92,7 @@ Dentro de la carpeta src/config hay configuraciones del servidor
 DATOS A TENER EN CUENTA 
 puntos faltantes a saber:
 - Falta realizar el chat funcional (hay 2 handlebars que tengo como base para hacerlo "chat" y "mensajes" siendo chat la unica que esta unida a un endpoint actualmente)
-- falta boton para agregar directamente productos al carrito desde la vista /products (aunque entiendo en este caso tendria que agregar tambien un imput para recibir un cid para linkear ese producto al carrito.
+
 -filtro de productos por categoría lo reemplace actualmente por "title" ya que no decidi bien los productos, solo difieren en titulo.
 -No logro que la funcion cartManager.modificarUnidadesProcducto(cid,pid,cantidad) funcione correctamente. mas info en el cartManager lina 119 (por favor si podes revisar)
 

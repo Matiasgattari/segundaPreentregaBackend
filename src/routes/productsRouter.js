@@ -4,8 +4,10 @@ import { randomUUID } from 'crypto'
 import { productsDB } from '../../public/dao/models/schemaProducts.js';
 import util from 'node:util'
 export const productManager = new ProductManager('./productos.txt');
-
-
+import { Server as SocketIOServer } from 'socket.io'
+import { io } from '../servidor.js';
+import { cartManager } from './cartsRouter.js';
+import { log } from 'console';
 
 export const productsRouter = Router()
 productsRouter.use(express.json())
@@ -160,3 +162,32 @@ productsRouter.delete('/:pid',async( req,res)=>{
         throw new Error ('Error: no se encontro el producto filtrado. ')
     }
     } )
+
+
+    productsRouter.put('/productSelected/:pid', async (req, res) => {
+        const pid = req.params.pid
+        //probando recibir producto nuevo para agregar por socket.io
+        io.on('connection', async clientSocket => {
+    
+    
+                clientSocket.on('agregarProducto',  valorInputAgregarCarrito => {
+                    cartManager.agregarProductoAlCarrito(valorInputAgregarCarrito,pid)
+                    console.log(valorInputAgregarCarrito)
+                        console.log(pid)
+                })
+    
+    
+        })
+
+        const productoFiltrado = await productsDB.find({_id:pid}).lean()
+    
+        res.render('productSelect.handlebars', {
+                pid:JSON.stringify(pid),
+               
+                producto:util.inspect(productoFiltrado, false, 10)
+               
+            })
+           
+        
+        })
+        
