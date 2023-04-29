@@ -3,11 +3,16 @@ import { Product, ProductManager } from '../../public/dao/ProductManager.js';
 import { randomUUID } from 'crypto'
 import { productsDB } from '../../public/dao/models/schemaProducts.js';
 import util from 'node:util'
+import { autenticacion } from '../middlewares/autenticacion.js';
+import { profileView } from '../controllers/web/perfil.controller.js';
+import { registroView } from '../controllers/web/registro.controller.js';
 export const productManager = new ProductManager('./productos.txt');
 
+import session from '../middlewares/session.js';
 
 
 export const sessionsRouter = Router()
+sessionsRouter.use(session)
 sessionsRouter.use(express.json())
 sessionsRouter.use(express.urlencoded({extended:true}))
 
@@ -16,28 +21,18 @@ sessionsRouter.use(express.urlencoded({extended:true}))
 sessionsRouter.get('/', async (req, res) => {
     res.render('sessions.handlebars', {})
     
-    })
-    
-
-
-sessionsRouter.get('/register', async (req, res) => {
- 
-    res.render('register.handlebars')
-    
-    })
+})
 
 
 
-    
-sessionsRouter.get('/login', async (req, res) => {
+sessionsRouter.get('/register',registroView)
 
-    res.render('login.handlebars')
-    
-    })
-    
-sessionsRouter.get('/profile', async (req, res) => {
+sessionsRouter.get('/profile',autenticacion,profileView)
 
-    res.render('profile.handlebars')
-    
-    })
+
+sessionsRouter.get('/login', (req,res)=>{
+    res.render('login')
+})
+
+
     

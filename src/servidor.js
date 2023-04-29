@@ -12,6 +12,13 @@ import { productsDB } from '../public/dao/models/schemaProducts.js';
 
 //inicializando mongoose en el sv
 import {inicioMongoose} from './database/mongoose.js'
+import { postAUsuarios } from './controllers/api/usuarios.controller.js';
+// import { postUsuarios } from './controllers/api/usuarios.controller.js';
+import { autenticacion } from './middlewares/autenticacion.js';
+import { profileView } from './controllers/web/perfil.controller.js';
+import { registroView } from './controllers/web/registro.controller.js';
+import session from './middlewares/session.js';
+
 
 const productManager = new ProductManager('./productos.txt')
 
@@ -33,7 +40,7 @@ app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/api/sessions', sessionsRouter)
 
-
+app.use(session)
 
 const httpServer = app.listen(PORT)
 console.log(`Servidor escuchando en puerto ${PORT}`);
@@ -133,15 +140,8 @@ res.render('chat.handlebars', {
 
 //controlador post "api/usuarios" a la cual hice el fetch en register.js
 
-app.post('/api/usuarios',(req,res)=>{
-    console.log(req.body) //con este console.log me debe llegar lo que envio por fetch post en el register.js tomado del formulario
-    const nuevoUsuario = {name:req.body.first_name}
+app.post('/api/usuarios',postAUsuarios)
     
-    res.status(201).json({mensaje:'usuario creado exitosamente', usuario: nuevoUsuario})
-    })
-    
-
-
 
 
 // app.get('/api/products/productSelected/:pid', async (req, res) => {
