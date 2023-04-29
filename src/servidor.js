@@ -19,16 +19,19 @@ const productManager = new ProductManager('./productos.txt')
 const app = express()
 
 app.engine('handlebars', engine())
-app.set('views', './views')
-app.set('view engine', 'handlebars')
+app.set('views', './views') //ruta donde estaran las vistas del handlebars
+app.set('view engine', 'handlebars') // que el motor por defecto para manejar las viastas sea handlebars
 
-app.use(express.static('./public'))
-app.use(express.static('./static'))
+app.use(express.static('./public')) //permite el uso de los archivos dentro de la carpeta public
+app.use(express.static('./static')) //permite el uso de los archivos dentro de la carpeta static
+
+
+app.use(express.json()) //para poder recibir archivos json desde express
+
 
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/api/sessions', sessionsRouter)
-
 
 
 
@@ -118,6 +121,26 @@ res.render('chat.handlebars', {
     encabezado: 'Lista de productos en base de datos'
 })
 })
+
+
+
+
+
+
+
+
+
+
+//controlador post "api/usuarios" a la cual hice el fetch en register.js
+
+app.post('/api/usuarios',(req,res)=>{
+    console.log(req.body) //con este console.log me debe llegar lo que envio por fetch post en el register.js tomado del formulario
+    const nuevoUsuario = {name:req.body.first_name}
+    
+    res.status(201).json({mensaje:'usuario creado exitosamente', usuario: nuevoUsuario})
+    })
+    
+
 
 
 

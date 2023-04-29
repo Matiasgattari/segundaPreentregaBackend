@@ -1,24 +1,9 @@
 <h1>Tu perfil (sin datos sensibles)</h1>
-<p>Nombre completo: </p>
-<p>Correo electronico: </p>
-<p>Edad: </p>
+{{!-- {{user}} --}}
+<p>Nombre completo: {{user.name}}</p>
+<p>Correo electronico: {{user.email}}</p>
+<p>Edad: {{user.age}}</p>
 <form id="formLogout">
   <button type="submit">Logout</button>
 </form>
-
-<p>Volver a página principal </p> 
-    
-    <button onclick="volver()">Volver</button>
-
-
-
-
-<script>
-function volver() {
-        window.location = `http://localhost:8080/api/sessions`
-    
-  }
-</script>
-
-
-{{!-- <script src="/js/indexProfile.js"></script> --}}
+<script src="/js/profile.js"></script>
