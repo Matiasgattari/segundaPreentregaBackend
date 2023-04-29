@@ -46,6 +46,9 @@ const response = await fetch('/api/usuarios', {
 
       console.log(usuarioCreado)
     }
+
+
+    window.location.href = 'http://localhost:8080/api/sessions/profile'
   })
 }
 

@@ -12,7 +12,7 @@ import { productsDB } from '../public/dao/models/schemaProducts.js';
 
 //inicializando mongoose en el sv
 import {inicioMongoose} from './database/mongoose.js'
-import { postAUsuarios } from './controllers/api/usuarios.controller.js';
+import { postAUsuarios, postAUsuariosLogin } from './controllers/api/usuarios.controller.js';
 // import { postUsuarios } from './controllers/api/usuarios.controller.js';
 import { autenticacion } from './middlewares/autenticacion.js';
 import { profileView } from './controllers/web/perfil.controller.js';
@@ -132,16 +132,22 @@ res.render('chat.handlebars', {
 
 
 
-
-
-
-
-
-
 //controlador post "api/usuarios" a la cual hice el fetch en register.js
 
 app.post('/api/usuarios',postAUsuarios)
-    
+
+//controlador post para login 
+
+app.post('/api/usuariosLogin',postAUsuariosLogin)
+
+//controlador delete para login
+app.delete('/api/usuariosLogin', async function deleteSesiones(req, res, next) {
+    req.session.destroy(err => {
+      res.sendStatus(200)
+    })
+  })
+
+
 
 
 // app.get('/api/products/productSelected/:pid', async (req, res) => {
