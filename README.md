@@ -77,7 +77,13 @@ Su código base y endpoints se encuentran dentro de la ruta src/routes/cartsRout
 
 "api/products/productSelected/:pid" Metodo PUT. esta ruta presenta un input en el cual cargo el CID (_id autogenerado por mongoose) del carrito al que quiero cargarle el prooducto al cual ingrese. al hacer click se agrega automaticamente al carrito.
 
+"api/sessions": muestra un inicio con redireccion a registro y login
 
+"api/sessions/register" permite el registro del usuario, completando un formulario con metodo post que hace un fetch a /api/usuarios. carga el usuario en una base de datos y crea la sesion. actualmente le saque la obligatoriedad de que sea unico el mail para poder probarla.
+
+"api/sessions/profile"  miestra a travez de un view handlebars muestra los datos del perfil del usuario, sin la contraseña 
+
+"api/sessions/login" muestra actualmente un formulario para realizar el login. no tiene funcionalidad actual
 
 
 Todos los productos cargados tienen un ID propio que les doy autogenerado por el randomUUII, pero para realizar las operaciones internas actualmente cambie al uso del _id (object ID que brinda mongoose)
@@ -95,4 +101,5 @@ puntos faltantes a saber:
 
 -filtro de productos por categoría lo reemplace actualmente por "title" ya que no decidi bien los productos, solo difieren en titulo.
 -No logro que la funcion cartManager.modificarUnidadesProcducto(cid,pid,cantidad) funcione correctamente. mas info en el cartManager lina 119 (por favor si podes revisar)
+-creo vista de registro y perfil de usuario, pero aun falta realizar la vista del login con su funcionalidad (express-session)
 
