@@ -70,5 +70,13 @@
     "first_name": "mati1",
     "last_name": "gattari",
     "age": 1
+  },
+  {
+    "_id": "64515d09b8d449a85fc407c3",
+    "email": "pepito@gmail.com",
+    "password": "asd",
+    "first_name": "pepito",
+    "last_name": "pepon",
+    "age": 11
   }
 ]

@@ -44,19 +44,18 @@ export class ProductManager {
 
 
     async readProducts() {
-        
         const data = await fs.readFile(this.path, "utf-8");
         this.products = JSON.parse(data);
     }
 
     async getProducts() {
-      
-     
-        const prodd = await productsDB.find().lean()
-        // await mongoose.connection.close()
-        this.products = prodd;
-        return this.products
-
+        try {
+            const prodd = await productsDB.find().lean()
+            this.products = prodd;
+            return this.products
+        } catch (error) {
+            throw new Error('SERVER-COMUNICATION-ERROR')
+        }
     }
 
 
@@ -92,14 +91,15 @@ export class ProductManager {
             }
 
         } catch (error) {
-            throw new Error("Los campos no pueden estar vacios")
+            throw new Error('CARGA-DE-PRODUCTO-FALLIDA')
         }
 
     }
 
 
     async getProductById(id) {
-const IDrecibido = id;
+        try {
+            const IDrecibido = id;
         const jsonProducts =  await this.getProducts()
         
         this.products = jsonProducts
@@ -107,11 +107,14 @@ const IDrecibido = id;
         const productFind = this.products.find((product) => product['_id'] == IDrecibido)
 
         if (productFind === undefined) {
-            throw new Error("producto no encontrado o ID invalido")
+            throw new Error('PRODUCT-NOT-FOUND')
         } else {
             const productoID = await productsDB.findOne({ _id: IDrecibido }).lean()
             return productoID
 
+        }
+        } catch (error) {
+            throw new Error('PRODUCT-NOT-FOUND')
         }
 
     }
@@ -119,7 +122,9 @@ const IDrecibido = id;
 
 
     async deleteProduct(id) {
-        const productos = await this.getProducts() //este paso asumo esta de mas
+        try {
+
+            const productos = await this.getProducts() //este paso asumo esta de mas
         this.products = productos //este paso asumo esta de mas
         
         await productsDB.deleteOne({ _id: id })
@@ -131,21 +136,26 @@ const IDrecibido = id;
         await fs.writeFile(this.path, jsonProducts)
 
         return console.log("producto eliminado correctamente");
-
+        }  catch (error) {
+            throw new Error('PRODUCT-NOT-FOUND')
+        }
     }
 
-    async updateProduct(id, prodModificado) {
-    await productsDB.findOneAndUpdate({_id:id},prodModificado)
+   async updateProduct(id, prodModificado) {
+        try {
+        await productsDB.findOneAndUpdate({_id:id},prodModificado)
         const productosActualizados = await productsDB.find().lean()
         this.products = productosActualizados
 
-    //actualizo el filesystem
+            //actualizo el filesystem
         const jsonProductsModif = JSON.stringify(this.products, null, 2)
         await fs.writeFile(this.path, jsonProductsModif)
 
-    console.log("El producto se actualizo con exito", prodModificado);
-
-    }
+        console.log("El producto se actualizo con exito", prodModificado);
+        } catch (error) {
+                throw new Error('PRODUCT-NOT-FOUND')
+        }
+   }
 
 }
 

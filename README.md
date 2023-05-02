@@ -103,3 +103,10 @@ puntos faltantes a saber:
 -No logro que la funcion cartManager.modificarUnidadesProcducto(cid,pid,cantidad) funcione correctamente. mas info en el cartManager lina 119 (por favor si podes revisar)
 -creo vista de registro y perfil de usuario, pero aun falta realizar la vista del login con su funcionalidad (express-session)
 
+
+
+PUNTOS NUEVOS A AGREGAR (ENTREGA DE PASSPORT)
+    -Se deberá contar con un hasheo de contraseña utilizando bcrypt
+    -Se deberá contar con una implementación de passport, tanto para register como para login.
+    -Implementar el método de autenticación de GitHub a la vista de login.
+

@@ -12,12 +12,16 @@ import { productsDB } from '../public/dao/models/schemaProducts.js';
 
 //inicializando mongoose en el sv
 import {inicioMongoose} from './database/mongoose.js'
+
 import { postAUsuarios, postAUsuariosLogin } from './controllers/api/usuarios.controller.js';
 // import { postUsuarios } from './controllers/api/usuarios.controller.js';
-import { autenticacion } from './middlewares/autenticacion.js';
-import { profileView } from './controllers/web/perfil.controller.js';
-import { registroView } from './controllers/web/registro.controller.js';
+
+// import { autenticacion } from './middlewares/autenticacion.js';
+// import { profileView } from './controllers/web/perfil.controller.js';
+// import { registroView } from './controllers/web/registro.controller.js';
+
 import session from './middlewares/session.js';
+import { manejadorDeErrores } from './middlewares/manejoDeErroresRest.js';
 
 
 const productManager = new ProductManager('./productos.txt')
@@ -177,3 +181,5 @@ app.delete('/api/usuariosLogin', async function deleteSesiones(req, res, next) {
        
         
 //         })
+
+app.use(manejadorDeErrores)

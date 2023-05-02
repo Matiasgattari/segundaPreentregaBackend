@@ -20,22 +20,30 @@ export class CartManager {
         this.products = [];
     }
     async readCarts() {
-        const data = await fs.readFile(this.path, "utf-8");
+       try {
+         const data = await fs.readFile(this.path, "utf-8");
+       } catch (error) {
+        throw new Error('CART-NOT-FOUND')
+       }
         
     }
 
     async getCarts() {
+      try {
         await this.readCarts();
         const cartsbd = await cartsDB.find().lean()
-
         this.carts = cartsbd
         return this.carts
+      } catch (error) {
+        throw new Error('CART-NOT-FOUND')
+      }
 
     }
 
     async crearCarrito() {
 
-        await this.getCarts()
+        try {
+            await this.getCarts()
         const cart = {
             "id": randomUUID(),
             "quantity": 0,
@@ -47,6 +55,9 @@ export class CartManager {
         await fs.writeFile(this.path, jsonCarts)
         await cartsDB.create(cart)
         console.log("carrito creado correctamente");
+        } catch (error) {
+            throw new Error('CART-NOT-FOUND')
+        }
     }
    
     async agregarProductoAlCarrito(cid, pid) {
@@ -108,99 +119,48 @@ export class CartManager {
              return { "message": "producto cargado correctamente"  }
 
         } catch (error) {
-            return error.message
+            throw new Error('CARGA-DE-PRODUCTO-FALLIDA')
         }
     }
 
 
 
-
-
-//en proceso, actualizar cantidad del producto del carrito especificado. No logro que se modifique la cantidad del producto por la cantidad que recibo de parametro. todos los valores los recibo correctamente, pero al tratar de asignarle la cantidad, crashea todo
-
-    async modificarUnidadesProcducto(cid,pid,cantidad) {
-        
-const cantidadCambiada = cantidad
-
-const carrito =await cartsDB.findById(cid).lean()
-
-        const carritoPorId =await  this.getCartById(cid)
-        const productosCarrito =  carritoPorId?.products
-       
-        const arrayProductos = []
-        const pushArray = productosCarrito?.forEach(element => {
-            arrayProductos.push(element['productID']?._id.toString())
-                               
-        })
-
-       const index = arrayProductos?.indexOf(pid)
-        
-        
-    
-    // carrito?.products[index].quantity =cantidad
-        
-        // const nuevoCarrito = carrito
-        // await cartsDB.findOneAndUpdate({_id:cid},nuevoCarrito)
-
-
-        // //esta parte aun sin probar
-        //     this.carts= await this.getCarts()
-        //     const jsonCarts = JSON.stringify(this.carts, null, 2)
-        //     await fs.writeFile(this.path, jsonCarts)
-
-       
-        
-
-        return {message: "producto actualizado correctamente"}
-        
-        
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     async eliminarProducto(cid,pid){
 
-const carritoPorId =await  this.getCartById(cid)
-const productosCarrito =  carritoPorId?.products
-// const productoCarrito5 = productosCarrito[5]['productID']['_id']
+        try {
+        const carritoPorId =await  this.getCartById(cid)
+        const productosCarrito =  carritoPorId?.products
+        
+        const arrayProductos = []
+        productosCarrito?.forEach(el=>arrayProductos.push(el.productID?._id.toString()))
+        const indiceProductoEliminar = arrayProductos.indexOf(pid)
+        
+        const nuevoCarrito = carritoPorId?.products.splice(indiceProductoEliminar,1)
 
-// const productoABorrar  = productosCarrito?.findIndex((el)=>el.productID?._id==pid)
-const arrayProductos = []
-productosCarrito?.forEach(el=>arrayProductos.push(el.productID?._id.toString()))
-const indiceProductoEliminar = arrayProductos.indexOf(pid)
-// console.log("index of array pid" , indiceProductoEliminar);
+        //esta parte aun sin probar
+        await cartsDB.findOneAndUpdate({_id:cid},nuevoCarrito)
+            this.carts= await this.getCarts()
+            const jsonCarts = JSON.stringify(this.carts, null, 2)
+            await fs.writeFile(this.path, jsonCarts)
+        return "producto eliminado correctamente"
+        } catch (error) {
+            throw new Error('PRODUCT-NOT-FOUND')
+        }
 
-const nuevoCarrito = carritoPorId?.products.splice(indiceProductoEliminar,1)
-
-//esta parte aun sin probar
-await cartsDB.findOneAndUpdate({_id:cid},nuevoCarrito)
-    this.carts= await this.getCarts()
-    const jsonCarts = JSON.stringify(this.carts, null, 2)
-    await fs.writeFile(this.path, jsonCarts)
-return "producto eliminado correctamente"
-
-}
-
+    }
 
 
     async saveCart() {
+       try {
         const jsonCarts = JSON.stringify(this.carts, null, 2)
         await fs.writeFile(this.path, jsonCarts)
+       } catch (error) {
+        throw new Error('CART-NOT-FOUND')
+       }
     }
-    async getCartById(id) {
 
+    async getCartById(id) {
+     try {
         const IDrecibido = id;
         const cartsProducts =  await this.getCarts()
         
@@ -215,11 +175,62 @@ return "producto eliminado correctamente"
             return cartID
 
         }
+        } catch (error) {
+            throw new Error('CART-NOT-FOUND')
+        }
+    }
 
 
+//----------------------------------EN PROCESO---------------------------------------
+//en proceso, actualizar cantidad del producto del carrito especificado. No logro que se modifique la cantidad del producto por la cantidad que recibo de parametro. todos los valores los recibo correctamente, pero al tratar de asignarle la cantidad, crashea todo
+
+async modificarUnidadesProcducto(cid,pid,cantidad) {
+        
+    try {
+        const cantidadCambiada = cantidad
+
+    const carrito =await cartsDB.findById(cid).lean()
+
+    const carritoPorId =await  this.getCartById(cid)
+    const productosCarrito =  carritoPorId?.products
+   
+    const arrayProductos = []
+    const pushArray = productosCarrito?.forEach(element => {
+        arrayProductos.push(element['productID']?._id.toString())
+                           
+    })
+
+   const index = arrayProductos?.indexOf(pid)
+    
+    
+
+    // carrito?.products[index].quantity =cantidad
+    
+    // const nuevoCarrito = carrito
+    // await cartsDB.findOneAndUpdate({_id:cid},nuevoCarrito)
+
+
+    // //esta parte aun sin probar
+    //     this.carts= await this.getCarts()
+    //     const jsonCarts = JSON.stringify(this.carts, null, 2)
+    //     await fs.writeFile(this.path, jsonCarts)
+
+   
+    
+
+    return {message: "producto actualizado correctamente"}
+    
+    
+    } catch (error) {
+        throw new Error('CARGA-DE-PRODUCTO-FALLIDA')
     }
 
 }
+
+
+
+}
+
 
 
 //Manager de carritos. Prueba
