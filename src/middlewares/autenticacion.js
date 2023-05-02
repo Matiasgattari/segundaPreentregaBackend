@@ -10,12 +10,18 @@ import { usuarioModel } from '../../public/dao/models/schemaUsuarios.js'
 import { User } from '../../public/dao/UserManager.js'
 
 export function autenticacion(req, res, next) {
-  if (req.session.user) {
+  if (req.session['user']) {
     next()
   } else {
     res.redirect('/api/sessions/register')
   //   res.redirect('/login')
   }
+  // if (req.session.user) {
+  //   next()
+  // } else {
+  //   res.redirect('/api/sessions/register')
+  // //   res.redirect('/login')
+  // }
 }
 
 
@@ -37,9 +43,9 @@ passport.use('jwt', new JwtStrategy({
 }))
 
 export function autenticacionJwtApi(req, res, next) {
-  passport.authenticate('jwt', (error, jwt_payload, info) => {
-      if (error || !jwt_payload) return next(new Error('ERROR_DE_AUTENTICACION'))
-      req.user = jwt_payload
+  passport.authenticate('jwt', (error, usuario, info) => {
+      if (error || !usuario) return next(new Error('ERROR_DE_AUTENTICACION JWT_API'))
+      req.user = usuario
       next()
   })(req, res, next)
 }
@@ -60,9 +66,9 @@ passport.use('local', new LocalStrategy({ usernameField: 'email', passwordField:
   const buscado = await userManager.getUserByUserName(username)
   
   if (!buscado)
-      return done(new Error('ERROR_DE_AUTENTICACION'))
+      return done(new Error('ERROR_DE_AUTENTICACION2'))
   if (!validarQueSeanIguales(password, buscado['password']))
-      return done(new Error('ERROR_DE_AUTENTICACION'))
+      return done(new Error('ERROR_DE_AUTENTICACION3'))
   delete buscado['password']
   done(null, buscado)
 }))

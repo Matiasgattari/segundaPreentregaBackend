@@ -34,5 +34,14 @@
     "last_name": "Paz",
     "age": 33,
     "rol": "Estudiante"
+  },
+  {
+    "_id": "645179ca5c8a0902561515eb",
+    "email": "mariano@aquino.com",
+    "password": "mariano",
+    "first_name": "mariano",
+    "last_name": "aquino",
+    "age": 37,
+    "rol": "Profesor"
   }
 ]
