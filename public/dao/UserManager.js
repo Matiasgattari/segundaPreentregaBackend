@@ -4,6 +4,19 @@ import mongoose from 'mongoose';
 import { usuarioModel } from './models/schemaUsuarios.js';
 
 
+
+export class User {
+    constructor({ email, password, nombre, apellido, edad, rol }) {
+        this.email = email
+        this.password = password
+        this.nombre = nombre
+        this.apellido = apellido
+        this.edad = edad
+        this.rol = rol
+    }
+}
+
+
 export class UserManager {
     
         constructor(path) {
@@ -29,7 +42,7 @@ export class UserManager {
 
         async getUserById(id) {
             try {
-                const usuarioFiltrado = await usuarioModel.find({_id:id})
+                const usuarioFiltrado = await usuarioModel.find({_id:id}).lean()
                 if (!usuarioFiltrado) {return "user not found"} else {return usuarioFiltrado}
                } catch (error) {
                 throw new Error('USER-NOT-FOUND')
@@ -37,8 +50,12 @@ export class UserManager {
         }
         async getUserByUserName(userName) {
             try {
-                const usuarioFiltrado = await usuarioModel.find({email:userName})
-                if (!usuarioFiltrado) {return "user not found"} else {return usuarioFiltrado}
+                const usuarioFiltrado = await usuarioModel.find({email:userName}).lean()
+                if (usuarioFiltrado===null || usuarioFiltrado === undefined) {
+                    return "user not found"
+                } else {
+                    return usuarioFiltrado
+                }
                } catch (error) {
                 throw new Error('USER-NOT-FOUND')
                }
@@ -85,7 +102,7 @@ export class UserManager {
 }
 
 
-
+export const userManager = new UserManager('./usuarios.txt')
 
 
 

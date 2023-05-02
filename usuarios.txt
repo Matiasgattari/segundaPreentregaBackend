@@ -1,82 +1,38 @@
 [
   {
-    "_id": "644c65db6ee3df81aad16b54",
+    "_id": "64516b3c6f1098232738654d",
     "email": "lea.mg90@gmail.com",
     "password": "matias",
-    "first_name": "matias",
-    "last_name": "gattari",
-    "age": 33
+    "first_name": "Matias",
+    "last_name": "Gattari",
+    "age": 33,
+    "rol": "Estudiante"
   },
   {
-    "_id": "644c69f95fbb3e9a27fd247c",
-    "email": "q@q",
-    "password": "asd",
-    "first_name": "asd",
-    "last_name": "asd",
-    "age": 1
+    "_id": "64516b736f10982327386551",
+    "email": "juan@gmail.com",
+    "password": "juan",
+    "first_name": "Juan",
+    "last_name": "Gomez",
+    "age": 33,
+    "rol": "Tutor"
   },
   {
-    "_id": "644c728be416cd6277ae2784",
-    "email": "asd@asd.com",
-    "password": "asd",
-    "first_name": "matias",
-    "last_name": "gattari",
-    "age": 33
+    "_id": "64516b846f10982327386553",
+    "email": "alan@gmail.com",
+    "password": "alan",
+    "first_name": "Alan",
+    "last_name": "Perez",
+    "age": 33,
+    "rol": "Profesor"
   },
   {
-    "_id": "644c73731fb468a686121f1a",
-    "email": "w@w",
-    "password": "fff",
-    "first_name": "fff",
-    "last_name": "fff",
-    "age": 1
-  },
-  {
-    "_id": "644c73a671176efa3ce3f3f0",
-    "email": "da@asd",
-    "password": "ggg",
-    "first_name": "ggg",
-    "last_name": "ggg",
-    "age": 1
-  },
-  {
-    "_id": "644c755bdb0329be5b05235c",
-    "email": "qwe@qwe",
-    "password": "qwe",
-    "first_name": "qwe",
-    "last_name": "qwe",
-    "age": 1
-  },
-  {
-    "_id": "644c7826357dca1edf9621f5",
-    "email": "asdasd@gmail.com",
-    "password": "asdasd",
-    "first_name": "matias",
-    "last_name": "gattari",
-    "age": 33
-  },
-  {
-    "_id": "644d4ede26b63343e30cb1f4",
-    "email": "mati@gmail.com",
-    "password": "123",
-    "first_name": "mati",
-    "last_name": "gattari",
-    "age": 33
-  },
-  {
-    "_id": "644d4f639487765f36691b0e",
-    "email": "asd@matias.com",
-    "password": "asd",
-    "first_name": "mati1",
-    "last_name": "gattari",
-    "age": 1
-  },
-  {
-    "_id": "64515d09b8d449a85fc407c3",
-    "email": "pepito@gmail.com",
-    "password": "asd",
-    "first_name": "pepito",
-    "last_name": "pepon",
-    "age": 11
+    "_id": "64516ba26f10982327386555",
+    "email": "ariel@gmail.com",
+    "password": "ariel",
+    "first_name": "Ariel",
+    "last_name": "Paz",
+    "age": 33,
+    "rol": "Estudiante"
   }
 ]

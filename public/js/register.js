@@ -11,13 +11,15 @@ if (formRegister instanceof HTMLFormElement) {
     const input_email = document.querySelector('#input_email')
     const input_age = document.querySelector('#input_age')
     const input_password = document.querySelector('#input_password')
+    const input_rol = document.querySelector('#input_rol')
 
     if (
       input_first_name instanceof HTMLInputElement &&
       input_last_name instanceof HTMLInputElement &&
       input_email instanceof HTMLInputElement &&
       input_age instanceof HTMLInputElement &&
-      input_password instanceof HTMLInputElement
+      input_password instanceof HTMLInputElement&&
+      input_rol instanceof HTMLInputElement
     ) {
 
       const datosUsuario = {
@@ -26,6 +28,7 @@ if (formRegister instanceof HTMLFormElement) {
         email: input_email.value,
         age: input_age.value,
         password: input_password.value,
+        rol: input_rol.value
       }
 console.log(datosUsuario);
 
@@ -39,7 +42,7 @@ const response = await fetch('/api/usuarios', {
   });
   
   if (!response.ok) {
-    throw new Error('Ha ocurrido un error en el servidor');
+    throw new Error('SERVER-COMUNICATION-ERROR');
   }
   
   const usuarioCreado = await response.json();
