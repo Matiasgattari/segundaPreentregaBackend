@@ -28,7 +28,7 @@ if (formRegister instanceof HTMLFormElement) {
         email: input_email.value,
         age: input_age.value,
         password: input_password.value,
-        rol: input_rol.value
+        rol: input_rol.value,
       }
 console.log(datosUsuario);
 
@@ -42,16 +42,18 @@ const response = await fetch('/api/usuarios', {
   });
   
   if (!response.ok) {
-    throw new Error('SERVER-COMUNICATION-ERROR');
+    throw new Error('USER-NOT-FOUND');
   }
   
   const usuarioCreado = await response.json();
 
       console.log(usuarioCreado)
+if (response.ok) {
+  window.location.href = 'http://localhost:8080/api/sessions/profile'
+}
     }
 
 
-    window.location.href = 'http://localhost:8080/api/sessions/profile'
   })
 }
 

@@ -24,27 +24,26 @@ if (formLogin instanceof HTMLFormElement) {
         console.log(loginUsuario);
 
 
-        const response = await fetch('/api/usuariosLogin', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(loginUsuario)
-          });
-          
-          if (!response.ok) {
-            throw new Error('Ha ocurrido un error en el servidor');
-          }
-          
-          const usuarioLogeado = await response.json();
-          console.log(usuarioLogeado)
+const response = await fetch('/api/usuariosLogin', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(loginUsuario)
+  });
+  
+  if (!response.ok) {
+    throw new Error('Ha ocurrido un error en el servidor');
+  }
+  
+  const usuarioLogeado = await response.json();
 
-          if (response.ok) {
-            window.location.replace('/api/sessions/profile')
-        }
-
+      console.log(usuarioLogeado)
+      if(response.ok) {
+        window.location.href = "http://localhost:8080/api/sessions/profile"
       }
+    }
 
   })
 

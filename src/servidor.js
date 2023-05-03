@@ -1,20 +1,14 @@
 import express from 'express'
 import { engine } from 'express-handlebars'
-
 import { Server as SocketIOServer } from 'socket.io'
-
 import { productsRouter } from './routes/productsRouter.js';
 import { cartsRouter } from './routes/cartsRouter.js';
-import { sessionsRouter } from './routes/sessionsRouter.js';
-import { usersRouter } from './routes/users.router.js';
-
 import { PORT } from './config/config.sv.js';
-import util from 'node:util'
-
 import { ProductManager } from '../public/dao/ProductManager.js';
+import util from 'node:util'
+import { sessionsRouter } from './routes/sessionsRouter.js';
 import { cartManager } from './routes/cartsRouter.js';
 import { productsDB } from '../public/dao/models/schemaProducts.js';
-
 
 //inicializando mongoose en el sv
 import {inicioMongoose} from './database/mongoose.js'
@@ -28,12 +22,7 @@ import { postAUsuarios, postAUsuariosLogin } from './controllers/api/usuarios.co
 
 import session from './middlewares/session.js';
 import { manejadorDeErrores } from './middlewares/manejoDeErroresRest.js';
-import { autenticacionJwtApi, autenticacionJwtView, passportInitialize } from './middlewares/autenticacion.js';
-import { COOKIE_SECRET } from './config/auth.config.js';
-import cookieParser from 'cookie-parser'
-
-
-
+import passport from 'passport';
 
 
 const productManager = new ProductManager('./productos.txt')
@@ -55,12 +44,9 @@ app.use(express.json()) //para poder recibir archivos json desde express
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/api/sessions', sessionsRouter)
-app.use(cookieParser(COOKIE_SECRET))
+
 app.use(session)
-// app.use(autenticacionJwtApi)
-// app.use(autenticacionJwtView)
-// app.use(passportInitialize)
-    
+
 const httpServer = app.listen(PORT)
 console.log(`Servidor escuchando en puerto ${PORT}`);
 // lo mismo que me devuelve el http.createServer() !!
@@ -149,11 +135,12 @@ res.render('chat.handlebars', {
 })
 
 
-app.use('/api/usuarios',usersRouter)
+
 
 //controlador post "api/usuarios" a la cual hice el fetch en register.js
 
-// app.post('/api/usuarios',postAUsuarios)
+app.post('/api/usuarios',postAUsuarios)
+// app.post('/api/usuarios',passport.authenticate('register', { failWithError: true }) ,postAUsuarios)
 
 //controlador post para login 
 
@@ -172,6 +159,7 @@ app.delete('/api/usuariosLogin', async function deleteSesiones(req, res, next) {
 // app.get('/api/products/productSelected/:pid', async (req, res) => {
    
 
+    
     
 //     const pid = req.params.pid
 //     //probando recibir producto nuevo para agregar por socket.io

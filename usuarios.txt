@@ -1,47 +1,92 @@
 [
   {
-    "_id": "64516b3c6f1098232738654d",
+    "_id": "64519a685523b181e174e9c4",
     "email": "lea.mg90@gmail.com",
     "password": "matias",
-    "first_name": "Matias",
-    "last_name": "Gattari",
+    "first_name": "matias",
+    "last_name": "gattari",
     "age": 33,
     "rol": "Estudiante"
   },
   {
-    "_id": "64516b736f10982327386551",
-    "email": "juan@gmail.com",
-    "password": "juan",
-    "first_name": "Juan",
-    "last_name": "Gomez",
-    "age": 33,
-    "rol": "Tutor"
-  },
-  {
-    "_id": "64516b846f10982327386553",
-    "email": "alan@gmail.com",
-    "password": "alan",
-    "first_name": "Alan",
-    "last_name": "Perez",
-    "age": 33,
-    "rol": "Profesor"
-  },
-  {
-    "_id": "64516ba26f10982327386555",
-    "email": "ariel@gmail.com",
-    "password": "ariel",
-    "first_name": "Ariel",
-    "last_name": "Paz",
-    "age": 33,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "645179ca5c8a0902561515eb",
-    "email": "mariano@aquino.com",
-    "password": "mariano",
-    "first_name": "mariano",
+    "_id": "64519a8a5523b181e174e9c7",
+    "email": "marian@aquino.com",
+    "password": "marian",
+    "first_name": "marian",
     "last_name": "aquino",
     "age": 37,
     "rol": "Profesor"
+  },
+  {
+    "_id": "64519aa65523b181e174e9ca",
+    "email": "anderson@ocania.com",
+    "password": "anderson",
+    "first_name": "anderson",
+    "last_name": "ocaña",
+    "age": 40,
+    "rol": "Tutor"
+  },
+  {
+    "_id": "6451a21c62e993f0e3613f76",
+    "email": "dario@lopilato.com",
+    "password": "dario",
+    "first_name": "dario",
+    "last_name": "lopilato",
+    "age": 35,
+    "rol": "Estudiante"
+  },
+  {
+    "_id": "6451a8883a340fd5c8411ff0",
+    "email": "lautaro@soto.com",
+    "password": "lautaro",
+    "first_name": "lautaro",
+    "last_name": "soto",
+    "age": 33,
+    "rol": "Estudiante"
+  },
+  {
+    "_id": "6451a98a21e345b7eee1bf3b",
+    "email": "ramiro@ponce.com",
+    "password": "$2b$10$1JTAlqS8QGFJGsqalgJ1t.BeinXbdVdIq/p6fWzv9RvjOjZbmlTJ2",
+    "first_name": "ramiro",
+    "last_name": "ponce",
+    "age": 34,
+    "rol": "Tutor"
+  },
+  {
+    "_id": "6451acf17dc91e93ea7b27e8",
+    "email": "martin@pele.com",
+    "password": "$2b$10$9jc/kmHNlGx/idnzmmf3XOuTmr32CYccw.H/eTL/OukqNKHVKDluq",
+    "first_name": "martin",
+    "last_name": "pele",
+    "age": 44,
+    "rol": "Estudiante"
+  },
+  {
+    "_id": "6451b40f86a963220bb7cefd",
+    "email": "german@costa.com",
+    "password": "$2b$10$H1Tv8YJPRLHthfzedo7z1eDv4vgXM1eyxvrUac7DA7lh4FVrXf90K",
+    "first_name": "german",
+    "last_name": "costa",
+    "age": 21,
+    "rol": "Estudiante"
+  },
+  {
+    "_id": "6451b750db8690cec71cbfe7",
+    "email": "maxi@mas.com",
+    "password": "$2b$10$CYFxGaTG8/k0RivibZ/Uguye1uLc96vLZohVoPxuQL1JD8MfZNPNW",
+    "first_name": "maxi",
+    "last_name": "mas",
+    "age": 22,
+    "rol": "Estudiante"
+  },
+  {
+    "_id": "6451b9e055231022d4ba81fa",
+    "email": "chicha@lala.com",
+    "password": "$2b$10$wxyuAEpOe7YHnfYFdBOso.7ADWpHq7OHGe0lN3Qz1ayYvZ7vEuU9C",
+    "first_name": "chicha",
+    "last_name": "lala",
+    "age": 22,
+    "rol": "Estudiante"
   }
 ]
