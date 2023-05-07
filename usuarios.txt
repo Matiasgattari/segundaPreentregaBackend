@@ -205,5 +205,23 @@
     "last_name": "las",
     "age": 22,
     "rol": "Estudiante"
+  },
+  {
+    "_id": "64582cc74365c5b3a6f3428b",
+    "email": "nico@cesa.com",
+    "password": "$2b$10$TR6s.Mar4UtUvBwQdljD/epAJdq73ZPUJog2taO5sQSp3iXUGdNmK",
+    "first_name": "nicolas",
+    "last_name": "cesa",
+    "age": 33,
+    "rol": "Estudiante"
+  },
+  {
+    "_id": "64582e7411a0a98ce7508fe3",
+    "email": "nicho@lol.com",
+    "password": "$2b$10$hl9f5NCMEswY6LBXQM99OO18JFDPWbiUCZC/nVfPthAvGGy0Cu9GK",
+    "first_name": "nicho",
+    "last_name": "lol",
+    "age": 22,
+    "rol": "Estudiante"
   }
 ]

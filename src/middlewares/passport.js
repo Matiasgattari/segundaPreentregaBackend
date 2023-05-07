@@ -9,77 +9,54 @@ import { hashear, validarQueSeanIguales } from '../utils/criptografia.js'
 import { userManager } from '../routes/sessionsRouter.js'
 import { usuarioModel } from '../../public/dao/models/schemaUsuarios.js'
 import {User} from '../entidades/User.js'
-// import { ErrorDeAutenticacion } from '../entidades/errors/ErrorDeAutenticacion.js'
-
-
-//con passport.use le paso la estrategia de REGISTRO , pidiendole que envie la peticion como primer parametro (passReqToCallback:true)
-// passport.use('register', new Strategy({ usernameField: 'email',passReqToCallback: true  },async (req,email, password, done) => {
-   
-//     const usuarioEncontrado =await usuarioModel.findOne({ email: email }).lean()
-    
-//     try {
-//         if(usuarioEncontrado!==null) {
-//             return done(null, false, { message: 'Error de credenciales' });
-//         }
-//         //extraigo datos personales del body y creo nuevo usuario
-//         const {first_name,last_name,email,password,age,rol} = req.body
-//         const user = new User({first_name:first_name,last_name:last_name,email:email,password:hashear(password),age:age,rol:rol})
-
-//         const usuarioCreado=  userManager.createUser(user)
-                
-//         done(null, user)
-
-//     } catch (error) {
-//         done(error)
-//     }
-// }))
-
 
 passport.use('register', new Strategy({ usernameField: 'email', passReqToCallback: true }, async (req, email, password, done) => {
     
-    //   const usuarioEncontrado = await usuarioModel.findOne({ email: email }).lean();
   try {
-    
-        // if(usuarioEncontrado !== null) {
-        //   return done(null, false, { message: 'El email ya está en uso' });
-        // }
-    
-        // const { first_name, last_name, email, password, age, rol } = req.body;
-        const user = new User({ first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, password: hashear(req.body.password), age: req.body.age, rol: req.body.rol });
-    
-        await userManager.createUser(user)
-        done(null,user)
-  } catch (error) {
-    
-  }
-   
-  }));
+       const user = new User({ first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, password: hashear(req.body.password), age: req.body.age, rol: req.body.rol });
+       await userManager.createUser(user)
+       done(null,user)
+        } catch (error) {
+            new Error ("Authentication error")
+        }
+    })
+  );
 
 
-
-
-
-
-//busco un usuario, llamo al done con ese usuario y queda logeado, aunque esta no es la mejor forma de hacerlo
-passport.use('login', new Strategy({
-    //puedo poner "con que nombre" voy a encontrar los campoos username y password, ya que si los nobmres no son los correctos no va a funcionar
-    usernameField: 'email',
-    // passwordField: 'contrasenia'
-}, async (username, password, done) => {
-    // esto es lo que estaba en el controller de login
+passport.use('login', new Strategy({ passReqToCallback: true,usernameField: 'email' }, async (req, _u, _p, done) => {
     try {
-        const buscado = await userManager.getUserByUserName(username)
-        if (!buscado)
-            return done(new Error('error de autenticacion'))
-        if (!validarQueSeanIguales(password, buscado['password']))
-            return done(new Error('error de autenticacion'))
-        delete buscado['password']
-        done(null, buscado)
+        
+    let buscado
+    try {
+        buscado = await usuarioModel.findOne({ email: req.body.email }).lean()
+        // console.log("buscadooooooooo", buscado);
+        // if (!buscado) {
+        //     return done(null, false, { message: 'El usuario no existe' })
+        // }
     } catch (error) {
-        done(error)
+        return done(new Error('error de autenticacion'))
+    }
+
+    // @ts-ignore
+    if (!validarQueSeanIguales(req.body.password, buscado['password'])) {
+        return done(null, false, { message: 'Contraseña incorrecta' })
+    }
+
+    const user = new User({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email,
+        password: req.body.password,
+        age: req.body.age,
+        rol: req.body.rol
+    })
+
+    // @ts-ignore
+    done(null, buscado)
+    } catch (error) {
+        new Error('error de autenticacion')
     }
 }))
-
 
 
 // esto lo tengo que agregar para que funcione passport! copiar y pegar, nada mas. ESTO es necesario para el funcionamiento de passport, le dice que hacer con las sesiones y como manejar los usuarios. 

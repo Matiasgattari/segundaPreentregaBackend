@@ -86,6 +86,9 @@ Su código base y endpoints se encuentran dentro de la ruta src/routes/cartsRout
 "api/sessions/login" muestra actualmente un formulario para realizar el login, con su funcionalidad finalizada para reconocer al email y contraseña del usuario para encontrarlo y logear.  El fetch de su logica se realiza hacia fetch('/api/usuariosLogin'), dicha ruta esta creada en server.js . Actualmente renderiza una lista de usuarios creados solo con la finalidad de poder seleccionar los datos de la base de datos para poder realizar las pruebas. 
 
 
+
+
+
 Todos los productos cargados tienen un ID propio que les doy autogenerado por el randomUUII, pero para realizar las operaciones internas actualmente cambie al uso del _id (object ID que brinda mongoose)
 Todos estos endpoints a grandes rasgos funcionan, salvo las cosas que marque puntualmente.
 
@@ -104,9 +107,6 @@ puntos faltantes a saber:
 -creo vista de registro y perfil de usuario, pero aun falta realizar la vista del login con su funcionalidad (express-session)
 
 
-
 PUNTOS NUEVOS A AGREGAR (ENTREGA DE PASSPORT)
-    -Se deberá contar con un hasheo de contraseña utilizando bcrypt
-    -Se deberá contar con una implementación de passport, tanto para register como para login.
-    -Implementar el método de autenticación de GitHub a la vista de login.
+  -Implementar el método de autenticación de GitHub a la vista de login.
 

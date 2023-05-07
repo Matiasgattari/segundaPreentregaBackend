@@ -61,14 +61,16 @@ app.get('/', async (req, res) => {
 
 
 //controlador POST a /API/USUARIOS a la cual hice el fetch en register.js
-//sin passport
-// app.post('/api/usuarios',postAUsuarios)
-//con passport, no funciona
+//sin passport // app.post('/api/usuarios',postAUsuarios)
+//con passport:
 app.post('/api/usuarios',passport.authenticate('register'),postAUsuarios)
 
 
-//controlador post para login 
-app.post('/api/usuariosLogin',postAUsuariosLogin)
+//controlador POST a /API/USUARIOSLOGIN a la cual hice el fetch en login.js
+//sin passport // app.post('/api/usuariosLogin',postAUsuariosLogin)
+//con passport:
+app.post('/api/usuariosLogin', passport.authenticate('login'), postAUsuariosLogin);
+
 
 //controlador delete para login
 app.delete('/api/usuariosLogin', async function deleteSesiones(req, res, next) {
@@ -76,18 +78,6 @@ app.delete('/api/usuariosLogin', async function deleteSesiones(req, res, next) {
       res.sendStatus(200)
     })
   })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 app.get('/realtimeproducts', async (req, res, next) => {

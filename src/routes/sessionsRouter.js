@@ -19,6 +19,7 @@ import { userRouter } from './userRouter.js';
 //importo las funciones que voy a utulizar con passport de la carpeta middlewares
 import { passportInitialize, passportSession } from '../middlewares/passport.js';
 import { postAUsuarios } from '../controllers/api/usuarios.controller.js';
+import { soloLogueados } from '../middlewares/soloLogueados.js';
 //importo el manejo de errores
 // import { manejadorDeErrores } from '../middlewares/manejoDeErroresRest.js';
 
@@ -58,7 +59,8 @@ sessionsRouter.get('/', async (req, res) => {
 
 sessionsRouter.get('/register',registroView)
 
-sessionsRouter.get('/profile',autenticacion,profileView)
+// sessionsRouter.get('/profile',autenticacion,profileView)
+sessionsRouter.get('/profile',soloLogueados,profileView)
 
 
 
