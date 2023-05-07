@@ -104,7 +104,6 @@ puntos faltantes a saber:
 
 -filtro de productos por categoría lo reemplace actualmente por "title" ya que no decidi bien los productos, solo difieren en titulo.
 -No logro que la funcion cartManager.modificarUnidadesProcducto(cid,pid,cantidad) funcione correctamente. mas info en el cartManager lina 119 (por favor si podes revisar)
--creo vista de registro y perfil de usuario, pero aun falta realizar la vista del login con su funcionalidad (express-session)
 
 
 PUNTOS NUEVOS A AGREGAR (ENTREGA DE PASSPORT)
