@@ -61,9 +61,10 @@ app.get('/', async (req, res) => {
 
 
 //controlador POST a /API/USUARIOS a la cual hice el fetch en register.js
-//sin passport // app.post('/api/usuarios',postAUsuarios)
+//sin passport 
+app.post('/api/usuarios',postAUsuarios)
 //con passport:
-app.post('/api/usuarios',passport.authenticate('register'),postAUsuarios)
+// app.post('/api/usuarios',passport.authenticate('register'),postAUsuarios)
 
 
 //controlador POST a /API/USUARIOSLOGIN a la cual hice el fetch en login.js

@@ -223,5 +223,14 @@
     "last_name": "lol",
     "age": 22,
     "rol": "Estudiante"
+  },
+  {
+    "_id": "645a94edbcdc075e15c9d58d",
+    "email": "lazaro@mela.com",
+    "password": "$2b$10$mcreaoM5biKotxmDClxMueFw8TeMt5lCU9SKEUKNJXWF9Nl0AyTD.",
+    "first_name": "lazaro",
+    "last_name": "mela",
+    "age": 33,
+    "rol": "Estudiante"
   }
 ]
