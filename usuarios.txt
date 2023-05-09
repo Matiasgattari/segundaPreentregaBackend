@@ -232,5 +232,32 @@
     "last_name": "mela",
     "age": 33,
     "rol": "Estudiante"
+  },
+  {
+    "_id": "645aa502cbdf30a51bbfe186",
+    "email": "charo@la.com",
+    "password": "$2b$10$aIMbZRLae8uwReV2yal7mO0ESjPVgDIau7f/vjrYIiUPgodAcN76q",
+    "first_name": "charo",
+    "last_name": "la",
+    "age": 13,
+    "rol": "Estudiante"
+  },
+  {
+    "_id": "645aac97a5e1b5c3171c589b",
+    "email": "lali@exp.com",
+    "password": "$2b$10$fufIUBjn8zJgdlXLgkpw4eYULD5qt9U6hE6bMeQ5qJamfrqOfZKCi",
+    "first_name": "lali",
+    "last_name": "exp",
+    "age": 22,
+    "rol": "Estudiante"
+  },
+  {
+    "_id": "645ab0a7ec425c394a584cca",
+    "email": "aika@la.com",
+    "password": "$2b$10$nqlh14QTdpQPCH1Ec3YMOeYyMqoMfI.5eINpCWUibswus8d.QrUD2",
+    "first_name": "aika",
+    "last_name": "la",
+    "age": 22,
+    "rol": "Estudiante"
   }
 ]

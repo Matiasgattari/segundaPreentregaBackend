@@ -8,7 +8,7 @@ Actualmente esta en desarrollo, con partes funcionales y partes que estan parcha
 
 base de datos mongo:
 database: ecommerce
-collections: products, carts, messages
+collections: products, carts, messages, users
 
 para iniciar el repositorio utilizo:
 -mongod --dbpath E:\BD-mongo
@@ -17,11 +17,18 @@ npm test
 
 dependencias que uso:
 "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-mongo": "^5.0.0",
     "express": "^4.18.2",
     "express-handlebars": "^7.0.2",
+    "express-session": "^1.17.3",
     "mongoose": "^7.0.3",
     "mongoose-paginate-v2": "^1.7.1",
     "nodemon": "^2.0.22",
+    "passport": "^0.6.0",
+    "passport-github2": "^0.1.12",
+    "passport-local": "^1.0.0",
+    "session-file-store": "^1.5.0",
     "socket.io": "^4.6.1"
   }
 
@@ -98,6 +105,11 @@ Dentro de la carpeta src/databases se encuentra el inicio de base de datos de mo
 Dentro de la carpeta src/config hay configuraciones del servidor
 
 
+
+SE OPTO POR LA ESTRATEGIA DE PASSPORT-LOCAL Y PASSPORT-GITHUB2 para el registro e inicio de sesion
+
+
+
 DATOS A TENER EN CUENTA 
 puntos faltantes a saber:
 - Falta realizar el chat funcional (hay 2 handlebars que tengo como base para hacerlo "chat" y "mensajes" siendo chat la unica que esta unida a un endpoint actualmente)
@@ -106,6 +118,4 @@ puntos faltantes a saber:
 -No logro que la funcion cartManager.modificarUnidadesProcducto(cid,pid,cantidad) funcione correctamente. mas info en el cartManager lina 119 (por favor si podes revisar)
 
 
-PUNTOS NUEVOS A AGREGAR (ENTREGA DE PASSPORT)
-  -Implementar el método de autenticación de GitHub a la vista de login.
 

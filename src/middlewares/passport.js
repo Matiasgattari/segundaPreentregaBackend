@@ -1,6 +1,7 @@
-//imports de libreria passport
+//imports de passport
 import passport from 'passport'
-import { Strategy } from 'passport-local'
+import { Strategy as LocalStrategy } from 'passport-local'
+import { Strategy as GithubStrategy } from 'passport-github2'
 
 //import bcrypt
 import { hashear, validarQueSeanIguales } from '../utils/criptografia.js'
@@ -9,61 +10,85 @@ import { hashear, validarQueSeanIguales } from '../utils/criptografia.js'
 import { userManager } from '../routes/sessionsRouter.js'
 import { usuarioModel } from '../../public/dao/models/schemaUsuarios.js'
 import {User} from '../entidades/User.js'
+import { githubCallbackUrl, githubClientSecret, githubClienteId } from '../config/auth.config.js'
 
-passport.use('register', new Strategy({ usernameField: 'email', passReqToCallback: true }, async (req, email, password, done) => {
-    
-  try {
-       const user = new User({ first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, password: hashear(req.body.password), age: req.body.age, rol: req.body.rol });
-       await userManager.createUser(user)
-       done(null,user)
+passport.use('local', new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, async (req, email, password, done) => {
+    try {
+        let buscado
+        try {
+            buscado = await usuarioModel.findOne({ email: req.body.email }).lean()
+            
         } catch (error) {
-            new Error ("Authentication error")
+            return done(new Error('error de autenticacion'))
+        }
+    
+        // @ts-ignore
+        if (!validarQueSeanIguales(req.body.password, buscado['password'])) {
+            return done(null, false, { message: 'Contraseña incorrecta' })
+        }
+    
+        const user = new User({
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+            password: req.body.password,
+            age: req.body.age,
+            rol: req.body.rol
+        })
+    
+        // @ts-ignore
+        done(null, buscado)
+        } catch (error) {
+            new Error('error de autenticacion')
         }
     })
   );
 
 
-passport.use('login', new Strategy({ passReqToCallback: true,usernameField: 'email' }, async (req, _u, _p, done) => {
-    try {
-        
-    let buscado
-    try {
-        buscado = await usuarioModel.findOne({ email: req.body.email }).lean()
-        // console.log("buscadooooooooo", buscado);
-        // if (!buscado) {
-        //     return done(null, false, { message: 'El usuario no existe' })
-        // }
-    } catch (error) {
-        return done(new Error('error de autenticacion'))
-    }
-
-    // @ts-ignore
-    if (!validarQueSeanIguales(req.body.password, buscado['password'])) {
-        return done(null, false, { message: 'Contraseña incorrecta' })
-    }
-
-    const user = new User({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        password: req.body.password,
-        age: req.body.age,
-        rol: req.body.rol
-    })
-
-    // @ts-ignore
-    done(null, buscado)
-    } catch (error) {
-        new Error('error de autenticacion')
-    }
+  passport.use('github', new GithubStrategy({
+    clientID: githubClienteId,
+    clientSecret: githubClientSecret,
+    callbackURL: githubCallbackUrl,
+    scope: ['user:email']
+}, async (accessToken, refreshToken, profile, done) => {
+   try {
+        const email = profile.emails[0].value
+        const usuarioBuscado = await userManager.getUserByUserName(email)
+        console.log("USUARIO BUSCADO POR MANAGER",usuarioBuscado[0]);
+  
+        if (usuarioBuscado){
+                done(null, usuarioBuscado[0])
+            } else {
+                let user =new User({
+                    first_name: profile['_json'].name|| "Pendiente nombre",
+                    last_name: profile['_json'].html_url || "Pendiente apellido",
+                    email: email,
+                    password: hashear(profile['_json'].name),
+                    age: profile.age || 0, 
+                    rol: profile.rol || "Pendiente"
+                })
+                await userManager.createUser(user)
+                console.log("USUARIO CREADO CON EXITO",user);
+                done(null, user)
+            }
+        } catch (error) {
+            new Error('error de logeo')
+        }
 }))
 
+// esto lo tengo que agregar para que funcione passport! copiar y pegar, nada mas.
+passport.serializeUser((user, next) => { next(null, user) })
+passport.deserializeUser((user, next) => { next(null, user) })
 
-// esto lo tengo que agregar para que funcione passport! copiar y pegar, nada mas. ESTO es necesario para el funcionamiento de passport, le dice que hacer con las sesiones y como manejar los usuarios. 
-passport.serializeUser((user, next) => { next(null, user) }) // "cuando termina la interaccion con el controller, llama al next con ese usuario sin hacerle nada como estaba guardado en la sesion"
-passport.deserializeUser((user, next) => { next(null, user) })// "que va a guardar cuando me llegue la sesion con la cookie"
+// estos son para cargar en express como middlewares a nivel aplicacion
+export const passportInitialize = passport.initialize()
+export const passportSession = passport.session()
 
-//exporto el middleware que va a usar passport para que todo este mecanismo funcione
-export const passportInitialize = passport.initialize() //middleware de passport propiamente dicho
-export const passportSession = passport.session() //middleware a travez del que passport inicializa la sesion
-//estos 2 exports son los que cargo con el app.use(passportInitialize, passportSession) del lado del servidor.js
+// estos son para cargar como middlewares antes de los controladores correspondientes
+export const autenticacionUserPass = passport.authenticate('local', { failWithError: true })
+export const autenticacionPorGithub = passport.authenticate('github', { scope: ['user:email'] })
+export const antenticacionPorGithub_CB = passport.authenticate('github', { failWithError: true })
+
+
+
+
