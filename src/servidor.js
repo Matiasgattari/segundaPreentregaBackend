@@ -63,27 +63,18 @@ app.get('/', async (req, res) => {
 //REGISTRO controlador POST a /API/USUARIOS a la cual hice el fetch en register.js
 //sin passport 
 app.post('/api/usuarios',postAUsuarios)
-//con passport:
-// app.post('/api/usuarios',passport.authenticate('register'),postAUsuarios)
-
 
 //LOGIN controlador POST a /API/USUARIOSLOGIN a la cual hice el fetch en login.js
-//sin passport // app.post('/api/usuariosLogin',postAUsuariosLogin)
-//con passport:
-// app.post('/api/usuariosLogin', passport.authenticate('login'), postAUsuariosLogin);
-//congithub
+
+//local
 app.post('/api/usuariosLogin', autenticacionUserPass, postAUsuariosLogin);
 
 // login con github. esto es lo nuevo que se agrega
 sessionsRouter.get('/github', autenticacionPorGithub)
 //esta es la ruta a la que devuelve la info github luego de autenticar. este al terminar la autenticacion redirige a inicio
-sessionsRouter.get('/githubcallback', antenticacionPorGithub_CB, (req, res, next) => { res.redirect('/api/sessions/profile') })
+sessionsRouter.get('/githubcallback', antenticacionPorGithub_CB, (req, res, next) => { res.redirect('/api/sessions/current') })
 
-
-
-
-
-//controlador delete para login
+//LOGOUT
 app.delete('/api/usuariosLogin', async function deleteSesiones(req, res, next) {
     req.session.destroy(err => {
       res.sendStatus(200)

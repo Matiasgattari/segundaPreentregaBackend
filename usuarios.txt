@@ -1,263 +1,32 @@
 [
   {
-    "_id": "64519a685523b181e174e9c4",
+    "_id": "645ae8c43a87f1debdd51503",
     "email": "lea.mg90@gmail.com",
-    "password": "matias",
-    "first_name": "matias",
-    "last_name": "gattari",
-    "age": 33,
-    "rol": "Estudiante"
+    "password": "$2b$10$gq9U9Nqf4ZGrfVE6W9TVfu6DH3RVZlk0Z.B0t9aCUReV9i1mwP51.",
+    "first_name": "Matiasgattari",
+    "last_name": "https://github.com/Matiasgattari",
+    "age": 2,
+    "rol": "User",
+    "cart": "Pendiente"
   },
   {
-    "_id": "64519a8a5523b181e174e9c7",
-    "email": "marian@aquino.com",
-    "password": "marian",
-    "first_name": "marian",
-    "last_name": "aquino",
-    "age": 37,
-    "rol": "Profesor"
-  },
-  {
-    "_id": "64519aa65523b181e174e9ca",
-    "email": "anderson@ocania.com",
-    "password": "anderson",
-    "first_name": "anderson",
-    "last_name": "ocaña",
-    "age": 40,
-    "rol": "Tutor"
-  },
-  {
-    "_id": "6451a21c62e993f0e3613f76",
-    "email": "dario@lopilato.com",
-    "password": "dario",
-    "first_name": "dario",
-    "last_name": "lopilato",
-    "age": 35,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "6451a8883a340fd5c8411ff0",
+    "_id": "645ae90a3a87f1debdd51509",
     "email": "lautaro@soto.com",
-    "password": "lautaro",
+    "password": "$2b$10$A2oFKNw2Cv1noc9g44oYDeNm8ypWSyDxTMb.VEi67TlGKJ/PPGBAK",
     "first_name": "lautaro",
     "last_name": "soto",
-    "age": 33,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "6451a98a21e345b7eee1bf3b",
-    "email": "ramiro@ponce.com",
-    "password": "$2b$10$1JTAlqS8QGFJGsqalgJ1t.BeinXbdVdIq/p6fWzv9RvjOjZbmlTJ2",
-    "first_name": "ramiro",
-    "last_name": "ponce",
-    "age": 34,
-    "rol": "Tutor"
-  },
-  {
-    "_id": "6451acf17dc91e93ea7b27e8",
-    "email": "martin@pele.com",
-    "password": "$2b$10$9jc/kmHNlGx/idnzmmf3XOuTmr32CYccw.H/eTL/OukqNKHVKDluq",
-    "first_name": "martin",
-    "last_name": "pele",
-    "age": 44,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "6451b40f86a963220bb7cefd",
-    "email": "german@costa.com",
-    "password": "$2b$10$H1Tv8YJPRLHthfzedo7z1eDv4vgXM1eyxvrUac7DA7lh4FVrXf90K",
-    "first_name": "german",
-    "last_name": "costa",
-    "age": 21,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "6451b750db8690cec71cbfe7",
-    "email": "maxi@mas.com",
-    "password": "$2b$10$CYFxGaTG8/k0RivibZ/Uguye1uLc96vLZohVoPxuQL1JD8MfZNPNW",
-    "first_name": "maxi",
-    "last_name": "mas",
     "age": 22,
-    "rol": "Estudiante"
+    "rol": "Admin",
+    "cart": "cart1"
   },
   {
-    "_id": "6451b9e055231022d4ba81fa",
-    "email": "chicha@lala.com",
-    "password": "$2b$10$wxyuAEpOe7YHnfYFdBOso.7ADWpHq7OHGe0lN3Qz1ayYvZ7vEuU9C",
-    "first_name": "chicha",
-    "last_name": "lala",
-    "age": 22,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "645801bb8099dce17455da6a",
-    "email": "leandrogattari@gmail.com",
-    "password": "$2b$10$/vbYZltsqFRYsU/R97TUxO0rJkSn/tcP//eNbJqG/Kxzv38En.AxK",
-    "first_name": "leandro",
-    "last_name": "gattari",
-    "age": 33,
-    "rol": "Tutor"
-  },
-  {
-    "_id": "6458021d354c1ffcc3504e7e",
-    "email": "leand@lea.com",
-    "password": "$2b$10$bBsiO2CgeLRWJuUyV9gL4uKB1Xd73Ftk0w1De0gY0eAebc4/Pj1dW",
-    "first_name": "leandro",
-    "last_name": "gattari",
-    "age": 33,
-    "rol": "Tutor"
-  },
-  {
-    "_id": "64580286df333c7948cf07d7",
-    "email": "joa@alala.com",
-    "password": "$2b$10$5qzrrxgSzArX.DnVDplMb.2XyD1ZqLCywyulASqRBhfawF9jQZ9YS",
-    "first_name": "joaquin",
-    "last_name": "alala",
-    "age": 22,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "645802d90f4dd2f892ecd475",
-    "email": "yoa@lala.com",
-    "password": "$2b$10$LtyhFNMOyU0XE4DQw6F/k.dbyp9WHfVii1GO46AkO2JY5hKXLAXQ.",
-    "first_name": "yoa",
-    "last_name": "lala",
-    "age": 22,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "645803263b43cd30fb14c08f",
-    "email": "lau@salsa.com",
-    "password": "$2b$10$DTgYIu7PmAa6c21Wyqvj.ePWt2Uhp.n72hbBzSUXVtcZGs7ictpla",
-    "first_name": "laura",
-    "last_name": "salsa",
-    "age": 33,
-    "rol": "Tutor"
-  },
-  {
-    "_id": "64580429bf8d12f3d1367d87",
-    "email": "ander@aga.com",
-    "password": "$2b$10$31ULxjYq1TMc.sV2yfKWveKaczNZHhbGYhRi5iKkZUmapV32Pkrgu",
-    "first_name": "anderson",
-    "last_name": "ocaña",
-    "age": 33,
-    "rol": "Tutor"
-  },
-  {
-    "_id": "64580465287217f3f3456744",
-    "email": "dae@dar.com",
-    "password": "$2b$10$J6y7jmNkLQ8BNyFBIWBeOec8NUZAJDbc8ttnkywx2Q3RhmsD4P07.",
-    "first_name": "dario",
-    "last_name": "daro",
-    "age": 33,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "645813bd22ba974b0e716232",
-    "email": "tin@last.com",
-    "password": "$2b$10$gfQ.6elAWMKnPK9gkatsFuDOVAWYksYzlA2Ge5ccgmlweygs/qx3.",
-    "first_name": "tintin",
-    "last_name": "last",
-    "age": 22,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "64581e6ce97bee4f9ab4065f",
-    "email": "lore@lamas.com",
-    "password": "$2b$10$2VG2wfIzYv6P/bhJuU5nPudmVFIZCjOjsaux5aq7i5OTfnzC7w.Y6",
-    "first_name": "lorenzo",
-    "last_name": "lamas",
-    "age": 33,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "6458206c9539795a7784d334",
-    "email": "lichi@lo.com",
-    "password": "$2b$10$Adfm62xgLu4WgZikWAclleKtyv0nk8JDPtUPK8sEMsmhAybzDjy3i",
-    "first_name": "lichi",
-    "last_name": "lol",
-    "age": 33,
-    "rol": "Tutor"
-  },
-  {
-    "_id": "645820d09539795a7784d33b",
-    "email": "cholo@la.com",
-    "password": "$2b$10$9eV.AWrft3oid9gahLETce.Vgjj0TY14/Zzc8i/cVZu1DEzLsh9n.",
-    "first_name": "cholo",
-    "last_name": "la",
-    "age": 22,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "64582142d14d14a9657c7941",
-    "email": "lari@gmail.com",
-    "password": "$2b$10$0bp1vfeKPFgzdxpzBF8CGu1jCpXIPAFyTqiNpeOujia7G/i6itHlq",
-    "first_name": "lari",
-    "last_name": "la",
-    "age": 33,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "64582185f29dedd16e2aaf0c",
-    "email": "lau@las.com",
-    "password": "$2b$10$9KrRQYvx/3PYbgaV6gWoaOp1IfAPzJEFOk2zV2nDry5GWdGmybh3u",
-    "first_name": "laurita",
-    "last_name": "las",
-    "age": 22,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "64582cc74365c5b3a6f3428b",
-    "email": "nico@cesa.com",
-    "password": "$2b$10$TR6s.Mar4UtUvBwQdljD/epAJdq73ZPUJog2taO5sQSp3iXUGdNmK",
-    "first_name": "nicolas",
-    "last_name": "cesa",
-    "age": 33,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "64582e7411a0a98ce7508fe3",
-    "email": "nicho@lol.com",
-    "password": "$2b$10$hl9f5NCMEswY6LBXQM99OO18JFDPWbiUCZC/nVfPthAvGGy0Cu9GK",
-    "first_name": "nicho",
-    "last_name": "lol",
-    "age": 22,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "645a94edbcdc075e15c9d58d",
-    "email": "lazaro@mela.com",
-    "password": "$2b$10$mcreaoM5biKotxmDClxMueFw8TeMt5lCU9SKEUKNJXWF9Nl0AyTD.",
-    "first_name": "lazaro",
-    "last_name": "mela",
-    "age": 33,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "645aa502cbdf30a51bbfe186",
-    "email": "charo@la.com",
-    "password": "$2b$10$aIMbZRLae8uwReV2yal7mO0ESjPVgDIau7f/vjrYIiUPgodAcN76q",
-    "first_name": "charo",
-    "last_name": "la",
-    "age": 13,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "645aac97a5e1b5c3171c589b",
-    "email": "lali@exp.com",
-    "password": "$2b$10$fufIUBjn8zJgdlXLgkpw4eYULD5qt9U6hE6bMeQ5qJamfrqOfZKCi",
-    "first_name": "lali",
-    "last_name": "exp",
-    "age": 22,
-    "rol": "Estudiante"
-  },
-  {
-    "_id": "645ab0a7ec425c394a584cca",
-    "email": "aika@la.com",
-    "password": "$2b$10$nqlh14QTdpQPCH1Ec3YMOeYyMqoMfI.5eINpCWUibswus8d.QrUD2",
-    "first_name": "aika",
-    "last_name": "la",
-    "age": 22,
-    "rol": "Estudiante"
+    "_id": "645ae9203a87f1debdd5150d",
+    "email": "marian@aquino.com",
+    "password": "$2b$10$5LLjsrrFLDnYKkJnJZj.b.SACeTnx68v0Gd2RPZ0IUey/S27ULA1O",
+    "first_name": "mariano",
+    "last_name": "aquino",
+    "age": 37,
+    "rol": "Developer",
+    "cart": "cart2"
   }
 ]

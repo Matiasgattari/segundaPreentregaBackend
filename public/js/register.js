@@ -12,6 +12,7 @@ if (formRegister instanceof HTMLFormElement) {
     const input_age = document.querySelector('#input_age')
     const input_password = document.querySelector('#input_password')
     const input_rol = document.querySelector('#input_rol')
+    const input_cart = document.querySelector('#input_cart')
 
     if (
       input_first_name instanceof HTMLInputElement &&
@@ -19,7 +20,8 @@ if (formRegister instanceof HTMLFormElement) {
       input_email instanceof HTMLInputElement &&
       input_age instanceof HTMLInputElement &&
       input_password instanceof HTMLInputElement&&
-      input_rol instanceof HTMLInputElement
+      input_rol instanceof HTMLInputElement &&
+      input_cart instanceof HTMLInputElement
     ) {
 
       const datosUsuario = {
@@ -29,6 +31,7 @@ if (formRegister instanceof HTMLFormElement) {
         age: input_age.value,
         password: input_password.value,
         rol: input_rol.value,
+        cart: input_cart.value,
       }
 console.log(datosUsuario);
 
@@ -49,7 +52,7 @@ const response = await fetch('/api/usuarios', {
 
       console.log(usuarioCreado)
 if (response.ok) {
-  window.location.href = 'http://localhost:8080/api/sessions/profile'
+  window.location.href = 'http://localhost:8080/api/sessions/current'
 }
     }
 

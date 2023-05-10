@@ -59,8 +59,7 @@ sessionsRouter.get('/', async (req, res) => {
 
 sessionsRouter.get('/register',registroView)
 
-// sessionsRouter.get('/profile',autenticacion,profileView)
-sessionsRouter.get('/profile',soloLogueados,profileView)
+sessionsRouter.get('/current',soloLogueados,profileView)
 
 
 

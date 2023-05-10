@@ -33,7 +33,8 @@ passport.use('local', new LocalStrategy({ usernameField: 'email', passReqToCallb
             email: req.body.email,
             password: req.body.password,
             age: req.body.age,
-            rol: req.body.rol
+            rol: req.body.rol,
+            cart: req.body.cart
         })
     
         // @ts-ignore
@@ -51,30 +52,34 @@ passport.use('local', new LocalStrategy({ usernameField: 'email', passReqToCallb
     callbackURL: githubCallbackUrl,
     scope: ['user:email']
 }, async (accessToken, refreshToken, profile, done) => {
-   try {
+    try {
+        console.log(profile['_json'].login);
         const email = profile.emails[0].value
         const usuarioBuscado = await userManager.getUserByUserName(email)
-        console.log("USUARIO BUSCADO POR MANAGER",usuarioBuscado[0]);
-  
-        if (usuarioBuscado){
-                done(null, usuarioBuscado[0])
-            } else {
-                let user =new User({
-                    first_name: profile['_json'].name|| "Pendiente nombre",
-                    last_name: profile['_json'].html_url || "Pendiente apellido",
-                    email: email,
-                    password: hashear(profile['_json'].name),
-                    age: profile.age || 0, 
-                    rol: profile.rol || "Pendiente"
-                })
-                await userManager.createUser(user)
-                console.log("USUARIO CREADO CON EXITO",user);
-                done(null, user)
-            }
-        } catch (error) {
-            new Error('error de logeo')
+        console.log("USUARIO BUSCADO POR MANAGER", usuarioBuscado);
+        console.log("length", usuarioBuscado.length);
+        if (usuarioBuscado.length > 0) {
+            console.log("USUARIO ENCONTRADO");
+            done(null, usuarioBuscado[0]);
+        } else {
+            let user = new User({
+                first_name: profile['_json'].login || "Pendiente nombre",
+                last_name: profile['_json'].html_url || "Pendiente apellido",
+                email: email,
+                password: hashear(profile['_json'].login),
+                age: 2,
+                rol: "User",
+                cart: "Pendiente"
+            });
+            await userManager.createUser(user);
+            console.log("USUARIO CREADO CON EXITO", user);
+            done(null, user);
         }
-}))
+    } catch (error) {
+        console.error('error de logeo', error);
+        done(error);
+    }
+}));
 
 // esto lo tengo que agregar para que funcione passport! copiar y pegar, nada mas.
 passport.serializeUser((user, next) => { next(null, user) })

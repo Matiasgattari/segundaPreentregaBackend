@@ -59,7 +59,7 @@ export class UserManager {
         async createUser(user){
             try {
                 // const usuarioNuevo = {email: user.email, password: hashear(user.password), first_name:user.first_name, last_name:user.last_name, age:user.age,rol:user.rol}
-                const usuarioNuevo = {email: user.email, password: user.password, first_name:user.first_name, last_name:user.last_name, age:user.age,rol:user.rol}
+                const usuarioNuevo = {email: user.email, password: user.password, first_name:user.first_name, last_name:user.last_name, age:user.age,rol:user.rol,cart: user.cart}
                 await usuarioModel.create(usuarioNuevo)
                 await this.saveUsersLocal()
                } catch (error) {

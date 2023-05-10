@@ -88,7 +88,7 @@ Su código base y endpoints se encuentran dentro de la ruta src/routes/cartsRout
 
 "api/sessions/register" permite el registro del usuario, completando un formulario con metodo post que hace un fetch a /api/usuarios. carga el usuario en una base de datos y crea la sesion. actualmente le saque la obligatoriedad de que sea unico el mail para poder probarla.
 
-"api/sessions/profile"  miestra a travez de un view handlebars muestra los datos del perfil del usuario, sin la contraseña . el fetch de su logica se realiza hacia fetch('/api/usuarios'). dicha ruta esta creada en server.js
+"api/sessions/current"  miestra a travez de un view handlebars muestra los datos del perfil del usuario, sin la contraseña . el fetch de su logica se realiza hacia fetch('/api/usuarios'). dicha ruta esta creada en server.js
 
 "api/sessions/login" muestra actualmente un formulario para realizar el login, con su funcionalidad finalizada para reconocer al email y contraseña del usuario para encontrarlo y logear.  El fetch de su logica se realiza hacia fetch('/api/usuariosLogin'), dicha ruta esta creada en server.js . Actualmente renderiza una lista de usuarios creados solo con la finalidad de poder seleccionar los datos de la base de datos para poder realizar las pruebas. 
 
@@ -116,6 +116,7 @@ puntos faltantes a saber:
 
 -filtro de productos por categoría lo reemplace actualmente por "title" ya que no decidi bien los productos, solo difieren en titulo.
 -No logro que la funcion cartManager.modificarUnidadesProcducto(cid,pid,cantidad) funcione correctamente. mas info en el cartManager lina 119 (por favor si podes revisar)
+
 
 
 

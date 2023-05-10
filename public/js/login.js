@@ -41,7 +41,7 @@ const response = await fetch('/api/usuariosLogin', {
 
       console.log(usuarioLogeado)
       if(response.ok) {
-        window.location.href = "http://localhost:8080/api/sessions/profile"
+        window.location.href = "http://localhost:8080/api/sessions/current"
       }
     }
 
