@@ -28,5 +28,15 @@
     "age": 37,
     "rol": "Developer",
     "cart": "cart2"
+  },
+  {
+    "_id": "64640a320096152dab8de0ec",
+    "email": "adminCoder@coder.com",
+    "password": "$2b$10$de1.CrIuTjedzsO/hRkD5Omfx/4K4EtFHGSh9aI6xn2LmcwFgJh3m",
+    "first_name": "coder",
+    "last_name": "house",
+    "age": 11,
+    "rol": "Admin",
+    "cart": "cart1"
   }
 ]

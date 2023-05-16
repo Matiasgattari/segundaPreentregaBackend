@@ -86,9 +86,9 @@ Su código base y endpoints se encuentran dentro de la ruta src/routes/cartsRout
 
 "api/sessions": muestra un inicio con redireccion a registro y login
 
-"api/sessions/register" permite el registro del usuario, completando un formulario con metodo post que hace un fetch a /api/usuarios. carga el usuario en una base de datos y crea la sesion. actualmente le saque la obligatoriedad de que sea unico el mail para poder probarla.
+"api/sessions/register" permite el registro del usuario, completando un formulario con metodo post que hace un fetch a /api/usuarios. carga el usuario en una base de datos y crea la sesion. actualmente le saque la obligatoriedad de que sea unico el mail para poder probarla. Al cruzar el mail "adminCoder@coder.com" con el password "adminCod3r123", siempre va a ser registrado como Admin.
 
-"api/sessions/current"  miestra a travez de un view handlebars muestra los datos del perfil del usuario, sin la contraseña . el fetch de su logica se realiza hacia fetch('/api/usuarios'). dicha ruta esta creada en server.js
+"api/sessions/current"  muestra a travez de un view handlebars muestra los datos del perfil del usuario, sin la contraseña . el fetch de su logica se realiza hacia fetch('/api/usuarios'). dicha ruta esta creada en server.js
 
 "api/sessions/login" muestra actualmente un formulario para realizar el login, con su funcionalidad finalizada para reconocer al email y contraseña del usuario para encontrarlo y logear.  El fetch de su logica se realiza hacia fetch('/api/usuariosLogin'), dicha ruta esta creada en server.js . Actualmente renderiza una lista de usuarios creados solo con la finalidad de poder seleccionar los datos de la base de datos para poder realizar las pruebas. 
 
@@ -119,7 +119,8 @@ puntos faltantes a saber:
 
 
 desafio clase 19:
-Sin embargo, para poder aprobar completamente el desafío, es necesario que agregues la siguiente consigna: si el usuario inicia sesión con el correo "adminCoder@coder.com" y la contraseña "adminCod3r123", el usuario de la sesión debe tener un campo que lo identifique como administrador
+Resuelto en archivo "register.js", agregando un condicional, que sin importar que rol se coloque, al cruzar el mail "adminCoder@coder.com" con el password "adminCod3r123", siempre va a ser registrado como admin.
+Por las dudas, agrego otro condicional de seguridad if en la funcion "profileView" (controller de /current) para asegurar que siempre sea "Admin" lo que se muestra para esos datos.
 
 desafio clase 15:
 Actualmente, el manager de MongoDB y el manager de filesystem están dentro del mismo archivo,  para aprobar el desafío, necesito que los managers estén separados en archivos distintos. Esto facilitará la lectura del código y ayudará a asegurar que sea más fácil de mantener a largo plazo.
