@@ -118,5 +118,8 @@ puntos faltantes a saber:
 -No logro que la funcion cartManager.modificarUnidadesProcducto(cid,pid,cantidad) funcione correctamente. mas info en el cartManager lina 119 (por favor si podes revisar)
 
 
+desafio clase 19:
+Sin embargo, para poder aprobar completamente el desafío, es necesario que agregues la siguiente consigna: si el usuario inicia sesión con el correo "adminCoder@coder.com" y la contraseña "adminCod3r123", el usuario de la sesión debe tener un campo que lo identifique como administrador
 
-
+desafio clase 15:
+Actualmente, el manager de MongoDB y el manager de filesystem están dentro del mismo archivo,  para aprobar el desafío, necesito que los managers estén separados en archivos distintos. Esto facilitará la lectura del código y ayudará a asegurar que sea más fácil de mantener a largo plazo.

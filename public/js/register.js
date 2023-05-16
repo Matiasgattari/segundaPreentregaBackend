@@ -33,7 +33,14 @@ if (formRegister instanceof HTMLFormElement) {
         rol: input_rol.value,
         cart: input_cart.value,
       }
+
+      
+    if(datosUsuario.email=='adminCoder@coder.com'&& datosUsuario.password=="adminCod3r123"){
+        datosUsuario.rol="Admin"
+    }
+      
 console.log(datosUsuario);
+
 
 const response = await fetch('/api/usuarios', {
     method: 'POST',
