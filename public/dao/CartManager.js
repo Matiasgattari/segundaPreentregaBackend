@@ -9,6 +9,7 @@ import mongoose from 'mongoose';
 import { cartsDB } from "./models/schemaCarts.js";
 import util from 'node:util'
 import { log } from "console";
+import { Persistencia } from "./fileSystemProducts.js";
 
 
 
@@ -18,10 +19,12 @@ export class CartManager {
         this.carts;
         this.path = path;
         this.products = [];
+        this.persistencia =new Persistencia(path)
     }
     async readCarts() {
        try {
-         const data = await fs.readFile(this.path, "utf-8");
+        //  const data = await fs.readFile(this.path, "utf-8");
+        await this.persistencia.readTxt()
        } catch (error) {
         throw new Error('CART-NOT-FOUND')
        }
@@ -52,7 +55,8 @@ export class CartManager {
         this.carts.push(cart)
 
         const jsonCarts = JSON.stringify(this.carts, null, 2)
-        await fs.writeFile(this.path, jsonCarts)
+        await this.persistencia.saveTxt(jsonCarts)
+        // await fs.writeFile(this.path, jsonCarts)
         await cartsDB.create(cart)
         console.log("carrito creado correctamente");
         } catch (error) {
@@ -102,7 +106,7 @@ export class CartManager {
 
                 this.carts= await this.getCarts()
                 const jsonCarts = JSON.stringify(this.carts, null, 2)
-                await fs.writeFile(this.path, jsonCarts)
+                await this.persistencia.saveTxt(jsonCarts)
                
             } else {
                 const push = carritoProductos.push(produID)
@@ -112,7 +116,7 @@ export class CartManager {
                 await cartsDB.findOneAndUpdate({_id:cid},carritoFiltrado)
                 this.carts= await this.getCarts()
                 const jsonCarts = JSON.stringify(this.carts, null, 2)
-                await fs.writeFile(this.path, jsonCarts)
+                await this.persistencia.saveTxt(jsonCarts)
 
             }
 
@@ -139,9 +143,9 @@ export class CartManager {
 
         //esta parte aun sin probar
         await cartsDB.findOneAndUpdate({_id:cid},nuevoCarrito)
-            this.carts= await this.getCarts()
-            const jsonCarts = JSON.stringify(this.carts, null, 2)
-            await fs.writeFile(this.path, jsonCarts)
+        this.carts= await this.getCarts()
+        const jsonCarts = JSON.stringify(this.carts, null, 2)
+        await this.persistencia.saveTxt(jsonCarts)
         return "producto eliminado correctamente"
         } catch (error) {
             throw new Error('PRODUCT-NOT-FOUND')
@@ -153,7 +157,7 @@ export class CartManager {
     async saveCart() {
        try {
         const jsonCarts = JSON.stringify(this.carts, null, 2)
-        await fs.writeFile(this.path, jsonCarts)
+        await this.persistencia.saveTxt(jsonCarts)
        } catch (error) {
         throw new Error('CART-NOT-FOUND')
        }

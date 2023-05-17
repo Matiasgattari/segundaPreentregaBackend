@@ -132,6 +132,6 @@ Por las dudas, agrego otro condicional de seguridad if en la funcion "profileVie
 
 
 desafio clase 15:
-Actualmente, el manager de MongoDB y el manager de filesystem están dentro del mismo archivo,  para aprobar el desafío, necesito que los managers estén separados en archivos distintos. Esto facilitará la lectura del código y ayudará a asegurar que sea más fácil de mantener a largo plazo.
+Creo la pagina fileSystemProducts.js, la cual posee una clase constructora para manejar la persistencia del fileSystem. dentro del manager de carts, products y users, esta misma se instancia y utiliza desde this.persistencia 
 
 

@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 
 import { usuarioModel } from './models/schemaUsuarios.js';
 import { hashear } from '../../src/utils/criptografia.js';
+import { Persistencia } from './fileSystemProducts.js';
 
 
 
@@ -12,7 +13,7 @@ export class UserManager {
         constructor(path) {
             this.users;
             this.path = path;
-            
+            this.persistencia =new Persistencia(path)
         }
     
     
@@ -51,7 +52,9 @@ export class UserManager {
             const usuarios = await usuarioModel.find().lean()
             this.users = usuarios;
             const jsonUsers = JSON.stringify(this.users, null, 2)
-            await fs.writeFile(this.path, jsonUsers)
+            // await fs.writeFile(this.path, jsonUsers)
+            await this.persistencia.saveTxt(jsonUsers)
+            
             } catch (error) {
                 throw new Error('SERVER-COMUNICATION-ERROR')
             }
