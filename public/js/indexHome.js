@@ -63,7 +63,7 @@ cargarBTN?.addEventListener("click", (e)=>{
 console.log(productoAgregar);
 
 serverSocket.emit('nuevoProducto', productoAgregar)
-// location.reload()
+location.reload()
 
 
 } )

@@ -202,5 +202,29 @@
     "category": "hielo",
     "status": true,
     "id": "bb33fc1b-1925-465f-8db9-5e23d1612ab8"
+  },
+  {
+    "_id": "646424e2812e432e9ddff4b3",
+    "title": "moltres",
+    "description": "pokemon legendario",
+    "price": 20000000,
+    "thumbnail": "moltres jpg",
+    "stock": 33,
+    "code": "pokemon",
+    "category": "fuego",
+    "status": true,
+    "id": "6fd7b4e4-cbe8-4ac8-892a-c6fdbf63f799"
+  },
+  {
+    "_id": "64642619d2e1268356ded3eb",
+    "title": "togepi",
+    "description": "pokemon huevo",
+    "price": 40000,
+    "thumbnail": "togepi jpg",
+    "stock": 45,
+    "code": "pokemon",
+    "category": "hada",
+    "status": true,
+    "id": "29e9063b-e96d-4105-807c-72948ad36f40"
   }
 ]

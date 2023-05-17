@@ -86,7 +86,7 @@ Su código base y endpoints se encuentran dentro de la ruta src/routes/cartsRout
 
 "api/sessions": muestra un inicio con redireccion a registro y login
 
-"api/sessions/register" permite el registro del usuario, completando un formulario con metodo post que hace un fetch a /api/usuarios. carga el usuario en una base de datos y crea la sesion. actualmente le saque la obligatoriedad de que sea unico el mail para poder probarla.
+"api/sessions/register" permite el registro del usuario, completando un formulario con metodo post que hace un fetch a /api/usuarios. carga el usuario en una base de datos y crea la sesion. actualmente le saque la obligatoriedad de que sea unico el mail para poder probarla. Al cruzar el mail "adminCoder@coder.com" con el password "adminCod3r123", siempre va a ser registrado como ADMIN.
 
 "api/sessions/current"  miestra a travez de un view handlebars muestra los datos del perfil del usuario, sin la contraseña . el fetch de su logica se realiza hacia fetch('/api/usuarios'). dicha ruta esta creada en server.js
 
@@ -129,34 +129,6 @@ puntos faltantes a saber:
 desafio clase 19:
 Resuelto en archivo "register.js", agregando un condicional, que sin importar que rol se coloque, al cruzar el mail "adminCoder@coder.com" con el password "adminCod3r123", siempre va a ser registrado como admin.
 Por las dudas, agrego otro condicional de seguridad if en la funcion "profileView" (controller de /current) para asegurar que siempre sea "Admin" lo que se muestra para esos datos.
-export function profileView(req,res){
-  if(req.user.email=="adminCoder@coder.com"){
-    req.user.rol=="Admin"
-  }
-  res.render('profile', {
-        // pageTitle: 'Perfil', user: JSON.stringify(req.session['user'])
-        
-        pageTitle: 'Perfil', user: req['user']
-    })
-}
-
-      const datosUsuario = {
-        first_name: input_first_name.value,
-        last_name: input_last_name.value,
-        email: input_email.value,
-        age: input_age.value,
-        password: input_password.value,
-        rol: input_rol.value,
-        cart: input_cart.value,
-      }
-
-      
-    if(datosUsuario.email=='adminCoder@coder.com'&& datosUsuario.password=="adminCod3r123"){
-        datosUsuario.rol="Admin"
-    }
-      
-console.log(datosUsuario);
-
 
 
 desafio clase 15:

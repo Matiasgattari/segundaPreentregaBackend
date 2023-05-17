@@ -10,7 +10,7 @@ import { productsDB } from './models/schemaProducts.js';
 import { cartsDB } from './models/schemaCarts.js';
 import { log } from 'console';
 
-
+import { Persistencia } from './fileSystemProducts.js';
 //constructor para creacion de productos nuevos
 export class Product {
     constructor({
@@ -41,11 +41,13 @@ export class ProductManager {
         this.products;
         this.path = path;
         // this.#productosDb = mongoose.model('products', schemaProducts)
+        this.persistencia =new Persistencia(path)
     }
 
 
     async readProducts() {
-        const data = await fs.readFile(this.path, "utf-8");
+        // const data = await fs.readFile(this.path, "utf-8");
+        const data = await this.persistencia.readTxt()
         this.products = JSON.parse(data);
     }
 
@@ -64,7 +66,7 @@ export class ProductManager {
 
         try {
             const productos = await this.getProducts()
-            // console.log(productos);
+        
             const productFind = this.products.find((product) => product.title === title)
             if (productFind) {
                 console.log('Ya existe un producto con ese titulo');
@@ -72,20 +74,9 @@ export class ProductManager {
 
             if (title !== undefined && description !== undefined && price !== undefined && stock !== undefined && code !== undefined && category !== undefined) {
                 
-                const agregar = {title:title,description:description,price:price,thumbnail:thumbnail,stock:stock,code:code,category:category,status:status,id: randomUUID()}
-                console.log("producto a agregar: ",agregar);
-            //    const product2 = await productsDB.create({ // insertOne en version mongoose
-            //         title: title,
-            //         description: description,
-            //         price: parseInt(price),
-            //         thumbnail: thumbnail,
-            //         stock: parseInt(stock),
-            //         code: code,
-            //         category: category,
-            //         status: status,
-            //         // id: randomUUID()
-            // })
-            // const product2 = await productsDB.create(agregar)
+            const agregar = {title:title,description:description,price:price,thumbnail:thumbnail,stock:stock,code:code,category:category,status:status,id: randomUUID()}
+            console.log("producto a agregar: ",agregar);
+           
             await productsDB.create(agregar)
             .then(createdProduct => {
               console.log('Producto creado correctamente:', createdProduct);
@@ -97,7 +88,8 @@ export class ProductManager {
                 this.products = await this.getProducts()
                 
                 const jsonProducts = JSON.stringify(this.products, null, 2)
-                await fs.writeFile(this.path, jsonProducts)
+                await this.persistencia.saveTxt(jsonProducts)
+                // await fs.writeFile(this.path, jsonProducts)
               
 
             }
@@ -145,7 +137,7 @@ export class ProductManager {
         this.products = productos2
 
         const jsonProducts = JSON.stringify(this.products, null, 2)
-        await fs.writeFile(this.path, jsonProducts)
+        await this.persistencia.saveTxt(jsonProducts)
 
         return console.log("producto eliminado correctamente");
         }  catch (error) {
@@ -160,8 +152,8 @@ export class ProductManager {
         this.products = productosActualizados
 
             //actualizo el filesystem
-        const jsonProductsModif = JSON.stringify(this.products, null, 2)
-        await fs.writeFile(this.path, jsonProductsModif)
+        const jsonProducts = JSON.stringify(this.products, null, 2)
+        await this.persistencia.saveTxt(jsonProducts)
 
         console.log("El producto se actualizo con exito", prodModificado);
         } catch (error) {
