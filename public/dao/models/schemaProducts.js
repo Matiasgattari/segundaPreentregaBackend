@@ -9,8 +9,8 @@ export const schemaProducts = new Schema({
     stock: { type: Number, required: true, min: 1 },
     code: { type: String, required: true },
     category: { type: String, required: true , index: true },
-    status: { type: String, required: true },
-    // id: { required: true, unique:true,type: Schema.Types.ObjectId}
+    status: { type: Boolean},
+    id: {type:String}
 }, { versionKey: false })
 
 schemaProducts.plugin(mongoosePaginate)
@@ -35,8 +35,8 @@ export const productsDB = mongoose.model('products', schemaProducts)
 //         stock: 45,
 //         code: "televisor",
 //         category: "hogar",
-//         status: true,
-//         id: "1"
+//         status: true
+//         
 // })
 // await productsDB.create({ // insertOne en version mongoose
 //         title: "tv2",
@@ -46,8 +46,7 @@ export const productsDB = mongoose.model('products', schemaProducts)
 //         stock: 45,
 //         code: "televisor",
 //         category: "hogar",
-//         status: true,
-//         id: "2"
+//         status: true
 // })
 // await productsDB.create({ // insertOne en version mongoose
 //         title: "tv4",
@@ -57,8 +56,7 @@ export const productsDB = mongoose.model('products', schemaProducts)
 //         stock: 45,
 //         code: "televisor",
 //         category: "hogar",
-//         status: true,
-//         id: "3"
+//         status: true
 // })
 
 

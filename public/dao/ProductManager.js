@@ -8,6 +8,7 @@ import { Schema } from 'mongoose';
 import { schemaProducts } from './models/schemaProducts.js';
 import { productsDB } from './models/schemaProducts.js';
 import { cartsDB } from './models/schemaCarts.js';
+import { log } from 'console';
 
 
 //constructor para creacion de productos nuevos
@@ -59,29 +60,40 @@ export class ProductManager {
     }
 
 
-    async addProduct(title, description, price, thumbnail, stock, code, category) {
+    async addProduct(title, description, price, thumbnail, stock, code, category,status) {
 
         try {
-            await this.getProducts()
-
+            const productos = await this.getProducts()
+            // console.log(productos);
             const productFind = this.products.find((product) => product.title === title)
             if (productFind) {
                 console.log('Ya existe un producto con ese titulo');
             }
 
             if (title !== undefined && description !== undefined && price !== undefined && stock !== undefined && code !== undefined && category !== undefined) {
-               
-                const product2 = await productsDB.create({ // insertOne en version mongoose
-                    title: title,
-                    description: description,
-                    price: price,
-                    thumbnail: thumbnail,
-                    stock: stock,
-                    code: code,
-                    category: category,
-                    status: true,
-                    id: randomUUID()
+                
+                const agregar = {title:title,description:description,price:price,thumbnail:thumbnail,stock:stock,code:code,category:category,status:status,id: randomUUID()}
+                console.log("producto a agregar: ",agregar);
+            //    const product2 = await productsDB.create({ // insertOne en version mongoose
+            //         title: title,
+            //         description: description,
+            //         price: parseInt(price),
+            //         thumbnail: thumbnail,
+            //         stock: parseInt(stock),
+            //         code: code,
+            //         category: category,
+            //         status: status,
+            //         // id: randomUUID()
+            // })
+            // const product2 = await productsDB.create(agregar)
+            await productsDB.create(agregar)
+            .then(createdProduct => {
+              console.log('Producto creado correctamente:', createdProduct);
             })
+            .catch(error => {
+              console.error('Error al crear el producto:', error);
+            });
+
                 this.products = await this.getProducts()
                 
                 const jsonProducts = JSON.stringify(this.products, null, 2)

@@ -86,9 +86,9 @@ Su código base y endpoints se encuentran dentro de la ruta src/routes/cartsRout
 
 "api/sessions": muestra un inicio con redireccion a registro y login
 
-"api/sessions/register" permite el registro del usuario, completando un formulario con metodo post que hace un fetch a /api/usuarios. carga el usuario en una base de datos y crea la sesion. actualmente le saque la obligatoriedad de que sea unico el mail para poder probarla. Al cruzar el mail "adminCoder@coder.com" con el password "adminCod3r123", siempre va a ser registrado como Admin.
+"api/sessions/register" permite el registro del usuario, completando un formulario con metodo post que hace un fetch a /api/usuarios. carga el usuario en una base de datos y crea la sesion. actualmente le saque la obligatoriedad de que sea unico el mail para poder probarla.
 
-"api/sessions/current"  muestra a travez de un view handlebars muestra los datos del perfil del usuario, sin la contraseña . el fetch de su logica se realiza hacia fetch('/api/usuarios'). dicha ruta esta creada en server.js
+"api/sessions/current"  miestra a travez de un view handlebars muestra los datos del perfil del usuario, sin la contraseña . el fetch de su logica se realiza hacia fetch('/api/usuarios'). dicha ruta esta creada en server.js
 
 "api/sessions/login" muestra actualmente un formulario para realizar el login, con su funcionalidad finalizada para reconocer al email y contraseña del usuario para encontrarlo y logear.  El fetch de su logica se realiza hacia fetch('/api/usuariosLogin'), dicha ruta esta creada en server.js . Actualmente renderiza una lista de usuarios creados solo con la finalidad de poder seleccionar los datos de la base de datos para poder realizar las pruebas. 
 
@@ -118,9 +118,48 @@ puntos faltantes a saber:
 -No logro que la funcion cartManager.modificarUnidadesProcducto(cid,pid,cantidad) funcione correctamente. mas info en el cartManager lina 119 (por favor si podes revisar)
 
 
+DATOS A TENER EN CUENTA 
+puntos faltantes a saber:
+- Falta realizar el chat funcional (hay 2 handlebars que tengo como base para hacerlo "chat" y "mensajes" siendo chat la unica que esta unida a un endpoint actualmente)
+
+-filtro de productos por categoría lo reemplace actualmente por "title" ya que no decidi bien los productos, solo difieren en titulo.
+-No logro que la funcion cartManager.modificarUnidadesProcducto(cid,pid,cantidad) funcione correctamente. mas info en el cartManager lina 119 (por favor si podes revisar)
+
+
 desafio clase 19:
 Resuelto en archivo "register.js", agregando un condicional, que sin importar que rol se coloque, al cruzar el mail "adminCoder@coder.com" con el password "adminCod3r123", siempre va a ser registrado como admin.
 Por las dudas, agrego otro condicional de seguridad if en la funcion "profileView" (controller de /current) para asegurar que siempre sea "Admin" lo que se muestra para esos datos.
+export function profileView(req,res){
+  if(req.user.email=="adminCoder@coder.com"){
+    req.user.rol=="Admin"
+  }
+  res.render('profile', {
+        // pageTitle: 'Perfil', user: JSON.stringify(req.session['user'])
+        
+        pageTitle: 'Perfil', user: req['user']
+    })
+}
+
+      const datosUsuario = {
+        first_name: input_first_name.value,
+        last_name: input_last_name.value,
+        email: input_email.value,
+        age: input_age.value,
+        password: input_password.value,
+        rol: input_rol.value,
+        cart: input_cart.value,
+      }
+
+      
+    if(datosUsuario.email=='adminCoder@coder.com'&& datosUsuario.password=="adminCod3r123"){
+        datosUsuario.rol="Admin"
+    }
+      
+console.log(datosUsuario);
+
+
 
 desafio clase 15:
 Actualmente, el manager de MongoDB y el manager de filesystem están dentro del mismo archivo,  para aprobar el desafío, necesito que los managers estén separados en archivos distintos. Esto facilitará la lectura del código y ayudará a asegurar que sea más fácil de mantener a largo plazo.
+
+

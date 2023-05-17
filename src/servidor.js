@@ -89,8 +89,8 @@ app.get('/realtimeproducts', async (req, res, next) => {
     // recibir producto nuevo para agregar por socket.io
     io.on('connection', async clientSocket => {
 
-            clientSocket.on('nuevoProducto',async function agregarProd (productoAgregar)  {
-            await productManager.addProduct(productoAgregar.title,productoAgregar.description,productoAgregar.price,productoAgregar.thumbnail,productoAgregar.stock,productoAgregar.code,productoAgregar.category)
+            clientSocket.on('nuevoProducto',async function agregarProd(productoAgregar){
+            await productManager.addProduct(productoAgregar.title,productoAgregar.description,productoAgregar.price,productoAgregar.thumbnail,productoAgregar.stock,productoAgregar.code,productoAgregar.category,productoAgregar.status)
 
             })
             

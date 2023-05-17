@@ -178,5 +178,29 @@
     "category": "bicho veneno",
     "status": true,
     "id": "ade0f4d9-716b-4453-tryu-6d5df1564232"
+  },
+  {
+    "_id": "646423b132c0b490972404f8",
+    "title": "pikachu",
+    "description": "pokemon roedor",
+    "price": 3000,
+    "thumbnail": "pikachu jpg",
+    "stock": 22,
+    "code": "pokemon",
+    "category": "electrico",
+    "status": true,
+    "id": "e6b4ddca-e5e5-4b0b-b813-883ef20dd07e"
+  },
+  {
+    "_id": "646423e232c0b490972404fc",
+    "title": "lapras",
+    "description": "pokemon montura",
+    "price": 30000,
+    "thumbnail": "lapras jpg",
+    "stock": 22,
+    "code": "pokemon",
+    "category": "hielo",
+    "status": true,
+    "id": "bb33fc1b-1925-465f-8db9-5e23d1612ab8"
   }
 ]

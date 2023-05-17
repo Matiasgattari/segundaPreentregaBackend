@@ -47,21 +47,23 @@ cargarBTN?.addEventListener("click", (e)=>{
     // @ts-ignore
     const valorDescripcion= descripcion?.value
     // @ts-ignore
-    const valorPrecio= precio?.value
+    const valorPrecio= parseInt(precio?.value)
     // @ts-ignore
     const valorUrlIMG= urlIMG?.value
     // @ts-ignore
-    const valorStock= stock?.value
+    const valorStock= parseInt(stock?.value)
     // @ts-ignore
     const valorCodigo= codigo?.value
     // @ts-ignore
     const valorCategoria= categoria?.value
+    // @ts-ignore
+    const valorStatus= statusTrue?.value || true
 
-    const productoAgregar = {"title":valorTitulo,"description":valorDescripcion,"price":valorPrecio,"thumbnail":valorUrlIMG,"stock":valorStock,"code":valorCodigo,"category":valorCategoria,"status":statusTrue}
-
+    const productoAgregar = {"title":valorTitulo,"description":valorDescripcion,"price":valorPrecio,"thumbnail":valorUrlIMG,"stock":valorStock,"code":valorCodigo,"category":valorCategoria,"status":valorStatus}
+console.log(productoAgregar);
 
 serverSocket.emit('nuevoProducto', productoAgregar)
-location.reload()
+// location.reload()
 
 
 } )

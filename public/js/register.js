@@ -41,7 +41,6 @@ if (formRegister instanceof HTMLFormElement) {
       
 console.log(datosUsuario);
 
-
 const response = await fetch('/api/usuarios', {
     method: 'POST',
     headers: {
