@@ -1,4 +1,5 @@
-import { ProductManager } from "./ProductManager.js";
+// import { ProductManager } from "./ProductManager.js";
+import { productManager } from "./ProductManager.js";
 import {
     privateDecrypt,
     randomUUID
@@ -67,7 +68,7 @@ export class CartManager {
     async agregarProductoAlCarrito(cid, pid) {
         try {
             //instancio productManager
-            const productManager = new ProductManager('./productos.txt');
+            // const productManager = new ProductManager('./productos.txt');
 
             //ubico producto por pid
             const productos = await productManager.getProducts()

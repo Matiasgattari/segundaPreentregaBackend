@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2'
+// import { productManager } from '../ProductManager.js';
 
 export const schemaProducts = new Schema({
     title: { type: String, required: true, index: true },
@@ -20,7 +21,7 @@ export const productsDB = mongoose.model('products', schemaProducts)
 // await productsDB.deleteMany()
 
 
-// const productManager = new ProductManager('../../productos.txt');
+
 // const poductosLeidos = await productManager.getProducts()
 // console.log(poductosLeidos);
 

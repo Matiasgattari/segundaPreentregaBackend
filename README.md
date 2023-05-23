@@ -126,12 +126,7 @@ puntos faltantes a saber:
 -No logro que la funcion cartManager.modificarUnidadesProcducto(cid,pid,cantidad) funcione correctamente. mas info en el cartManager lina 119 (por favor si podes revisar)
 
 
-desafio clase 19:
-Resuelto en archivo "register.js", agregando un condicional, que sin importar que rol se coloque, al cruzar el mail "adminCoder@coder.com" con el password "adminCod3r123", siempre va a ser registrado como admin.
-Por las dudas, agrego otro condicional de seguridad if en la funcion "profileView" (controller de /current) para asegurar que siempre sea "Admin" lo que se muestra para esos datos.
-
-
-desafio clase 15:
-Creo la pagina fileSystemProducts.js, la cual posee una clase constructora para manejar la persistencia del fileSystem. dentro del manager de carts, products y users, esta misma se instancia y utiliza desde this.persistencia 
-
-
+Desafìo entregable clase 27:
+    * se agrega librerìa "commander", archivos en /src/config/config.sv.js
+    * se agrega librerìa "dotenv", funcionalidad creada en /src/config/entorno.js y archivo env.config de carpeta raiz. Se lo llama desde el archivo server.js solo para mostrar su contenido y funcionalidad.
+    *arquitectura en capas:  

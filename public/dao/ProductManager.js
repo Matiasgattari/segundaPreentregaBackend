@@ -164,6 +164,8 @@ export class ProductManager {
 }
 
 
+export const productManager = new ProductManager('./productos.txt')
+
 //manager de productos. prueba
 // const productManager = new ProductManager('../productos.txt');
 // console.log('console log de get products',await productManager.getProducts());

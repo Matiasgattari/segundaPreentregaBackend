@@ -1,5 +1,5 @@
 import express, {Router} from 'express';
-import { Product, ProductManager } from '../../public/dao/ProductManager.js';
+import { Product, productManager } from '../../public/dao/ProductManager.js';
 import { randomUUID } from 'crypto'
 import { productsDB } from '../../public/dao/models/schemaProducts.js';
 import util from 'node:util'
@@ -30,7 +30,7 @@ import { soloLogueados } from '../middlewares/soloLogueados.js';
 
 
 export const userManager = new UserManager('./usuarios.txt')
-export const productManager = new ProductManager('./productos.txt');
+
 
 
 export const sessionsRouter = Router()

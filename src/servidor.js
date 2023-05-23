@@ -1,30 +1,45 @@
+//EXPRESS Y SOCKET.IO
 import express from 'express'
 import { engine } from 'express-handlebars'
 import { Server as SocketIOServer } from 'socket.io'
+
+//VARIABLES DE ENTORNO
+import entorno from './config/entorno.js';
+console.log('variable de entorno 1: ' + entorno.FONDO);
+console.log('variable de entorno 2: ' + entorno.FRENTE);
+
+//ROUTERS
 import { productsRouter } from './routes/productsRouter.js';
 import { cartsRouter } from './routes/cartsRouter.js';
-import { PORT } from './config/config.sv.js';
-import { ProductManager } from '../public/dao/ProductManager.js';
-import util from 'node:util'
 import { sessionsRouter } from './routes/sessionsRouter.js';
+
+//CFG
+import util from 'node:util'
+import { PORT } from './config/config.sv.js';
+
+//DAOS
+// import { ProductManager } from '../public/dao/ProductManager.js';
+import { productManager } from '../public/dao/ProductManager.js';
 import { cartManager } from './routes/cartsRouter.js';
 import { productsDB } from '../public/dao/models/schemaProducts.js';
 
 //inicializando mongoose en el sv
 import {inicioMongoose} from './database/mongoose.js'
 
+//CONTROLLERS
 import { postAUsuarios, postAUsuariosLogin } from './controllers/api/usuarios.controller.js';
 
+//SESSION
 import session from './middlewares/session.js';
 
 import { manejadorDeErrores } from './middlewares/manejoDeErroresRest.js';
 
-//imports passport
+//PASSPORT
 import passport from 'passport';
 import { antenticacionPorGithub_CB, autenticacionPorGithub, autenticacionUserPass, passportInitialize } from './middlewares/passport.js';
 import { passportSession } from './middlewares/passport.js';
 
-const productManager = new ProductManager('./productos.txt')
+// const productManager = new ProductManager('./productos.txt')
 
 
 const app = express()
@@ -183,3 +198,6 @@ app.get('/chat', async (req,res,next) => {
 //         })
 
 app.use(manejadorDeErrores)
+
+
+

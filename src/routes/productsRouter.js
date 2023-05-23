@@ -1,9 +1,9 @@
 import express, {Router} from 'express';
-import { Product, ProductManager } from '../../public/dao/ProductManager.js';
+import { Product, productManager } from '../../public/dao/ProductManager.js';
 import { randomUUID } from 'crypto'
 import { productsDB } from '../../public/dao/models/schemaProducts.js';
 import util from 'node:util'
-export const productManager = new ProductManager('./productos.txt');
+// export const productManager = new ProductManager('./productos.txt');
 import { Server as SocketIOServer } from 'socket.io'
 import { io } from '../servidor.js';
 import { cartManager } from './cartsRouter.js';

@@ -2,7 +2,7 @@ import express, {
     json,
     Router
 } from 'express';
-import { ProductManager } from '../../public/dao/ProductManager.js';
+import { productManager } from '../../public/dao/ProductManager.js';
 import { Product } from '../../public/dao/ProductManager.js';
 import { CartManager } from '../../public/dao/CartManager.js';
 import {
@@ -26,7 +26,7 @@ cartsRouter.use(express.urlencoded({
 }))
 
 
-const productManager = new ProductManager('./productos.txt');
+// const productManager = new ProductManager('./productos.txt');
 export const cartManager = new CartManager('./carrito.txt')
 
 

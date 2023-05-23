@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2'
 import util from 'node:util'
-// import { ProductManager } from '../../public/productManager.js';
+// import { productManager } from '../../public/productManager.js';
 
 // import { MONGODB_PATH } from './src/config/config.mongo';
 // import { CartManager } from '../../public/CartManager.js';
