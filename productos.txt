@@ -226,5 +226,65 @@
     "category": "hada",
     "status": true,
     "id": "29e9063b-e96d-4105-807c-72948ad36f40"
+  },
+  {
+    "_id": "646d2d69a62d05d2d6a3766f",
+    "title": "psyduck",
+    "description": "pokemon pato",
+    "price": 2000,
+    "thumbnail": "pato jpg",
+    "stock": 23,
+    "code": "pokemon",
+    "category": "agua",
+    "status": true,
+    "id": "7d6d0208-9d05-4efc-8ef2-2c99359f43cb"
+  },
+  {
+    "_id": "646d2fe91344b0729a8100f0",
+    "title": "cindaquyl",
+    "description": "pokemon roedor",
+    "price": 4000,
+    "thumbnail": "cindaquyl jpg",
+    "stock": 24,
+    "code": "pokemon",
+    "category": "fuego",
+    "status": true,
+    "id": "78873321-60ce-412b-902a-f83595c01a1e"
+  },
+  {
+    "_id": "646d3026e3cd868d49e56b70",
+    "title": "rogenrola",
+    "description": "pokemon roca",
+    "price": 1000,
+    "thumbnail": "rogenrola jpg",
+    "stock": 10,
+    "code": "pokemon",
+    "category": "roca",
+    "status": true,
+    "id": "60562a63-93cf-4716-b230-42628f30dd40"
+  },
+  {
+    "_id": "646d31662d97809cee91f70c",
+    "title": "scyther",
+    "description": "pokemon mantis",
+    "price": 3000,
+    "thumbnail": "scyther jpg",
+    "stock": 22,
+    "code": "pokemon",
+    "category": "bicho",
+    "status": true,
+    "id": "4301db20-01df-43a5-bed2-4048a6c28ceb"
+  },
+  {
+    "_id": "646d31f19c581d6705660a8e",
+    "title": "chansey",
+    "description": "pokemon cura",
+    "price": 5000,
+    "thumbnail": "chansey.jpg",
+    "stock": 15,
+    "code": "pokemon",
+    "category": "hada",
+    "status": true,
+    "id": "4b68a0f9-3165-42d3-bba3-058bd349b01c"
   }
 ]

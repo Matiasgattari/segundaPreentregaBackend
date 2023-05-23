@@ -124,7 +124,7 @@ productsRouter.post('/', async (req, res) => {
         })
         console.log(producto1);
         
-        const addProducto = await productManager.addProduct(producto1.title, producto1.description,producto1.price, producto1.thumbnail, producto1.stock, producto1.code,producto1.category)
+        const addProducto = await productManager.addProduct(producto1.dto().title, producto1.dto().description,producto1.dto().price, producto1.dto().thumbnail, producto1.dto().stock, producto1.dto().code,producto1.dto().category)
         res.json(addProducto)
     } catch (error) {
         throw new Error('aiuda')

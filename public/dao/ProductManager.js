@@ -11,8 +11,22 @@ import { cartsDB } from './models/schemaCarts.js';
 import { log } from 'console';
 
 import { Persistencia } from './fileSystemProducts.js';
+
+
+import { toPojo } from '../../src/utils/utilidades.js';
+
+
 //constructor para creacion de productos nuevos
 export class Product {
+    #title
+    #description
+    #price
+    #thumbnail
+    #code
+    #stock
+    #category
+    #id
+   
     constructor({
         title,
         description,
@@ -22,16 +36,30 @@ export class Product {
         stock,
         category
     }) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.thumbnail = thumbnail;
-        this.code = code;
-        this.stock = stock;
-        this.category = category;
-        this.id = randomUUID();
+        this.#title = title;
+        this.#description = description;
+        this.#price = price;
+        this.#thumbnail = thumbnail;
+        this.#code = code;
+        this.#stock = stock;
+        this.#category = category;
+        this.#id = randomUUID();
     }
+
+    dto() {
+        return {
+            title:this.#title,
+            description:this.#description,
+            price:this.#price,
+            thumbnail:this.#thumbnail,
+            code:this.#code,
+            stock:this.#stock,
+            category:this.#category,
+            id:this.#id
+        }
+      }
 }
+
 
 
 
@@ -75,24 +103,24 @@ export class ProductManager {
             if (title !== undefined && description !== undefined && price !== undefined && stock !== undefined && code !== undefined && category !== undefined) {
                 
             const agregar = {title:title,description:description,price:price,thumbnail:thumbnail,stock:stock,code:code,category:category,status:status,id: randomUUID()}
-            console.log("producto a agregar: ",agregar);
-           
+            // console.log("producto a agregar: ",agregar);
+                      
             await productsDB.create(agregar)
             .then(createdProduct => {
-              console.log('Producto creado correctamente:', createdProduct);
+                console.log('Producto creado correctamente:', createdProduct);
             })
             .catch(error => {
-              console.error('Error al crear el producto:', error);
+                console.error('Error al crear el producto:', error);
             });
-
-                this.products = await this.getProducts()
-                
-                const jsonProducts = JSON.stringify(this.products, null, 2)
-                await this.persistencia.saveTxt(jsonProducts)
-                // await fs.writeFile(this.path, jsonProducts)
-              
-
-            }
+            
+            this.products = await this.getProducts()
+            
+            const jsonProducts = JSON.stringify(this.products, null, 2)
+            await this.persistencia.saveTxt(jsonProducts)
+           
+            // const creadoSinMetodos = toPojo(creado)
+            
+        }
 
         } catch (error) {
             throw new Error('CARGA-DE-PRODUCTO-FALLIDA')
