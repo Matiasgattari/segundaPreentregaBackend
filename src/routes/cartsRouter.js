@@ -12,6 +12,8 @@ import util from 'node:util'
 
 import { engine } from 'express-handlebars'
 import { cartsDB } from '../../public/dao/models/schemaCarts.js';
+
+import { cartManager } from '../../public/dao/CartManager.js';
 // const app = express()
 
 // app.engine('handlebars', engine())
@@ -27,7 +29,7 @@ cartsRouter.use(express.urlencoded({
 
 
 // const productManager = new ProductManager('./productos.txt');
-export const cartManager = new CartManager('./carrito.txt')
+
 
 
 cartsRouter.get('/json/cartsJSON', async (req, res) => {

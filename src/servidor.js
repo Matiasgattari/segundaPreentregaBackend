@@ -5,8 +5,6 @@ import { Server as SocketIOServer } from 'socket.io'
 
 //VARIABLES DE ENTORNO
 import entorno from './config/entorno.js';
-console.log('variable de entorno 1: ' + entorno.FONDO);
-console.log('variable de entorno 2: ' + entorno.FRENTE);
 
 //ROUTERS
 import { productsRouter } from './routes/productsRouter.js';
@@ -18,9 +16,8 @@ import util from 'node:util'
 import { PORT } from './config/config.sv.js';
 
 //DAOS
-// import { ProductManager } from '../public/dao/ProductManager.js';
 import { productManager } from '../public/dao/ProductManager.js';
-import { cartManager } from './routes/cartsRouter.js';
+import { cartManager } from '../public/dao/CartManager.js';
 import { productsDB } from '../public/dao/models/schemaProducts.js';
 
 //inicializando mongoose en el sv
@@ -80,7 +77,6 @@ app.get('/', async (req, res) => {
 app.post('/api/usuarios',postAUsuarios)
 
 //LOGIN controlador POST a /API/USUARIOSLOGIN a la cual hice el fetch en login.js
-
 //local
 app.post('/api/usuariosLogin', autenticacionUserPass, postAUsuariosLogin);
 
@@ -117,7 +113,6 @@ app.get('/realtimeproducts', async (req, res, next) => {
             })
 
     })
-
 
     const listado = [];
     
@@ -157,13 +152,6 @@ app.get('/chat', async (req,res,next) => {
         encabezado: 'Lista de productos en base de datos'
     })
 })
-
-
-
-
-
-
-
 
 
 

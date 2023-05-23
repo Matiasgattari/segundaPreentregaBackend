@@ -6,7 +6,7 @@ import util from 'node:util'
 // export const productManager = new ProductManager('./productos.txt');
 import { Server as SocketIOServer } from 'socket.io'
 import { io } from '../servidor.js';
-import { cartManager } from './cartsRouter.js';
+import { cartManager } from '../../public/dao/CartManager.js';
 import { log } from 'console';
 
 export const productsRouter = Router()

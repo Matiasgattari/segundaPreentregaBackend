@@ -238,6 +238,8 @@ async modificarUnidadesProcducto(cid,pid,cantidad) {
 
 
 
+export const cartManager = new CartManager('./carrito.txt')
+
 //Manager de carritos. Prueba
 // const carrito = new CartManager('../carrito.txt')
 

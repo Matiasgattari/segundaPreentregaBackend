@@ -38,5 +38,15 @@
     "age": 11,
     "rol": "Admin",
     "cart": "cart1"
+  },
+  {
+    "_id": "646d357b0571048fc8da9cd1",
+    "email": "satoshi@mail.com",
+    "password": "$2b$10$M9hRfhkkpNAKJhLyWIjRK.uyzzMhBWlJ1r418mdr/PWDfhCrxKSXO",
+    "first_name": "satoshi",
+    "last_name": "gattari",
+    "age": 22,
+    "rol": "User",
+    "cart": "cart2"
   }
 ]
