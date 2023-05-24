@@ -16,9 +16,9 @@ import util from 'node:util'
 import { PORT } from './config/config.sv.js';
 
 //DAOS
-import { productManager } from '../public/dao/ProductManager.js';
-import { cartManager } from '../public/dao/CartManager.js';
-import { productsDB } from '../public/dao/models/schemaProducts.js';
+// import { productManager } from '../public/dao/ProductManager.js';
+// import { cartManager } from '../public/dao/CartManager.js';
+// import { productsDB } from '../public/dao/models/schemaProducts.js';
 
 //inicializando mongoose en el sv
 import {inicioMongoose} from './database/mongoose.js'
@@ -35,6 +35,7 @@ import { manejadorDeErrores } from './middlewares/manejoDeErroresRest.js';
 import passport from 'passport';
 import { antenticacionPorGithub_CB, autenticacionPorGithub, autenticacionUserPass, passportInitialize } from './middlewares/passport.js';
 import { passportSession } from './middlewares/passport.js';
+import { productosService } from './servicios/productosService.js';
 
 // const productManager = new ProductManager('./productos.txt')
 
@@ -95,13 +96,14 @@ app.delete('/api/usuariosLogin', async function deleteSesiones(req, res, next) {
 
 app.get('/realtimeproducts', async (req, res, next) => {
 
-    const listado1 = await productManager.getProducts()
+    const listado1 = await productosService.buscarProductos()
 
     // recibir producto nuevo para agregar por socket.io
     io.on('connection', async clientSocket => {
 
             clientSocket.on('nuevoProducto',async function agregarProd(productoAgregar){
-            await productManager.addProduct(productoAgregar.title,productoAgregar.description,productoAgregar.price,productoAgregar.thumbnail,productoAgregar.stock,productoAgregar.code,productoAgregar.category,productoAgregar.status)
+            
+            await productosService.crear(productoAgregar.title,productoAgregar.description,productoAgregar.price,productoAgregar.thumbnail,productoAgregar.stock,productoAgregar.code,productoAgregar.category,productoAgregar.status)
 
             })
             
@@ -109,7 +111,7 @@ app.get('/realtimeproducts', async (req, res, next) => {
             // io.sockets.emit('actualizarProductos', listado1) 
 
             clientSocket.on('eliminarProducto',  productoEliminar => {
-                productManager.deleteProduct(productoEliminar)
+                productosService.eliminarProducto(productoEliminar)
             })
 
     })
@@ -130,7 +132,7 @@ app.get('/realtimeproducts', async (req, res, next) => {
 
 app.get('/home', async (req, res, next) => {
   
-    const listado1 = await productManager.getProducts()
+    const listado1 = await productosService.buscarProductos()
     
     const producto = [];
     listado1.forEach(element => {producto.push(JSON.stringify(element))

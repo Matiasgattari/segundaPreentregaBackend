@@ -252,18 +252,6 @@
     "id": "78873321-60ce-412b-902a-f83595c01a1e"
   },
   {
-    "_id": "646d3026e3cd868d49e56b70",
-    "title": "rogenrola",
-    "description": "pokemon roca",
-    "price": 1000,
-    "thumbnail": "rogenrola jpg",
-    "stock": 10,
-    "code": "pokemon",
-    "category": "roca",
-    "status": true,
-    "id": "60562a63-93cf-4716-b230-42628f30dd40"
-  },
-  {
     "_id": "646d31662d97809cee91f70c",
     "title": "scyther",
     "description": "pokemon mantis",
@@ -286,5 +274,17 @@
     "category": "hada",
     "status": true,
     "id": "4b68a0f9-3165-42d3-bba3-058bd349b01c"
+  },
+  {
+    "_id": "646d6a6548783db1fa5f168f",
+    "title": "mew",
+    "description": "pokemon mitico",
+    "price": 600000,
+    "thumbnail": "mew jpg",
+    "stock": 1,
+    "code": "pokemon",
+    "category": "fantasma",
+    "status": true,
+    "id": "729f171f-e37c-4cd2-aabe-c1ba1d8186bb"
   }
 ]

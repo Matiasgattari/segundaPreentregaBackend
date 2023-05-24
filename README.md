@@ -130,3 +130,6 @@ Desafìo entregable clase 27:
     * se agrega librerìa "commander", archivos en /src/config/config.sv.js
     * se agrega librerìa "dotenv", funcionalidad creada en /src/config/entorno.js y archivo env.config de carpeta raiz. Se lo llama desde el archivo src/config/auth.config.js y su contenido se utiliza para las credenciales de github y cookie-parser.
     *arquitectura en capas:  
+            -agrego servicio de usuarios en /src/servicios/usuariosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.
+            -agrego servicio de productos en /src/servicios/productosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.
+            -agrego servicio de carritos en /src/servicios/carritosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.

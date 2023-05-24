@@ -11,6 +11,8 @@ import { cartsDB } from "./models/schemaCarts.js";
 import util from 'node:util'
 import { log } from "console";
 import { Persistencia } from "./fileSystemProducts.js";
+import { productosService } from "../../src/servicios/productosService.js";
+import { Cart } from "../../src/entidades/Cars.js";
 
 
 
@@ -47,17 +49,18 @@ export class CartManager {
     async crearCarrito() {
 
         try {
-            await this.getCarts()
-        const cart = {
+        await this.getCarts()
+               
+        const cart = new Cart({
             "id": randomUUID(),
             "quantity": 0,
             "products": []
-        }
+        })
+
         this.carts.push(cart)
 
         const jsonCarts = JSON.stringify(this.carts, null, 2)
         await this.persistencia.saveTxt(jsonCarts)
-        // await fs.writeFile(this.path, jsonCarts)
         await cartsDB.create(cart)
         console.log("carrito creado correctamente");
         } catch (error) {
@@ -67,11 +70,8 @@ export class CartManager {
    
     async agregarProductoAlCarrito(cid, pid) {
         try {
-            //instancio productManager
-            // const productManager = new ProductManager('./productos.txt');
-
-            //ubico producto por pid
-            const productos = await productManager.getProducts()
+           
+            const productos = await productosService.buscarProductos()
             const productoIndex = productos.findIndex(prod => prod['_id'] == pid)
             const productoFiltrado = productos[productoIndex]
 
@@ -148,6 +148,19 @@ export class CartManager {
         const jsonCarts = JSON.stringify(this.carts, null, 2)
         await this.persistencia.saveTxt(jsonCarts)
         return "producto eliminado correctamente"
+        } catch (error) {
+            throw new Error('PRODUCT-NOT-FOUND')
+        }
+
+    }
+    async eliminarCarrito(cid){
+
+        try {
+        await cartsDB.deleteOne({_id:cid})
+        this.carts= await this.getCarts()
+        const jsonCarts = JSON.stringify(this.carts, null, 2)
+        await this.persistencia.saveTxt(jsonCarts)
+        return "carrito eliminado correctamente"
         } catch (error) {
             throw new Error('PRODUCT-NOT-FOUND')
         }

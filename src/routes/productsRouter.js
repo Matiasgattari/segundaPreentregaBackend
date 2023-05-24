@@ -8,6 +8,8 @@ import { Server as SocketIOServer } from 'socket.io'
 import { io } from '../servidor.js';
 import { cartManager } from '../../public/dao/CartManager.js';
 import { log } from 'console';
+import { productosService } from '../servicios/productosService.js';
+import { carritosService } from '../servicios/carritosService.js';
 
 export const productsRouter = Router()
 productsRouter.use(express.json())
@@ -84,7 +86,7 @@ const filtro = filtroTitle || filtroTDisp
 } )
 
 productsRouter.get('/json/productsJSON', async (req, res) => {
-    const productos = await productsDB.find().lean()
+    const productos = await productosService.buscarProductos()
     res.send(productos)
     
     })
@@ -94,10 +96,11 @@ productsRouter.get('/:pid', async (req,res)=>{
 
     try {
         const idProducto = req.params.pid
-        const poductosLeidos = await productManager.getProducts()
+        
+        const poductosLeidos = await productosService.buscarProductos()
         
         if (idProducto)  {
-            const prodFiltradoID= await productManager.getProductById(idProducto)
+            const prodFiltradoID= await productosService.buscarProductoPorId(idProducto)
             res.send(prodFiltradoID)
             } else {
                 throw new Error("no existe el id")
@@ -116,15 +119,15 @@ productsRouter.get('/:pid', async (req,res)=>{
 
 productsRouter.post('/', async (req, res) => {
     try {
-        await productManager.getProducts()
+        await productosService.buscarProductos()
 
         const producto1 = new Product({
             ...req.body,
             id: randomUUID()
         })
-        console.log(producto1);
-        
-        const addProducto = await productManager.addProduct(producto1.dto().title, producto1.dto().description,producto1.dto().price, producto1.dto().thumbnail, producto1.dto().stock, producto1.dto().code,producto1.dto().category)
+      
+        const addProducto = await productosService.crear(producto1.dto().title, producto1.dto().description,producto1.dto().price, producto1.dto().thumbnail, producto1.dto().stock, producto1.dto().code,producto1.dto().category)
+
         res.json(addProducto)
     } catch (error) {
         throw new Error('aiuda')
@@ -135,11 +138,11 @@ productsRouter.post('/', async (req, res) => {
 productsRouter.put('/:pid',async( req,res)=>{
 try {
 
-    const getProds = await productManager.getProducts()
+    const getProds = await productosService.buscarProductos()
     const id= req.params.pid
     const prodActualizado = req.body
 
-    await productManager.updateProduct(id,prodActualizado)
+    await productosService.modificarProducto(id,prodActualizado)
     // res.send('Producto actualizado correctamente')
     res.send(prodActualizado)
    
@@ -151,11 +154,10 @@ try {
 productsRouter.delete('/:pid',async( req,res)=>{
     try {
     
-        const getProds = await productManager.getProducts()
+        const getProds = await productosService.buscarProductos()
         const id= req.params.pid
-           
-        await productManager.deleteProduct(id)
-    
+        await productosService.eliminarProducto(id)
+      
         res.send('Producto eliminado correctamente')
        
     } catch (error) {
@@ -171,7 +173,7 @@ productsRouter.delete('/:pid',async( req,res)=>{
     
     
                 clientSocket.on('agregarProducto',  valorInputAgregarCarrito => {
-                    cartManager.agregarProductoAlCarrito(valorInputAgregarCarrito,pid)
+                    carritosService.agregarProductoAlCarrito(valorInputAgregarCarrito,pid)
                     console.log(valorInputAgregarCarrito)
                         console.log(pid)
                 })
@@ -179,7 +181,7 @@ productsRouter.delete('/:pid',async( req,res)=>{
     
         })
 
-        const productoFiltrado = await productsDB.find({_id:pid}).lean()
+        const productoFiltrado = await productosService.buscarProductoPorId(pid)
     
         res.render('productSelect.handlebars', {
                 pid:JSON.stringify(pid),
