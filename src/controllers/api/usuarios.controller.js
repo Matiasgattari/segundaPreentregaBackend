@@ -1,5 +1,6 @@
 import { User } from "../../entidades/User.js";
 import { userManager } from "../../routes/sessionsRouter.js";
+import { usuariosService } from "../../servicios/usuariosService.js";
 import { hashear } from "../../utils/criptografia.js";
 
 
@@ -7,9 +8,8 @@ export async function postAUsuarios(req,res,next){
     try {
         const user = new User({ first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, password: hashear(req.body.password), age: req.body.age, rol: req.body.rol,cart: req.body.cart });
         console.log(user);
-        console.log(req.body.cart);
-        await userManager.createUser(user)
-      
+        const registrado = await usuariosService.registrar(user)
+        
         // funcion de passport para que el registro ya me deje logueado tambien!. ESTE login hace lo mismo que el "done", dejandome el usuario logeado
         req.login(user, error => {
             if (error) {
@@ -26,7 +26,8 @@ export async function postAUsuarios(req,res,next){
 }
 
 export async function getUsersController(req, res, next) {
-    const users = await userManager.getUsers()
+    
+    const users = await usuariosService.buscarUsuarios()
     res.json(users)
 }
 

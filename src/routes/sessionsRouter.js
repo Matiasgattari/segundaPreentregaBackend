@@ -20,6 +20,7 @@ import { userRouter } from './userRouter.js';
 import { passportInitialize, passportSession } from '../middlewares/passport.js';
 import { postAUsuarios } from '../controllers/api/usuarios.controller.js';
 import { soloLogueados } from '../middlewares/soloLogueados.js';
+import { usuariosService } from '../servicios/usuariosService.js';
 //importo el manejo de errores
 // import { manejadorDeErrores } from '../middlewares/manejoDeErroresRest.js';
 
@@ -56,29 +57,19 @@ sessionsRouter.get('/', async (req, res) => {
 })
 
 
-
 sessionsRouter.get('/register',registroView)
 
 sessionsRouter.get('/current',soloLogueados,profileView)
 
-
-
-
-
-  
 sessionsRouter.get('/login',async (req,res)=>{
 
 
-const listaUsuarios = await userManager.getUsers()
 
-// const usuarioFiltrado = await userManager.getUserById(id)
+const listaUsuarios = await usuariosService.buscarUsuarios()
 
-
-// res.status(201).json({mensaje:'usuario ubicado exitosamente', usuario: listaUsuarios})
 const conUtil=util.inspect(listaUsuarios, false, 10)
 const listaUsuariosArray = []
 listaUsuarios.forEach(element => listaUsuariosArray.push(util.inspect(element, false, 10)))
-
 
 
 const variablesLogin ={

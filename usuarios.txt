@@ -48,5 +48,95 @@
     "age": 22,
     "rol": "User",
     "cart": "cart2"
+  },
+  {
+    "_id": "646d3adedda8aec97e52f502",
+    "email": "mei@gattari",
+    "password": "$2b$10$odxdGC7UDsomnUuWwWf0V..3e.Qh5Wu/q8Tzb5IV0yFIKg2/mS48.",
+    "first_name": "mei",
+    "last_name": "gattari",
+    "age": 22,
+    "rol": "User",
+    "cart": "cart1"
+  },
+  {
+    "_id": "646d3b2cdda8aec97e52f508",
+    "email": "endy@gattari.com",
+    "password": "$2b$10$qw35.uNFGoEJfszaDtsRE.ZzkGXSmrB04wld/UchJ8DT84veSjBVy",
+    "first_name": "endy",
+    "last_name": "gattari",
+    "age": 6,
+    "rol": "User",
+    "cart": ""
+  },
+  {
+    "_id": "646d3ce1874f964ff8d9f7b8",
+    "email": "asd@asd.com",
+    "password": "$2b$10$g/FLbydEsI/hmtbDrNySMeCl8zRDrh4/fZ/H7k4AlTEyiu5Ax.2vK",
+    "first_name": "asd",
+    "last_name": "asd",
+    "age": 22,
+    "rol": "User",
+    "cart": ""
+  },
+  {
+    "_id": "646d44293aba74cdd8e8e620",
+    "email": "asd2@asd.com",
+    "password": "$2b$10$Q7vlHiNoR5jGtNl/PGbyIejYM2AJx3S1.LMnYqPCePjxdu8n.68BW",
+    "first_name": "asd2",
+    "last_name": "asd3",
+    "age": 23,
+    "rol": "User",
+    "cart": ""
+  },
+  {
+    "_id": "646d449706ec832803f1df07",
+    "email": "lazaro@melano",
+    "password": "$2b$10$MwSJJFkaHKBQN.QcxTt4q.j0nVYuYO.t4K5YP/d3UMB.5Lm7jwZGO",
+    "first_name": "lazaro",
+    "last_name": "melano",
+    "age": 23,
+    "rol": "User",
+    "cart": ""
+  },
+  {
+    "_id": "646d456bcdb1f747c245d179",
+    "email": "anali@mai",
+    "password": "$2b$10$8b5Jh7rkeKVYTybTjKaNy.w4dfElPsCa6CnrgCPAut4kHLDVnKPXa",
+    "first_name": "anai",
+    "last_name": "mai",
+    "age": 23,
+    "rol": "User",
+    "cart": ""
+  },
+  {
+    "_id": "646d4cd0d4478dc4b260c72f",
+    "email": "ramita@ponce.com",
+    "password": "$2b$10$UgN9IT05cZX.cRNK.jBCAeHeOrrz1qSYoPJ3IeQ8rcgPOFBT5YdBW",
+    "first_name": "ramita",
+    "last_name": "ponce",
+    "age": 23,
+    "rol": "User",
+    "cart": ""
+  },
+  {
+    "_id": "646d4e5f0239abc8c69e0c84",
+    "email": "chatran@gatito.com",
+    "password": "$2b$10$XIG.ZcRgVJYN4o43c6Lb6el7e8bKpqEJa3l6YX8Mp.mFRgUlIEAHG",
+    "first_name": "chatran",
+    "last_name": "gatito",
+    "age": 23,
+    "rol": "Admin",
+    "cart": ""
+  },
+  {
+    "_id": "646d5746359a8a49cdfc0f36",
+    "email": "papi@chulo.com",
+    "password": "$2b$10$maO1ZgjoRmnMVsGw9/Y2quuosmVnYq5xhUYZ3TWT1Jl5TzQEr8XIO",
+    "first_name": "papi",
+    "last_name": "chulo",
+    "age": 23,
+    "rol": "User",
+    "cart": ""
   }
 ]

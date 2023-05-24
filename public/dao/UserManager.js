@@ -40,12 +40,17 @@ export class UserManager {
                }
         }
         async getUserByUserName(userName) {
-            try {
-                const usuarioFiltrado = await usuarioModel.find({email:userName}).lean()
-                if (!usuarioFiltrado) {return "user not found"} else {return usuarioFiltrado}
-               } catch (error) {
-                throw new Error('USER-NOT-FOUND')
-               }
+          try {
+            const usuarioFiltrado = await usuarioModel.findOne({email: userName}).lean();
+            if (usuarioFiltrado) {
+              return usuarioFiltrado;
+            }
+            else {
+              throw new Error("USER-NOT-FOUND");
+            }
+          } catch (error) {
+              throw error;
+          }
         }
         async saveUsersLocal(){
             try {

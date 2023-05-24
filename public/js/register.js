@@ -1,5 +1,16 @@
 console.log('desde js register');
 
+function validarMail(str) {
+  // Comprobar si el string tiene . y @ usando el método includes
+  return str.includes(".") && str.includes("@");
+}
+
+function soloLetras(palabra) {
+  // Crear una expresión regular que acepte solo letras de la a a la z en mayúsculas o minúsculas
+  let letras = /^[a-zA-Z]+$/;
+  return letras.test(palabra); //true si coincide con la exp regular
+}
+
 const formRegister = document.querySelector('#formRegister')
 
 if (formRegister instanceof HTMLFormElement) {
@@ -23,6 +34,11 @@ if (formRegister instanceof HTMLFormElement) {
       input_rol instanceof HTMLInputElement &&
       input_cart instanceof HTMLInputElement
     ) {
+
+
+if(!soloLetras(input_first_name.value)){alert('El nombre solo puede utilizar letras a-z')}
+if(!soloLetras(input_last_name.value)){alert('El apellido solo puede utilizar letras a-z')}
+if(!validarMail(input_email.value)){alert('El email debe tener formato usuario@servidor.dominio')}
 
       const datosUsuario = {
         first_name: input_first_name.value,
