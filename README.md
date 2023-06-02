@@ -141,7 +141,6 @@ Se debe incluir todo lo visto:
 -arquitectura: diseño con separacion en capas (ruteo, negocio, persistencia) -YA AGREGUE SERVICIOS, falta repositorios-
       -opcional: aplicar el patron factory (se suele aplicar en el tipo de persistencia)
       -aplicar el patron repositorio (pasamanos entre capa de negocios y capa de persistencias), dentro del mismo tengo un DAO que redirige los metodos.  
-      -DTO objeto sin metodos (escondo las cosas que tiene el objeto y le elimino los metodos). puedo darle la forma que quiero y no compartir ciertos datos
       -modificar el dao para hacer daofactory y poder seleccionar persistencia
 
 -roles: middlewares que permitan la autorizacion para que no todo el mundo pueda realizar todas las operaciones. 

@@ -1,0 +1,231 @@
+Carpeta Repositorys, archivo personas.repository.js   (DAOS FACTORY)
+
+
+import { personasDao } from '../daos/daos.factory.js'
+
+class PersonasRepository {
+  constructor(dao) {
+    this.dao = dao
+  }
+
+  create(data, options) {
+    return this.dao.create(data)
+  }
+
+  readOne(criteria, options) {
+    return this.dao.readOne(criteria)
+  }
+
+  readMany(criteria, options) {
+    return this.dao.readMany(criteria)
+  }
+
+  updateOne(criteria, newData, options) {
+    return this.dao.updateOne(criteria, newData)
+  }
+
+  updateMany(criteria, newData, options) {
+    return this.dao.updateMany(criteria, newData)
+  }
+
+  deleteOne(criteria, options) {
+    return this.dao.deleteOne(criteria)
+  }
+
+  deleteMany(criteria, options) {
+    return this.dao.deleteMany(criteria)
+  }
+}
+
+export const personasRepository = new PersonasRepository(personasDao)
+
+
+
+
+
+
+
+persistencia para memoria por defecto. nosotros usariamos mongoose por defecto.
+//export const TIPO_PERSISTENCIA = process.argv[2] || 'memoria'
+export const TIPO_PERSISTENCIA = process.argv[2] || 'mongoose'
+
+
+carpeta DAOS, archivo daos.factory.js
+
+import { TIPO_PERSISTENCIA } from '../config/persistencia.config.js'
+
+let personasDao
+if (TIPO_PERSISTENCIA === 'mongoose') {
+  const { personasDaoMongoose } = await import('./personas.dao.mongoose.js')
+  personasDao = personasDaoMongoose
+} else {
+  const { personasDaoMemoria } = await import('./personas.dao.memoria.js')
+  personasDao = personasDaoMemoria
+}
+
+export { personasDao }
+
+
+
+
+carpeta DAOS, archivo personas.dao.memoria
+
+function matcher(query) {
+  return function (obj) {
+    const conditions = Object.entries(query)
+    for (const [key, value] of conditions) {
+      if (!obj[key] || obj[key] != value) return false
+    }
+    return true
+  }
+}
+
+function toPojo(object) {
+  return JSON.parse(
+    JSON.stringify(
+      object
+    )
+  )
+}
+
+class PersonasDaoMemoria {
+  #personas
+  constructor() {
+    this.#personas = []
+  }
+
+  create(element) {
+    const pojo = toPojo(element)
+    this.#personas.push(pojo)
+    return Promise.resolve(pojo)
+  }
+
+  readOne(criteria) {
+    const result = this.#personas.find(matcher(criteria))
+    if (!result) throw new Error('NOT FOUND')
+    return Promise.resolve(result)
+  }
+
+  readMany(criteria) {
+    return Promise.resolve(this.#personas.filter(matcher(criteria)))
+  }
+
+  updateOne(criteria, newData) {
+    const index = this.#personas.findIndex(matcher(criteria))
+    if (index === -1) throw new Error('NOT FOUND')
+    this.#personas[index] = toPojo({
+      ...this.#personas[index],
+      ...newData
+    })
+    return Promise.resolve(this.#personas[index])
+  }
+
+  updateMany(criteria, newData) {
+    let modifiedCount = 0
+    for (let index = 0; index < this.#personas.length; index++) {
+      if (matcher(criteria)(this.#personas[index])) {
+        this.#personas[index] = toPojo({
+          ...this.#personas[index],
+          ...newData
+        })
+        modifiedCount++
+      }
+    }
+    return Promise.resolve({ modifiedCount })
+  }
+
+  deleteOne(criteria) {
+    const index = this.#personas.findIndex(matcher(criteria))
+    if (index === -1) throw new Error('NOT FOUND')
+    const deleted = this.#personas[index]
+    this.#personas.splice(index, 1)
+    return Promise.resolve(deleted)
+  }
+
+  deleteMany(criteria) {
+    let initialCount = this.#personas.length
+    this.#personas = this.#personas.filter(e => !matcher(criteria)(e))
+    return Promise.resolve({ deletedCount: initialCount - this.#personas.length })
+  }
+}
+
+export const personasDaoMemoria = new PersonasDaoMemoria()
+
+
+
+
+carpeta DAOS, archivo personas.dao.mongoose
+
+import mongoose from './mongoose.js'
+
+function toPojo(object) {
+  return JSON.parse(
+    JSON.stringify(
+      object
+    )
+  )
+}
+
+class PersonasDaoMongoose {
+  #personasModel
+  constructor(mongooseModel) {
+    this.#personasModel = mongooseModel
+  }
+
+  async create(element) {
+    return toPojo(await this.#personasModel.create(element))
+  }
+
+  async readOne(criteria) {
+    const result = await this.#personasModel.findOne(criteria).lean()
+    if (!result) throw new Error('NOT FOUND')
+    return result
+  }
+
+  async readMany(criteria) {
+    return await this.#personasModel.find(criteria).lean()
+  }
+
+  async updateOne(criteria, newData) {
+    const modifiedUser = await this.#personasModel.findOneAndUpdate(criteria, newData, { new: true }).lean()
+    if (!modifiedUser) throw new Error('NOT FOUND')
+    return toPojo(modifiedUser)
+  }
+
+  async updateMany(criteria, newData) {
+    await this.#personasModel.updateMany(criteria, newData)
+  }
+
+  async deleteOne(criteria) {
+    const deletedUser = await this.#personasModel.findOneAndDelete(criteria).lean()
+    if (!deletedUser) throw new Error('NOT FOUND')
+    return toPojo(deletedUser)
+  }
+
+  async deleteMany(criteria) {
+    await this.#personasModel.deleteMany(criteria)
+  }
+}
+
+const personasSchema = new mongoose.Schema({
+  id: { type: String, index: true },
+  nombre: String,
+  email: String,
+  edad: Number
+}, { versionKey: false })
+const personasModel = mongoose.model('personas', personasSchema)
+
+export const personasDaoMongoose = new PersonasDaoMongoose(personasModel)
+
+
+
+
+archivo mongoose.js
+
+import mongoose from 'mongoose'
+
+import { MONGODB_CNX_STR } from '../config/mongoose.config.js'
+await mongoose.connect(MONGODB_CNX_STR)
+console.log(`conectado a ${MONGODB_CNX_STR}`)
+
+export default mongoose
