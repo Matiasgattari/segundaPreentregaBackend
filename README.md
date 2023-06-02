@@ -16,9 +16,11 @@ npm i (de requerir)
 npm test
 
 dependencias que uso:
-"dependencies": {
+"dependencies": 
     "bcrypt": "^5.1.0",
+    "commander": "^10.0.1",
     "connect-mongo": "^5.0.0",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-handlebars": "^7.0.2",
     "express-session": "^1.17.3",
@@ -30,7 +32,6 @@ dependencias que uso:
     "passport-local": "^1.0.0",
     "session-file-store": "^1.5.0",
     "socket.io": "^4.6.1"
-  }
 
 ENDPOINTS:
 
@@ -133,3 +134,21 @@ Desafìo entregable clase 27:
             -agrego servicio de usuarios en /src/servicios/usuariosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.
             -agrego servicio de productos en /src/servicios/productosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.
             -agrego servicio de carritos en /src/servicios/carritosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.
+
+
+TERCER ENTREGA DEL PROYECTO FINAL
+Se debe incluir todo lo visto:
+-arquitectura: diseño con separacion en capas (ruteo, negocio, persistencia) -YA AGREGUE SERVICIOS, falta repositorios-
+      -opcional: aplicar el patron factory (se suele aplicar en el tipo de persistencia)
+      -aplicar el patron repositorio (pasamanos entre capa de negocios y capa de persistencias), dentro del mismo tengo un DAO que redirige los metodos.  
+      -DTO objeto sin metodos (escondo las cosas que tiene el objeto y le elimino los metodos). puedo darle la forma que quiero y no compartir ciertos datos
+      -modificar el dao para hacer daofactory y poder seleccionar persistencia
+
+-roles: middlewares que permitan la autorizacion para que no todo el mundo pueda realizar todas las operaciones. 
+      -creacion, actualizacion y eliminacion de productos son solo para el ADMIN
+      -el chat, solo deberia ser accesible por USUARIOS
+      -agregar productos al carrito solo puede ser usado por USUARIOS REGISTRADOS
+
+-agregar una nueva ENTIDAD al sistema, el "ticket". este mismo representa la COMPRA de un carrito. el mismo va a poseer un id autogenerado (random uuid), fecha de compra, monto de la venta, correo electronico de la persona que compro el carrito (usuario)
+
+-agregar una ruta /:cid/purchase la cual permitira finalizar el proceso de compra de dicho carrito (esto puede ser reemplazado por una ruta TICKET que reciba todos los datos necesarios ). vamos a querer comprar un carrito a partir de su ID. el carrito va a tener una lista de productos con ciertas caracteristicas : el producto debe existir (validar), incluimos concepto de stock (validar que haya suficiente para vender), al venderlo debo ajustar el stock (restar los vendidos), si no hay suficiente stock para vender no se realiza la compra solo de ese producto . en el caso de que una compra que no se complete, los productos que no se pudieron comprar deben QUEDAR en el carrito, pero los comrpados deben desaparecer
