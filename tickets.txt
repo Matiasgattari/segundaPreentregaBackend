@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "_id": "647b625885fdeedc192c25c0",
+    "date": "3/6/2023",
+    "usuario": "lea.mg90@gmail.com",
+    "id": "048dcb0e-1429-4a05-a978-bfba780d306c",
+    "monto": 154500,
+    "cart": "6445a1c506e307de067a8bf4"
+  },
+  {
+    "_id": "647b64f8bc01739948116b65",
+    "date": "3/6/2023",
+    "usuario": "satoshi@mail.com",
+    "id": "a716aa2f-4364-48bf-9a0b-112816f1e6d5",
+    "monto": 154500,
+    "cart": "6445a1c506e307de067a8bf4"
+  },
+  {
+    "_id": "647b66a177ae86c6c8087405",
+    "date": "3/6/2023",
+    "usuario": "satoshi@mail.com",
+    "id": "6ec372ca-58b8-4e86-90e3-d8b24148d6f2",
+    "monto": 154500,
+    "cart": "6445a1c506e307de067a8bf4"
+  },
+  {
+    "_id": "647b66b6393f196278d3cd49",
+    "date": "3/6/2023",
+    "usuario": "satoshi@mail.com",
+    "id": "07a5d4d2-2fef-461e-977d-7d7620a79bf9",
+    "monto": 154500,
+    "cart": "6445a1c506e307de067a8bf4"
+  },
+  {
+    "_id": "647b671097386ecc442fd0d6",
+    "date": "3/6/2023",
+    "usuario": "satoshi@mail.com",
+    "id": "fbad37aa-6413-43c7-971b-47f67582513f",
+    "monto": 154500,
+    "cart": "6445a1c506e307de067a8bf4"
+  },
+  {
+    "_id": "647b675d9c32813d123d75ae",
+    "date": "3/6/2023",
+    "usuario": "satoshi@mail.com",
+    "id": "9539c694-3005-49ca-a74f-c2b7224050a3",
+    "monto": 154500,
+    "cart": "6445a1c506e307de067a8bf4"
+  },
+  {
+    "_id": "647b7895fd914382af6d9968",
+    "date": "3/6/2023",
+    "usuario": "satoshi@mail.com",
+    "id": "bdc7641b-ddb1-42f6-8737-684c3ecfd8be",
+    "monto": 154500,
+    "cart": "6445a1c506e307de067a8bf4"
+  }
+]

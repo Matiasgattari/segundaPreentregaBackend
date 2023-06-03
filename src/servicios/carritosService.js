@@ -40,5 +40,9 @@ class CarritosService {
     const productoModificado = await cartManager.modificarUnidadesProcducto(cid,pid,cantidad)
     return productoModificado     
   }
+  async modificarCarrito(cid,carritoNuevo){
+    const productoModificado = await cartManager.modificarCarrito(cid,carritoNuevo)
+    return productoModificado     
+  }
 }
 export const carritosService = new CarritosService()

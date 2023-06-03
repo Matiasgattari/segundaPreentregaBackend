@@ -177,6 +177,15 @@ export class CartManager {
        }
     }
 
+    async modificarCarrito(cid,carritoNuevo){
+        try {
+            //{new: true}hace que el find devuelva el nuevo carrito
+            await cartsDB.findByIdAndUpdate(cid,carritoNuevo,{new: true})
+        } catch (error) {
+            throw new Error('Error al modificar el carrito')
+        }
+
+    }
     async getCartById(id) {
      try {
         const IDrecibido = id;

@@ -131,7 +131,7 @@ Formato de usuario : {
 
 "/chat" muestra un chat funcional con socket.io. Solo permite el intreso a usuarios logueados
 
-
+"/:cid/purchase" realiza la compra del carrito. Para ingresar a esta parte, el usuario debe estar logueado. al ingresar, se toma el carrito por su CID y se cruza con los datos del usuario. 
 
 
 Todos los productos cargados tienen un ID propio que les doy autogenerado por el randomUUII, pero para realizar las operaciones internas actualmente cambie al uso del _id (object ID que brinda mongoose)

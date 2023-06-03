@@ -2,10 +2,12 @@ import { ticketManager } from "../../public/dao/ticketManager.js"
 
 
 class TicketsService {
-  async crear(user) {
-    const creado = await ticketManager.createTicket(user)
+    
+  async crearTicket(ticket) {
+    const creado = await ticketManager.createTicket(ticket)
     return creado
   }
+
   async buscarTickets(){
     const tickets = await ticketManager.getTickets()
     return tickets
