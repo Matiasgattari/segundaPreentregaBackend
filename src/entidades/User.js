@@ -10,13 +10,6 @@ function validarMail(str) {
   }
   
 export class User {
-#first_name
-#last_name
-#email
-#password
-#age
-#rol
-#cart
     constructor({ first_name, last_name, email, password, age, rol,cart }) {
       try {
       
@@ -46,28 +39,15 @@ export class User {
            }
        
  
-         this.#first_name = first_name;
-         this.#last_name = last_name;
-         this.#email=email;
-         this.#password = password;
-         this.#age = age;
-         this.#rol = rol;
-         this.#cart = cart;
+         this.first_name = first_name;
+         this.last_name = last_name;
+         this.email=email;
+         this.password = password;
+         this.age = age;
+         this.rol = rol;
+         this.cart = cart;
       } catch (error) {
         console.log(error.mensaje);
       }
-  }
-
-  
-  dto() {
-    return {
-      email: this.#email,
-      password: this.#password,
-      first_name:this.#first_name,
-      last_name:this.#last_name,
-      age:this.#age,
-      rol:this.#rol,
-      cart: this.#cart
-    }
   }
 }

@@ -30,6 +30,8 @@ import { postAUsuarios, postAUsuariosLogin } from './controllers/api/usuarios.co
 import session from './middlewares/session.js';
 
 import { manejadorDeErrores } from './middlewares/manejoDeErroresRest.js';
+import { soloLogueados } from './middlewares/soloLogueados.js';
+import { chatController } from './controllers/web/chat.controller.js';
 
 //PASSPORT
 import passport from 'passport';
@@ -147,16 +149,12 @@ app.get('/home', async (req, res, next) => {
         })
 })
 
-app.get('/chat', async (req,res,next) => {
-  
-    res.render('chat.handlebars', {
-        titulo: 'Products',
-        encabezado: 'Lista de productos en base de datos'
-    })
+app.get('/chat', soloLogueados,chatController)
+
+
+app.get('*', (req,res)=>{
+    res.redirect('/')
 })
-
-
-
 
 
 // app.get('/api/products/productSelected/:pid', async (req, res) => {

@@ -138,5 +138,15 @@
     "age": 23,
     "rol": "User",
     "cart": ""
+  },
+  {
+    "_id": "647a79268e7dea8c08384ae3",
+    "email": "s@s.s",
+    "password": "$2b$10$o5CSxuF7yI230NzuqH6BcO2YWND5NxCGxb6g7./e5r0wLBOKMdGHa",
+    "first_name": "sssss",
+    "last_name": "sssssss",
+    "age": 22,
+    "rol": "User",
+    "cart": "asd"
   }
 ]
