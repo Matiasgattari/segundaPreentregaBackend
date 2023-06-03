@@ -1,9 +1,12 @@
 import mongoose, { Schema } from 'mongoose';
-import mongoosePaginate from 'mongoose-paginate-v2'
 
-// const schemaMessages = new mongoose.Schema({
-//     user: { type: String, required: true },
-//     message: { type: String, required: true }
-// }, { versionKey: false })
+const schemaMensajes = new Schema({
+    timestamp: { type: Number },
+    autor: { type: String },
+    mensaje: { type: String},
+    // _id:{ type: String}
+}, { versionKey: false })
 
-// schemaMessages.plugin(mongoosePaginate)
+
+export const mensajesDB = mongoose.model('messages', schemaMensajes)
+

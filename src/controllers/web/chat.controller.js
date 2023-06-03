@@ -1,44 +1,36 @@
 import {
+    mensajesManager
+} from "../../../public/dao/mensajesManager.js";
+import {
     io
 } from "../../servidor.js";
 
 export function chatController(req, res) {
-    // Escuchar los eventos de conexión de Socket.io
-    io.on('connection', clientSocket=> {
-        console.log('Un cliente se ha conectado');
 
-        // Escuchar el evento 'nombre' del cliente
-        clientSocket.on('nombre', async function (nombre) {
-            console.log(`hola ${nombre.nombre}`);
-            // Enviar un mensaje a todos los clientes informando del nuevo nombre
-            io.emit('mensaje', {
-                texto: nombre.nombre + ' se ha unido al chat'
-            });
+    io.on('connection', async clientSocket => {
+
+        // evento para nuevos mensajes
+        clientSocket.on('nuevoMensaje', async mensaje => {
+            await mensajesManager.guardarMensajes(mensaje)
+            const mensajes = await mensajesManager.buscarMensajes()
+            const mensajesParaFront = mensajes.map(m => ({
+                ...m,
+                fecha: new Date(m.timestamp).toLocaleTimeString()
+            }))
+            io.sockets.emit('actualizarMensajes', mensajesParaFront)
         })
 
-        // Escuchar el evento 'mensaje' del cliente
-        clientSocket.on('mensaje', async mensaje=> {
-            // console.log(mensaje.texto);
-            // Enviar un mensaje a todos los clientes con el nombre y el texto recibidos
-            io.emit('mensaje', {
-                texto: req.user.first_name + ': ' + mensaje.texto
-            });
+        clientSocket.on('nuevoUsuario', async nombreUsuario => {
+            clientSocket.broadcast.emit('nuevoUsuario', nombreUsuario)
         })
 
-
-        clientSocket.on('disconnect', usuarioDeslogeado => {
-            console.log('Un usuario se ha desconectado');
-            // console.log(usuarioDeslogeado);
-            
-            //sin probar
-            // io.emit('mensaje',function () {
-            //     texto: ' Un usuario se ha desconectado ';
-            // });
-
-
-        });
-    });
-
+        const mensajes = await mensajesManager.buscarMensajes()
+        const mensajesParaFront = mensajes.map(m => ({
+            ...m,
+            fecha: new Date(m.timestamp).toLocaleTimeString()
+        }))
+        io.sockets.emit('actualizarMensajes', mensajesParaFront)
+    })
 
     res.render('chat', {
         user: req.user

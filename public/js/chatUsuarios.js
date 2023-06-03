@@ -1,71 +1,67 @@
-// Importar Socket.io desde el servidor
-console.log("desde el chat");
+  // @ts-ignore
+const serverSocket = io()
 
-// Crear una conexión con Socket.io
+
 // @ts-ignore
-const socket = io.connect('http://localhost:8080');
-
-// Escuchar el evento 'mensaje' del servidor
-socket.on('mensaje', function (data) {
-  // Añadir el mensaje al div de mensajes
-  let p = document.createElement('p');
-  p.textContent = data.texto;
-  // @ts-ignore
-  document.getElementById('mensajes').appendChild(p);
-});
+Swal.fire({
+    title: "Bienvenido al grupo de chat."   
+})
 
 
-// Escuchar el evento 'submit' del formulario de nombre
-// @ts-ignore
-document.getElementById('form-nombre').addEventListener('submit', function (e) {
-  e.preventDefault();
-  // @ts-ignore
-  const nombre = document.getElementById('nombre').value;
-  console.log(nombre);
-  // Enviar el nombre al servidor mediante el evento 'nombre'
-  socket.emit('nombre', {
-    nombre: nombre
-  });
-});
-
-
-// Escuchar el evento 'submit' del formulario de mensaje
-// @ts-ignore
-document.getElementById('form-mensaje').addEventListener('submit', function (e) {
-  e.preventDefault();
-  // @ts-ignore
-  const texto = document.getElementById('texto').value;
-  console.log(texto);
-  // Enviar el texto al servidor mediante el evento 'mensaje'
-  socket.emit('mensaje', {
-    texto: texto
-  });
-  // @ts-ignore
-  document.getElementById('texto').value =""
-});
+const formularioChat = document.querySelector('#formularioChat')
 
 
 
-const boton_logoutChat = document.getElementById('btn_logout')
-if (boton_logoutChat) {
-  boton_logoutChat.addEventListener('click', async (e) => {
-      e.preventDefault()
-      // @ts-ignore
-      const nombre = document.getElementById('nombre').value;
-      socket.on ('disconnect', function () {
-        // Aquí emites el evento DelPlayer al servidor con el nombre del usuario
-        socket.emit ('usuarioDeslogeado', nombre);
-      });
 
-      const { status } = await fetch('/api/usuariosLogin', {
-        method: 'DELETE'
-      })
-  
-      if (status === 200) {
-        window.location.href = 'http://localhost:8080/api/sessions/login'
-      } else {
-        console.log('[logout] estado inesperado: ' + status)
-      }
-  
+const btnEnviar = document.querySelector('#btnEnviar')
+
+if (btnEnviar) {
+    btnEnviar.addEventListener('click', evento => {
+      evento.preventDefault()
+        const inputAutor = document.querySelector('#inputAutor')
+        const inputMensaje = document.querySelector('#inputMensaje')
+
+        if (!(inputAutor instanceof HTMLInputElement) || !(inputMensaje instanceof HTMLInputElement)) return
+
+        const autor = inputAutor.value
+        const mensaje = inputMensaje.value
+
+        if (!autor || !mensaje) return
+
+        serverSocket.emit('nuevoMensaje', { timestamp: Date.now(), autor, mensaje })
+        inputMensaje.value=""
     })
-  }
+}
+
+const plantillaMensajes = `
+{{#if hayMensajes }}
+<ul>
+    {{#each mensajes}}
+    <li>({{this.fecha}}) {{this.autor}}: {{this.mensaje}}</li>
+    {{/each}}
+</ul>
+{{else}}
+<p>no hay mensajes...</p>
+{{/if}}
+`
+const armarHtmlMensajes = Handlebars.compile(plantillaMensajes)
+
+serverSocket.on('actualizarMensajes', mensajes => {
+    const divMensajes = document.querySelector('#mensajes')
+    if (divMensajes) {
+        // divMensajes.innerHTML = JSON.stringify(mensajes)
+        divMensajes.innerHTML = armarHtmlMensajes({ mensajes, hayMensajes: mensajes.length > 0 })
+    }
+})
+
+serverSocket.on('nuevoUsuario', nombreUsuario => {
+    // @ts-ignore
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        title: `"${nombreUsuario}" se ha unido al chat`,
+        icon: "success"
+    })
+})

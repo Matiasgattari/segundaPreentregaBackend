@@ -1,69 +1,42 @@
-import fs from 'fs/promises'
+import { mensajesDB } from './models/schemaMessages.js'
 
-export class FileManager {
-    #cosas
-    #ruta
+export class MensajesManager {
+    #mensajes
+    #path
 
-    constructor(ruta) {
-        this.#ruta = ruta
-        this.#cosas = []
+    constructor(path) {
+        this.#path = path
+        this.#mensajes = []
     }
 
     async #leer() {
-        const json = await fs.readFile(this.#ruta, 'utf-8')
-        this.#cosas = JSON.parse(json)
+        const mensajes = await mensajesDB.find().lean()
+        this.#mensajes = mensajes
     }
 
-    async #escribir() {
-        const nuevoJson = JSON.stringify(this.#cosas, null, 2)
-        await fs.writeFile(this.#ruta, nuevoJson)
+    async #escribir(mensaje) {
+        await this.#leer
+        await mensajesDB.create(mensaje)
     }
 
-    async guardarCosa(cosa) {
+    async guardarMensajes(mensajes) {
         await this.#leer()
-        this.#cosas.push(cosa)
-        await this.#escribir()
-        return cosa
+        this.#mensajes.push(mensajes)
+        await this.#escribir(mensajes)
+        return mensajes
     }
 
-    async buscarCosas() {
+    async buscarMensajes() {
         await this.#leer()
-        return this.#cosas
+        return this.#mensajes
     }
 
-    async buscarCosaSegunId(id) {
-        await this.#leer()
-        const buscada = this.#cosas.find(c => c.id === id)
-        if (!buscada) {
-            throw new Error('id no encontrado')
-        }
-        return buscada
-    }
-
-    async reemplazarCosa(id, nuevaCosa) {
-        await this.#leer()
-        const indiceBuscado = this.#cosas.findIndex(c => c.id === id)
-        if (indiceBuscado === -1) {
-            throw new Error('id no encontrado')
-        }
-        this.#cosas[indiceBuscado] = nuevaCosa
-        await this.#escribir()
-        return nuevaCosa
-    }
-
-    async borrarCosaSegunId(id) {
-        await this.#leer()
-        const indiceBuscado = this.#cosas.findIndex(c => c.id === id)
-        if (indiceBuscado === -1) {
-            throw new Error('id no encontrado')
-        }
-        const [borrado] = this.#cosas.splice(indiceBuscado, 1)
-        await this.#escribir()
-        return borrado
-    }
-
-    async reset() {
-        this.#cosas = []
-        await this.#escribir()
+    async borrar() {
+        await mensajesDB.deleteMany({})
+        return this.#mensajes=[]
     }
 }
+
+export const mensajesManager = new MensajesManager('./mensajes.txt')
+
+ 
