@@ -8,6 +8,7 @@ export function soloLogueados(req, res, next) {
     }
     next();
 }
+
 export function soloAdmin(req, res, next) {
 if(req.user.rol==="Admin") {next ()} else {
     next(new Error("Error de credenciales. Debe haber iniciado sesion y poseer el Rol de Admin"))

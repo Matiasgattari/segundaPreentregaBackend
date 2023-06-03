@@ -1,5 +1,5 @@
 import { User } from "../../entidades/User.js";
-import { userManager } from "../../routes/sessionsRouter.js";
+import { userManager } from "../../../public/dao/UserManager.js";
 import { usuariosService } from "../../servicios/usuariosService.js";
 import { hashear } from "../../utils/criptografia.js";
 

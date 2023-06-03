@@ -98,7 +98,7 @@ export class UserManager {
 }
 
 
-
+export const userManager = new UserManager('./usuarios.txt')
 
 
 

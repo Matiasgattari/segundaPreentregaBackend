@@ -15,6 +15,7 @@ import { cartsDB } from '../../public/dao/models/schemaCarts.js';
 
 import { cartManager } from '../../public/dao/CartManager.js';
 import { carritosService } from '../servicios/carritosService.js';
+import { soloLogueados } from '../middlewares/soloLogueados.js';
 // const app = express()
 
 // app.engine('handlebars', engine())
@@ -84,7 +85,7 @@ const hayCarritos = (arrayCarritos!=null)
 
 
 
-cartsRouter.post('/:cid/product/:pid', async (req, res) => {
+cartsRouter.post('/:cid/product/:pid', soloLogueados,async (req, res) => {
     try {
         const cid = req.params.cid
         const pid = req.params.pid
@@ -95,7 +96,7 @@ cartsRouter.post('/:cid/product/:pid', async (req, res) => {
     }
 })
 
-cartsRouter.put('/:cid/product/:pid', async (req, res) => {
+cartsRouter.put('/:cid/product/:pid', soloLogueados, async (req, res) => {
     try {
         const cid = req.params.cid
         const pid = req.params.pid

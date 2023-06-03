@@ -7,7 +7,7 @@ import { autenticacion } from '../middlewares/autenticacion.js';
 import { profileView } from '../controllers/web/perfil.controller.js';
 import { registroView } from '../controllers/web/registro.controller.js';
 import session from '../middlewares/session.js';
-import { UserManager } from '../../public/dao/UserManager.js';
+import { userManager } from '../../public/dao/UserManager.js';
 
 
 
@@ -30,7 +30,7 @@ import { usuariosService } from '../servicios/usuariosService.js';
 
 
 
-export const userManager = new UserManager('./usuarios.txt')
+
 
 
 

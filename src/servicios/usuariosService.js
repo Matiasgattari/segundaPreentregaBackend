@@ -1,4 +1,4 @@
-import { userManager } from "../routes/sessionsRouter.js"
+import { userManager } from "../../public/dao/UserManager.js"
 
 
 class UsuariosService {
