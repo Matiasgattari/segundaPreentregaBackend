@@ -286,5 +286,29 @@
     "category": "fantasma",
     "status": true,
     "id": "729f171f-e37c-4cd2-aabe-c1ba1d8186bb"
+  },
+  {
+    "_id": "647ab373f3fae64eaac35ca2",
+    "title": "litten",
+    "description": "pokemon gato",
+    "price": 3000,
+    "thumbnail": "litten.jpg",
+    "stock": 22,
+    "code": "pokemon",
+    "category": "fuego",
+    "status": true,
+    "id": "4a32ac78-9b31-4065-89ec-6af21a6a360b"
+  },
+  {
+    "_id": "647ab373f3fae64eaac35ca4",
+    "title": "litten",
+    "description": "pokemon gato",
+    "price": 3000,
+    "thumbnail": "litten.jpg",
+    "stock": 22,
+    "code": "pokemon",
+    "category": "fuego",
+    "status": true,
+    "id": "236b9218-4683-4787-ae5f-a8899f0b8fd6"
   }
 ]

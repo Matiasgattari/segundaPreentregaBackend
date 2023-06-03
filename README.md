@@ -89,10 +89,11 @@ Su código base y endpoints se encuentran dentro de la ruta src/routes/cartsRout
 
 "api/sessions/register" permite el registro del usuario, completando un formulario con metodo post que hace un fetch a /api/usuarios. carga el usuario en una base de datos y crea la sesion. actualmente le saque la obligatoriedad de que sea unico el mail para poder probarla. Al cruzar el mail "adminCoder@coder.com" con el password "adminCod3r123", siempre va a ser registrado como ADMIN.
 
-"api/sessions/current"  miestra a travez de un view handlebars muestra los datos del perfil del usuario, sin la contraseña . el fetch de su logica se realiza hacia fetch('/api/usuarios'). dicha ruta esta creada en server.js
+"api/sessions/current"  miestra a travez de un view handlebars muestra los datos del perfil del usuario, sin la contraseña . el fetch de su logica se realiza hacia fetch('/api/usuarios'). dicha ruta esta creada en server.js . Solo permite el intreso a usuarios logueados
 
-"api/sessions/login" muestra actualmente un formulario para realizar el login, con su funcionalidad finalizada para reconocer al email y contraseña del usuario para encontrarlo y logear.  El fetch de su logica se realiza hacia fetch('/api/usuariosLogin'), dicha ruta esta creada en server.js . Actualmente renderiza una lista de usuarios creados solo con la finalidad de poder seleccionar los datos de la base de datos para poder realizar las pruebas. 
+"api/sessions/login" muestra actualmente un formulario para realizar el login, con su funcionalidad finalizada para reconocer al email y contraseña del usuario para encontrarlo y logear.  El fetch de su logica se realiza hacia fetch('/api/usuariosLogin'), dicha ruta esta creada en server.js . Actualmente renderiza una lista de usuarios creados solo con la finalidad de poder seleccionar los datos de la base de datos para poder realizar las pruebas.  Solo permite el intreso a usuarios sin loguear.
 
+"/chat" muestra un chat funcional con socket.io. Solo permite el intreso a usuarios logueados
 
 
 
@@ -120,21 +121,15 @@ puntos faltantes a saber:
 
 
 DATOS A TENER EN CUENTA 
-puntos faltantes a saber:
-- Falta realizar el chat funcional (hay 2 handlebars que tengo como base para hacerlo "chat" y "mensajes" siendo chat la unica que esta unida a un endpoint actualmente)
-
 -filtro de productos por categoría lo reemplace actualmente por "title" ya que no decidi bien los productos, solo difieren en titulo.
 -No logro que la funcion cartManager.modificarUnidadesProcducto(cid,pid,cantidad) funcione correctamente. mas info en el cartManager lina 119 (por favor si podes revisar)
-
-
-Desafìo entregable clase 27:
-    * se agrega librerìa "commander", archivos en /src/config/config.sv.js
-    * se agrega librerìa "dotenv", funcionalidad creada en /src/config/entorno.js y archivo env.config de carpeta raiz. Se lo llama desde el archivo src/config/auth.config.js y su contenido se utiliza para las credenciales de github y cookie-parser.
-    *arquitectura en capas:  
-            -agrego servicio de usuarios en /src/servicios/usuariosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.
-            -agrego servicio de productos en /src/servicios/productosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.
-            -agrego servicio de carritos en /src/servicios/carritosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.
-
+- se agrega librerìa "commander", archivos en /src/config/config.sv.js
+- se agrega librerìa "dotenv", funcionalidad creada en /src/config/entorno.js y archivo env.config de carpeta raiz. Se lo llama desde el archivo src/config/auth.config.js y su contenido se utiliza para las credenciales de github y cookie-parser.
+-arquitectura en capas:  
+            *agrego servicio de usuarios en /src/servicios/usuariosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.
+            *agrego servicio de productos en /src/servicios/productosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.
+            *agrego servicio de carritos en /src/servicios/carritosService.js y reemplazo todo acceso directo a la base de datos por este intermediario.
+-Usuarios registrados, con sesion iniciada pueden ingresar al chat. Los "Admin" pueden modificar, crear y eliminar productos. Solo los usuarios que no posean sesion iniciada pueden ingresar a api/sessions/login. Roles: "User", "Admin", "Developer". Defecto: "User"
 
 TERCER ENTREGA DEL PROYECTO FINAL
 Se debe incluir todo lo visto:
@@ -144,9 +139,7 @@ Se debe incluir todo lo visto:
       -modificar el dao para hacer daofactory y poder seleccionar persistencia
 
 -roles: middlewares que permitan la autorizacion para que no todo el mundo pueda realizar todas las operaciones. 
-      -creacion, actualizacion y eliminacion de productos son solo para el ADMIN
-      -el chat, solo deberia ser accesible por USUARIOS
-      -agregar productos al carrito solo puede ser usado por USUARIOS REGISTRADOS
+       -agregar productos al carrito solo puede ser usado por USUARIOS REGISTRADOS
 
 -agregar una nueva ENTIDAD al sistema, el "ticket". este mismo representa la COMPRA de un carrito. el mismo va a poseer un id autogenerado (random uuid), fecha de compra, monto de la venta, correo electronico de la persona que compro el carrito (usuario)
 

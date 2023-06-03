@@ -148,5 +148,15 @@
     "age": 22,
     "rol": "User",
     "cart": "asd"
+  },
+  {
+    "_id": "647ab295f9fda3dc51bd8e23",
+    "email": "lara@lo.com",
+    "password": "$2b$10$SPL1Mbe1gbGOvWxKy83zpeNiAMDD207mXS2yFAaS8kIzgTO5Am86G",
+    "first_name": "laralo",
+    "last_name": "laralo",
+    "age": 22,
+    "rol": "User",
+    "cart": "cart2"
   }
 ]

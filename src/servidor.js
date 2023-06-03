@@ -30,7 +30,7 @@ import { postAUsuarios, postAUsuariosLogin } from './controllers/api/usuarios.co
 import session from './middlewares/session.js';
 
 import { manejadorDeErrores } from './middlewares/manejoDeErroresRest.js';
-import { soloLogueados } from './middlewares/soloLogueados.js';
+import { sinLoguear, soloAdmin, soloLogueados } from './middlewares/soloLogueados.js';
 import { chatController } from './controllers/web/chat.controller.js';
 
 //PASSPORT
@@ -96,7 +96,8 @@ app.delete('/api/usuariosLogin', async function deleteSesiones(req, res, next) {
   })
 
 
-app.get('/realtimeproducts', async (req, res, next) => {
+
+app.get('/realtimeproducts',soloLogueados,soloAdmin, async (req, res, next) => {
 
     const listado1 = await productosService.buscarProductos()
 
