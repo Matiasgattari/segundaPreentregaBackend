@@ -1,0 +1,27 @@
+<h1>{{encabezado}}</h1>
+{{#if hayCarrito}}
+
+
+<p class="text-danger">Lista de productos del carrito {{id}} :</p>
+<ul class="">
+  {{#each arrayProductos}}
+  <li>{{this}} </li>
+  {{/each}}
+</ul>
+<input id="botonVaciarCarrito" type="button" value="Vaciar carrito">
+<input id="botonComprarCarrito" type="button" value="Comprar">
+<label for="carrito">Carrito:</label><input name="carrito" id="inputCarritoID" type="text" value="{{id}}" readonly>
+<input id="inputProductoEliminar" type="text" placeholder="Ingrese ID producto a eliminar">
+<button id="botonEliminarProducto">Eliminar</button>
+
+
+{{else}}
+<p class="text-danger">Carrito inexistente</p>
+{{/if}}
+
+<script src="/js/carrito.js">
+
+
+
+</script>
+ 

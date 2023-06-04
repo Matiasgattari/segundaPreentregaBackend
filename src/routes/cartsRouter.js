@@ -56,14 +56,19 @@ cartsRouter.get('/:cid', async (req, res) => {
         const IDCarrito = req.params.cid
         // @ts-ignore
         const carritosLeidos = await carritosService.buscarCarritos()
-        
-        if (IDCarrito)  {
-            const carritoFiltradoID= await carritosService.buscarCarritoPorId(IDCarrito)
-            res.send(carritoFiltradoID)
-            } else {
-                throw new Error("no existe el id")
-            }
-        }
+       
+        if (IDCarrito)  {const carritoFiltradoID= await carritosService.buscarCarritoPorId(IDCarrito)
+        const hayCarrito= carritoFiltradoID !==null
+        const arrayProductos =  []
+        const forEach = carritoFiltradoID?.products.forEach(e=>arrayProductos.push(`Producto:${util.inspect(e.productID, false, 10)}, Cantidad: ${e.quantity} `))
+        res.render('carritoCompra.handlebars', {
+            id:IDCarrito,
+            encabezado: 'Carrito para comprar',
+            hayCarrito,
+            
+            arrayProductos
+       })
+    }}
          catch(error) {
              res.status(500).json({
             message: error.message
@@ -120,6 +125,30 @@ cartsRouter.put('/:cid/product/:pid',soloLogueados, async (req, res) => {
         throw new Error('id no encontrado')
     }
 })
+
+
+cartsRouter.get('/:cid/productoEliminar/:pid',soloLogueados,async(req,res)=>{
+
+try {
+    const pid = req.params.pid
+    // console.log(pid);
+    const cid = req.params.cid
+    // console.log(cid);
+    const carritoBuscado = await carritosService.buscarCarritoPorId(cid)
+    // console.log(carritoBuscado?.products);  
+   const productoEliminado = await carritosService.eliminarProducto(cid,pid)
+    // res.redirect(`/api/carts/${cid}`)
+    res.send(productoEliminado)
+} catch (error) {
+    const pid = req.params.pid
+    // console.log(pid);
+    const cid = req.params.cid
+    // console.log(cid);
+    throw new Error(`El producto  ${pid} no se pudo eliminar del carrito ${cid} `)
+}
+})
+
+
 
 
 

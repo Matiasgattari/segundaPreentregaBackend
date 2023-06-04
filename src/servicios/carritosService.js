@@ -24,7 +24,7 @@ class CarritosService {
 
   async eliminarProducto(cid,pid) {
     const producto = await cartManager.eliminarProducto(cid,pid) 
-    return "producto eliminado"
+    return producto
   }
   async eliminarCarrito(cid) {
     const carrito = await cartManager.eliminarCarrito(cid) 
