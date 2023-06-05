@@ -2,7 +2,7 @@
 
 // @ts-ignore
 const serverSocket = io()
-
+// import util from 'node:util'
 const cargarBTN = document.getElementById('botonCargar')
 // console.log("cargarBTN", cargarBTN);
 
@@ -69,7 +69,6 @@ location.reload()
 } )
 
 
-
 //Intento de actualizacion automatica al agregar un nuevo producto    
 const plantillaMensajes = `
     {{#if hayProductos}}
@@ -88,14 +87,33 @@ const armarHtmlMensajes = Handlebars.compile(plantillaMensajes)
     
 serverSocket.on('actualizarProductos', productosStorage => {
         
+ try {
     const divProductos = document.getElementById('productos')
        
     if (divProductos) {
-        const productos = []
+      const productos = []
+      const productosID = []
+    
+      productosStorage.forEach(element => {productos.push(JSON.stringify(element))})
+      productosStorage.forEach(element => {productosID.push(element)})
 
-        productosStorage.forEach(element => {productos.push(JSON.stringify(element))  })
-           
-        divProductos.innerHTML = armarHtmlMensajes({ productos, hayProductos: productos.length > 0 })
-            
+    let lista = "<ul>";
+    for (let producto of productosID) {
+        const productoParseado = JSON.stringify(producto)
+        const IdProducto = producto._id
+        console.log(IdProducto);
+        const paginaRedireccion = `http://localhost:8080/api/products/${IdProducto}`
+        // const pagina = `http://localhost:8080/api/products/${productoParseado}/`
+       
+        lista += `<li>${productoParseado} <button onclick="window.location.href='${paginaRedireccion}'" >Ver</button></li>`;
+        // lista += `<li>${productoParseado} <button onClick="">Ver</button></li>`;
+      }
+      lista += "</ul> ";
+     
+      divProductos.innerHTML = lista;
     }
+
+ } catch (error) {
+    throw new Error("producto no encontrado")
+ }
 })
