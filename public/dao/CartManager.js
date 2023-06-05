@@ -136,28 +136,28 @@ export class CartManager {
         const carritoPorId =await  this.getCartById(cid)
         const productosCarrito =  carritoPorId?.products
         
-        // const arrayProductos = []
-        // productosCarrito?.forEach(el=>arrayProductos.push(el.productID?._id.toString()))
-        // const indiceProductoEliminar = arrayProductos.indexOf(pid)
-        
-        // const nuevoCarrito = carritoPorId?.products.splice(indiceProductoEliminar,1)
-
-        // //esta parte aun sin probar
-        // await cartsDB.findOneAndUpdate({_id:cid},nuevoCarrito)
-        // this.carts= await this.getCarts()
-        // const jsonCarts = JSON.stringify(this.carts, null, 2)
-        // await this.persistencia.saveTxt(jsonCarts)
-        // return "producto eliminado correctamente"
+        const carritos = await this.getCarts()
+        // const carritoIDString = JSON.parse(JSON.stringify(carritos))
+        // const carritoIndex = carritoIDString.findIndex(e=>e['_id']==cid)
 
         const productosNuevo =[]
+                // @ts-ignore
         productosCarrito?.forEach(e=>productosNuevo.push(e['productID']['_id']))
-// const indexProducto = productosNuevo?.findIndex(producto =>producto== pid)
+        
+        const productosNuevoString = JSON.parse(JSON.stringify(productosNuevo))
+        const productosindex = productosNuevoString.findIndex(e => e==pid)
+        
+        const tipoIndex =  parseInt(productosindex)
+       
+        const productosSplice = productosCarrito?.splice(tipoIndex,1)
 
-return productosNuevo
+        const carritoNuevo = carritoPorId
+        carritoNuevo?.products==productosNuevo 
 
+        await this.modificarCarrito(cid,carritoNuevo)
 
-
-        } catch (error) {
+        return carritoNuevo
+  } catch (error) {
             throw new Error('PRODUCT-NOT-FOUND')
         }
 

@@ -137,8 +137,8 @@ try {
     const carritoBuscado = await carritosService.buscarCarritoPorId(cid)
     // console.log(carritoBuscado?.products);  
    const productoEliminado = await carritosService.eliminarProducto(cid,pid)
-    // res.redirect(`/api/carts/${cid}`)
-    res.send(productoEliminado)
+    res.redirect(`/api/carts/${cid}`)
+    // res.send(productoEliminado)
 } catch (error) {
     const pid = req.params.pid
     // console.log(pid);
