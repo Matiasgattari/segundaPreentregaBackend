@@ -2,7 +2,9 @@ console.log("hola desde el carrito");
 
 const botonComprar = document.getElementById("botonComprarCarrito")
 botonComprar?.addEventListener("click", ()=>{
-    console.log("soy un boton de comprar");
+    // @ts-ignore
+    const valorInputCarritoID = document.getElementById("inputCarritoID")?.value
+    window.location.href = `http://localhost:8080/api/carts/${valorInputCarritoID}/purchase/`
 })
 
 const botonEliminarProducto = document.getElementById("botonEliminarProducto")
@@ -24,4 +26,8 @@ botonEliminarProducto?.addEventListener("click", ()=>{
 const botonVaciarCarrito = document.getElementById("botonVaciarCarrito")
 botonVaciarCarrito?.addEventListener("click", ()=>{
     console.log("soy un boton de vaciar carrito");
+    // @ts-ignore
+    const valorInputCarritoID = document.getElementById("inputCarritoID")?.value
+    window.location.href = `http://localhost:8080/api/carts/${valorInputCarritoID}/vaciarCarrito/`
+    
 })

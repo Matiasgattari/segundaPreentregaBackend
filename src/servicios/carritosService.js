@@ -30,6 +30,11 @@ class CarritosService {
     const carrito = await cartManager.eliminarCarrito(cid) 
     return "carrito eliminado"
   }
+
+  async vaciarCarrito(cid) {
+    const carrito = await cartManager.vaciarCarrito(cid) 
+    return carrito
+  }
   
   async persistenciaFisicaCarritos(cid,pid) {
     const carritos = await cartManager.saveCart()

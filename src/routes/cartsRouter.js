@@ -148,6 +148,26 @@ try {
 }
 })
 
+cartsRouter.get('/:cid/vaciarCarrito',soloLogueados,async(req,res)=>{
+
+    try {
+        const cid = req.params.cid
+        // console.log(cid);
+       
+        // console.log(carritoBuscado?.products);  
+       const productoEliminado = await carritosService.vaciarCarrito(cid)
+        // res.redirect(`/api/carts/${cid}`)
+        // res.send(productoEliminado)
+        res.json(productoEliminado)
+    } catch (error) {
+        // const pid = req.params.pid
+        // // console.log(pid);
+        // const cid = req.params.cid
+        // // console.log(cid);
+        // throw new Error(`El producto  ${pid} no se pudo eliminar del carrito ${cid} `)
+    }
+    })
+    
 
 
 
@@ -215,7 +235,7 @@ cartsRouter.get('/:cid/purchase',soloLogueados, async(req,res)=>{
     await carritosService.modificarCarrito(carritoID,carritoNuevo)
 
    
-    res.send("ok, desde purchase")
+    res.json({message:'Carrito comprado, en brenes nos comunicaremos con usted.'})
 
 
 })

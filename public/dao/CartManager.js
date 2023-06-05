@@ -137,9 +137,7 @@ export class CartManager {
         const productosCarrito =  carritoPorId?.products
         
         const carritos = await this.getCarts()
-        // const carritoIDString = JSON.parse(JSON.stringify(carritos))
-        // const carritoIndex = carritoIDString.findIndex(e=>e['_id']==cid)
-
+       
         const productosNuevo =[]
                 // @ts-ignore
         productosCarrito?.forEach(e=>productosNuevo.push(e['productID']['_id']))
@@ -215,6 +213,33 @@ export class CartManager {
             throw new Error('CART-NOT-FOUND')
         }
     }
+
+async vaciarCarrito(id) {
+
+    try {
+        const carritoPorId =await  this.getCartById(id)
+        const productosCarrito =  carritoPorId?.products
+
+        const carritos = await this.getCarts()
+
+        const productosNuevo =[]
+                // @ts-ignore
+        productosCarrito?.forEach(e=>productosNuevo.push(e['productID']['_id']))
+
+        const productosSplice = productosCarrito?.splice(0,productosCarrito.length)
+
+        const carritoNuevo = carritoPorId
+        carritoNuevo?.products==productosNuevo 
+
+        await this.modificarCarrito(id,carritoNuevo)
+
+        return carritoNuevo
+
+    } catch (error) {
+        throw new Error("Error al vaciar el carrito")
+    }
+}
+
 
 
 //----------------------------------EN PROCESO---------------------------------------
