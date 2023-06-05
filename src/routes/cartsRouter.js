@@ -60,12 +60,13 @@ cartsRouter.get('/:cid', async (req, res) => {
         if (IDCarrito)  {const carritoFiltradoID= await carritosService.buscarCarritoPorId(IDCarrito)
         const hayCarrito= carritoFiltradoID !==null
         const arrayProductos =  []
-        const forEach = carritoFiltradoID?.products.forEach(e=>arrayProductos.push(`Producto:${util.inspect(e.productID, false, 10)}, Cantidad: ${e.quantity} `))
+        const cantidadProductos =  []
+        const forEach = carritoFiltradoID?.products.forEach(e=>{arrayProductos.push(`Producto:${util.inspect(e.productID, false, 10)}, Cantidad: ${e.quantity} `); cantidadProductos.push(e.quantity)})
         res.render('carritoCompra.handlebars', {
             id:IDCarrito,
             encabezado: 'Carrito para comprar',
             hayCarrito,
-            
+            cantidad:cantidadProductos.reduce((accumulator, currentValue) => accumulator + currentValue,0),            
             arrayProductos
        })
     }}
@@ -152,26 +153,16 @@ cartsRouter.get('/:cid/vaciarCarrito',soloLogueados,async(req,res)=>{
 
     try {
         const cid = req.params.cid
-        // console.log(cid);
        
-        // console.log(carritoBuscado?.products);  
        const productoEliminado = await carritosService.vaciarCarrito(cid)
-        // res.redirect(`/api/carts/${cid}`)
-        // res.send(productoEliminado)
+        
         res.json(productoEliminado)
     } catch (error) {
-        // const pid = req.params.pid
-        // // console.log(pid);
-        // const cid = req.params.cid
-        // // console.log(cid);
-        // throw new Error(`El producto  ${pid} no se pudo eliminar del carrito ${cid} `)
+        const cid = req.params.cid
+        throw new Error(`No se ha podido vaciar el carrito ${cid} `)
     }
     })
     
-
-
-
-
 cartsRouter.delete('/:cid',soloLogueados,async( req,res)=>{
    
     try {

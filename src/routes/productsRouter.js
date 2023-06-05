@@ -39,18 +39,18 @@ try {
    
 
     //filtrado por titulo
-const productosFiltradosXTitulo = []
-const filtrandoXTitulo =  result.docs.forEach((res)=>{if(res.title==req.query.query)
-    productosFiltradosXTitulo.push(util.inspect(res, false, 10))})
-const filtroTitle = req.query.query
+    const productosFiltradosXTitulo = []
+    const filtrandoXTitulo =  result.docs.forEach((res)=>{if(res.title==req.query.query)
+        productosFiltradosXTitulo.push(util.inspect(res, false, 10))})
+    const filtroTitle = req.query.query
 
-//filtrado por disponibilidad
-const productosFiltradosXDisp = []
-const filtrandoXDisp =  result.docs.forEach((res)=>{if(res.status==true)
-    productosFiltradosXDisp.push(util.inspect(res, false, 10))})
-const filtroTDisp = req.query.status
+    //filtrado por disponibilidad
+    const productosFiltradosXDisp = []
+    const filtrandoXDisp =  result.docs.forEach((res)=>{if(res.status==true)
+        productosFiltradosXDisp.push(util.inspect(res, false, 10))})
+    const filtroTDisp = req.query.status
 
-const filtro = filtroTitle || filtroTDisp
+    const filtro = filtroTitle || filtroTDisp
 
     const context = {
         pageTitle: 'Products',
@@ -101,10 +101,17 @@ productsRouter.get('/:pid', async (req,res)=>{
         
         if (idProducto)  {
             const prodFiltradoID= await productosService.buscarProductoPorId(idProducto)
-            res.send(prodFiltradoID)
-            } else {
+
+            // res.send(prodFiltradoID)
+            res.render('productSelect', {
+                encabezado: "Producto",
+                producto:prodFiltradoID
+            })} else {
                 throw new Error("no existe el id")
             }
+
+
+          
         }
          catch(error) {
              res.status(500).json({

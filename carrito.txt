@@ -2,167 +2,39 @@
   {
     "_id": "6445a1c506e307de067a8bf4",
     "id": "642f2faab4be60728cdd1ae3",
-    "quantity": 49,
+    "quantity": 61,
     "products": [
       {
         "productID": {
-          "_id": "644587ac744b799f44db305d",
-          "title": "bulbasaur",
-          "description": "descripcion prod 3",
-          "price": 3500,
-          "thumbnail": "url imagen",
-          "stock": 45,
-          "code": "televisor",
-          "category": "hogar",
+          "_id": "646d2fe91344b0729a8100f0",
+          "title": "cindaquyl",
+          "description": "pokemon roedor",
+          "price": 4000,
+          "thumbnail": "cindaquyl jpg",
+          "stock": 24,
+          "code": "pokemon",
+          "category": "fuego",
           "status": true,
-          "id": "44820200-b24d-478f-8765-e69c4f8cf650"
-        },
-        "quantity": 5,
-        "_id": "6445a1c506e307de067a8bf5"
-      },
-      {
-        "productID": {
-          "_id": "644587ac744b799f44db305e",
-          "title": "ivysaur",
-          "description": "descripcion prod 2",
-          "price": 2500,
-          "thumbnail": "url imagen",
-          "stock": 45,
-          "code": "televisor",
-          "category": "hogar",
-          "status": true,
-          "id": "44820200-b24d-478f-1111-e69c4f8cf650"
-        },
-        "quantity": 18,
-        "_id": "6445a1c506e307de067a8bf6"
-      },
-      {
-        "productID": {
-          "_id": "644587ac744b799f44db306a",
-          "title": "kakuna",
-          "description": "descripcion prod 3",
-          "price": 3500,
-          "thumbnail": "url imagen",
-          "stock": 45,
-          "code": "televisor",
-          "category": "hogar",
-          "status": true,
-          "id": "ade0f4d9-716b-4453-b88d-6d5df1564232"
-        },
-        "quantity": 2,
-        "_id": "6445a1c506e307de067a8bf7"
-      },
-      {
-        "productID": {
-          "_id": "644587ac744b799f44db305f",
-          "title": "venasaur",
-          "description": "descripcion prod 3",
-          "price": 3500,
-          "thumbnail": "url imagen",
-          "stock": 45,
-          "code": "televisor",
-          "category": "hogar",
-          "status": true,
-          "id": "dac58fd1-4123-4b06-ad4f-aade9f184b2e"
-        },
-        "quantity": 4,
-        "_id": "6445a1c506e307de067a8bf8"
-      },
-      {
-        "productID": {
-          "_id": "644587ac744b799f44db3060",
-          "title": "charmander",
-          "description": "descripcion prod 3",
-          "price": 3500,
-          "thumbnail": "url imagen",
-          "stock": 45,
-          "code": "televisor",
-          "category": "hogar",
-          "status": true,
-          "id": "065592be-4846-4b2b-891e-ceddb54a01a9"
-        },
-        "quantity": 7,
-        "_id": "6445a1c506e307de067a8bf9"
-      },
-      {
-        "productID": {
-          "_id": "644587ac744b799f44db3062",
-          "title": "charizard",
-          "description": "descripcion prod 3",
-          "price": 3500,
-          "thumbnail": "url imagen",
-          "stock": 45,
-          "code": "televisor",
-          "category": "hogar",
-          "status": true,
-          "id": "065297be-4899-4b2b-891e-ceddb54a01a9"
+          "id": "78873321-60ce-412b-902a-f83595c01a1e"
         },
         "quantity": 3,
-        "_id": "6445a1c506e307de067a8bfa"
+        "_id": "647d56064cc5d186f5c62a97"
       },
       {
         "productID": {
-          "_id": "644587ac744b799f44db3063",
-          "title": "squirtle",
-          "description": "descripcion prod 3",
-          "price": 3500,
-          "thumbnail": "url imagen",
+          "_id": "64642619d2e1268356ded3eb",
+          "title": "togepi",
+          "description": "pokemon huevo",
+          "price": 40000,
+          "thumbnail": "togepi jpg",
           "stock": 45,
-          "code": "televisor",
-          "category": "hogar",
+          "code": "pokemon",
+          "category": "hada",
           "status": true,
-          "id": "015597be-4846-4b2b-7777-ceddb54a01a9"
-        },
-        "quantity": 5,
-        "_id": "6445a1c506e307de067a8bfb"
-      },
-      {
-        "productID": {
-          "_id": "644587ac744b799f44db306b",
-          "title": "beedrill",
-          "description": "descripcion prod 6",
-          "price": 3500,
-          "thumbnail": "url imagen",
-          "stock": 45,
-          "code": "televisor",
-          "category": "bicho veneno",
-          "status": true,
-          "id": "ade0f4d9-716b-4453-tryu-6d5df1564232"
-        },
-        "quantity": 3,
-        "_id": "6445a1c506e307de067a8bfc"
-      },
-      {
-        "productID": {
-          "_id": "644587ac744b799f44db3069",
-          "title": "weedle",
-          "description": "descripcion prod 3",
-          "price": 4000,
-          "thumbnail": "url imagen",
-          "stock": 45,
-          "code": "televisor",
-          "category": "hogar",
-          "status": true,
-          "id": "eb75a066-f01e-410e-b4d0-e622893532fd"
+          "id": "29e9063b-e96d-4105-807c-72948ad36f40"
         },
         "quantity": 1,
-        "_id": "6445a37791308a3e6ac8d1bd"
-      },
-      {
-        "productID": {
-          "_id": "644587ac744b799f44db3067",
-          "title": "metapod",
-          "description": "descripcion prod 3",
-          "price": 4000,
-          "thumbnail": "url imagen",
-          "stock": 45,
-          "code": "televisor",
-          "category": "hogar",
-          "status": true,
-          "id": "3307ab83-226d-49e2-905a-ef118d60172a"
-        },
-        "quantity": 1,
-        "_id": "6448728667bde62604949c51"
+        "_id": "647d5648a31afaaa5ced0b84"
       }
     ]
   }

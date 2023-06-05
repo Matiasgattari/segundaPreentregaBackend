@@ -45,13 +45,13 @@ ENDPOINTS:
 Actualmente presenta problemas, "cargar" el producto pedido pero entra en un loop lo cual puede o cargarlo reiteradas veces o tildar el programa.
 "eliminar" elimina el producto por medio del ID pasado, tambien entra en loop, pero al eliminar 1 solo producto se aprecia que funciona bien y no se rompe. 
 Esta trabajado con express-handlebars, siendo su vista /views/realTimeProducts.handlebars  y estando su JS de frontend en /public/js/indexHome.js
-Su código base y endpoints se encuentran dentro de la ruta src/routes/productRouter.js
+Su código base y endpoints se encuentran dentro de la ruta src/routes/productRouter.js.  Posee funcionalidad en cada elemento, que permite ir a cada producto en particular, para desde el, agregarlo al carrito.
 
 "/api/products": Este endpoint muestra una lista completa de todos los productos de la base de datos. Esta trabajado con express-handlebars, siendo su vista /views/products.handlebars, estando su codigo base en src/routes/productRouter.js
 por medio de la renderizacion de express y el paginate, se le agregaron tanto las opciones de paginacion como de busqueda (por pagina y criterio). La busqueda por query aun no esta probada del todo, pero deberia recibir un objeto con un criterio de busqueda como los del find en mongoDB ej: {_id:asdasasdasd}. Metodo GET
 Los botones para Sort ascendente y descendente se basan en el campo "precio" y esta funcional
 
-"/api/products/pid": METODO GET. este endpoint renderiza por medios de busqueda a la base de datos, el producto especificado por su pid ("_id" autogenerado por mongo), estando su codigo base en src/routes/productRouter.js.
+"/api/products/pid": METODO GET. este endpoint renderiza por medios de busqueda a la base de datos, el producto especificado por su pid ("_id" autogenerado por mongo), estando su codigo base en src/routes/productRouter.js. Permite agreegar dicho producto al carrito x 1 unidad o volver a la liesta de productos "/realtimeproducts"
 
 "/api/products/pid": METODO PUT. este endpoint actualiza por medios de busqueda a la base de datos, el producto especificado por su pid ("_id" autogenerado por mongo), y recibiendo en el body un producto de estructura:
 {
@@ -167,4 +167,3 @@ Se debe incluir todo lo visto:
       -aplicar el patron repositorio (pasamanos entre capa de negocios y capa de persistencias), dentro del mismo tengo un DAO que redirige los metodos.  
       -modificar el dao para hacer daofactory y poder seleccionar persistencia
 
--agregar una ruta /:cid/purchase la cual permitira finalizar el proceso de compra de dicho carrito (esto puede ser reemplazado por una ruta TICKET que reciba todos los datos necesarios ). vamos a querer comprar un carrito a partir de su ID. el carrito va a tener una lista de productos con ciertas caracteristicas : el producto debe existir (validar), incluimos concepto de stock (validar que haya suficiente para vender), al venderlo debo ajustar el stock (restar los vendidos), si no hay suficiente stock para vender no se realiza la compra solo de ese producto . en el caso de que una compra que no se complete, los productos que no se pudieron comprar deben QUEDAR en el carrito, pero los comrpados deben desaparecer
